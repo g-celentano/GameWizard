@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-<<<<<<< Updated upstream
-=======
-var cartaMoneta = "Oro"
-
-var dioCane = "🐶"
-
-let bruno = "è dura essere un dio"
-let ciao = "ciao mondo"
->>>>>>> Stashed changes
-
 struct ContentView: View {
    
     var body: some View {
