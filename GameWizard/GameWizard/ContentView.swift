@@ -14,6 +14,8 @@ var dioCane = "🐶"
 
 var roberto = "bau"
 
+var ciaomondo = "Hello World"
+
 struct ContentView: View {
    
     var body: some View {
