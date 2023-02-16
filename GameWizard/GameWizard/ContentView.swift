@@ -7,14 +7,16 @@
 
 import SwiftUI
 
+
 let height = UIScreen.main.bounds.height
 let width  = UIScreen.main.bounds.width
 
+var testJSON = Post()
 
 struct ContentView: View {
     
     @State var textFieldValue : String = ""
-   
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -23,20 +25,25 @@ struct ContentView: View {
                 .ignoresSafeArea(.all)
             
             VStack{
+                Button {
+                    callAPI()
+                } label: {
+                    Text("Click here to import the Steam Library")
+                        .font(.system(size: 20))
+                }
                 TextField("Type Here...", text: $textFieldValue)
                     .frame(maxWidth: width * 0.85, maxHeight: height * 0.02)
                     .padding()
                     .background(.white)
                     .cornerRadius(20)
                     .submitLabel(.send)
+                    
             }
             .frame(maxWidth: .infinity, maxHeight: height, alignment: .bottom)
             
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
