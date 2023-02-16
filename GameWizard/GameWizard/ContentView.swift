@@ -7,10 +7,7 @@
 
 import SwiftUI
 
-var cartaMoneta = "Oro"
-
-var dioCane = "🐶"
-
+var testJSON = Post()
 struct ContentView: View {
     var body: some View {
         VStack {
@@ -18,6 +15,13 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+            Button {
+                callAPI()
+            } label: {
+                Text("Click here to import the Steam Library")
+                    .font(.system(size: 20))
+            }
+    
         }
         .padding()
     }

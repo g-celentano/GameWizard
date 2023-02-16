@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201D5A7B299E6652000E615D /* API Caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201D5A7A299E6652000E615D /* API Caller.swift */; };
+		201D5A7F299E6CE9000E615D /* Lib.json in Resources */ = {isa = PBXBuildFile; fileRef = 201D5A7E299E6CE9000E615D /* Lib.json */; };
 		E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */; };
 		E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A69A299D36CD00CAFCF7 /* ContentView.swift */; };
 		E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E727A69C299D36CE00CAFCF7 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		201D5A7A299E6652000E615D /* API Caller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Caller.swift"; sourceTree = "<group>"; };
+		201D5A7E299E6CE9000E615D /* Lib.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Lib.json; sourceTree = "<group>"; };
 		E727A695299D36CD00CAFCF7 /* GameWizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameWizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardApp.swift; sourceTree = "<group>"; };
 		E727A69A299D36CD00CAFCF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		201D5A79299E661B000E615D /* Classes and Models */ = {
+			isa = PBXGroup;
+			children = (
+				201D5A7A299E6652000E615D /* API Caller.swift */,
+				201D5A7E299E6CE9000E615D /* Lib.json */,
+			);
+			path = "Classes and Models";
+			sourceTree = "<group>";
+		};
 		E727A68C299D36CD00CAFCF7 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +107,7 @@
 		E727A697299D36CD00CAFCF7 /* GameWizard */ = {
 			isa = PBXGroup;
 			children = (
+				201D5A79299E661B000E615D /* Classes and Models */,
 				E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */,
 				E727A69A299D36CD00CAFCF7 /* ContentView.swift */,
 				E727A69C299D36CE00CAFCF7 /* Assets.xcassets */,
@@ -231,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201D5A7F299E6CE9000E615D /* Lib.json in Resources */,
 				E727A6A0299D36CE00CAFCF7 /* Preview Assets.xcassets in Resources */,
 				E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */,
 			);
@@ -257,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201D5A7B299E6652000E615D /* API Caller.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
 				E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */,
 			);
@@ -417,7 +433,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AW53X29GKN;
+				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -446,7 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AW53X29GKN;
+				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
