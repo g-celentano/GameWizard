@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+var cartaMoneta = "Oro"
+
+var dioCane = "🐶"
+
 struct ContentView: View {
     var body: some View {
         VStack {
