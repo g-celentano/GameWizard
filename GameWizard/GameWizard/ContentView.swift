@@ -11,6 +11,8 @@ var cartaMoneta = "Oro"
 
 var dioCane = "🐶"
 
+var roberto = "bau"
+
 struct ContentView: View {
     var body: some View {
         VStack {
