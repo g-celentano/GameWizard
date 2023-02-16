@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OpenAISwift
 
 @main
 struct GameWizardApp: App {
