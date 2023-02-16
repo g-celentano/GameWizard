@@ -14,6 +14,7 @@
 		E727A6AA299D36CE00CAFCF7 /* GameWizardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6A9299D36CE00CAFCF7 /* GameWizardTests.swift */; };
 		E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */; };
 		E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */; };
+		E7BE1441299E6B1E0042BFCE /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = E7BE1440299E6B1E0042BFCE /* OpenAISwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7BE1441299E6B1E0042BFCE /* OpenAISwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = GameWizard;
+			packageProductDependencies = (
+				E7BE1440299E6B1E0042BFCE /* OpenAISwift */,
+			);
 			productName = GameWizard;
 			productReference = E727A695299D36CD00CAFCF7 /* GameWizard.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = E727A68C299D36CD00CAFCF7;
+			packageReferences = (
+				E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+			);
 			productRefGroup = E727A696299D36CD00CAFCF7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -583,6 +591,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7BE1440299E6B1E0042BFCE /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E727A68D299D36CD00CAFCF7 /* Project object */;
 }
