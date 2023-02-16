@@ -7,20 +7,34 @@
 
 import SwiftUI
 
+let height = UIScreen.main.bounds.height
+let width  = UIScreen.main.bounds.width
 
-var cartaMoneta = "Oro"
-
-var dioCane = "🐶"
-
-var roberto = "bau"
 
 struct ContentView: View {
+    
+    @State var textFieldValue : String = ""
    
     var body: some View {
-        VStack {
-         Text("Par e pall fra")
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color("BgColor"))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea(.all)
+            
+            VStack{
+                TextField("Type Here...", text: $textFieldValue)
+                    .frame(maxWidth: width * 0.85, maxHeight: height * 0.02)
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(20)
+                    .submitLabel(.send)
+            }
+            .frame(maxWidth: .infinity, maxHeight: height, alignment: .bottom)
+            
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
     
 }
