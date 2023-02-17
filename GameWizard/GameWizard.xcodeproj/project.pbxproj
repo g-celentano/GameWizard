@@ -16,7 +16,7 @@
 		E727A6AA299D36CE00CAFCF7 /* GameWizardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6A9299D36CE00CAFCF7 /* GameWizardTests.swift */; };
 		E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */; };
 		E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */; };
-		E7BE1441299E6B1E0042BFCE /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = E7BE1440299E6B1E0042BFCE /* OpenAISwift */; };
+		E72F569B299FBED800619B32 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72F569A299FBED800619B32 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +49,8 @@
 		E727A6AF299D36CE00CAFCF7 /* GameWizardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameWizardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITests.swift; sourceTree = "<group>"; };
 		E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E72F569A299FBED800619B32 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E72F569C299FC18F00619B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7BE1441299E6B1E0042BFCE /* OpenAISwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,11 +110,13 @@
 		E727A697299D36CD00CAFCF7 /* GameWizard */ = {
 			isa = PBXGroup;
 			children = (
+				E72F569C299FC18F00619B32 /* Info.plist */,
 				201D5A79299E661B000E615D /* Classes and Models */,
 				E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */,
 				E727A69A299D36CD00CAFCF7 /* ContentView.swift */,
 				E727A69C299D36CE00CAFCF7 /* Assets.xcassets */,
 				E727A69E299D36CE00CAFCF7 /* Preview Content */,
+				E72F569A299FBED800619B32 /* Message.swift */,
 			);
 			path = GameWizard;
 			sourceTree = "<group>";
@@ -160,7 +163,6 @@
 			);
 			name = GameWizard;
 			packageProductDependencies = (
-				E7BE1440299E6B1E0042BFCE /* OpenAISwift */,
 			);
 			productName = GameWizard;
 			productReference = E727A695299D36CD00CAFCF7 /* GameWizard.app */;
@@ -235,7 +237,6 @@
 			);
 			mainGroup = E727A68C299D36CD00CAFCF7;
 			packageReferences = (
-				E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */,
 			);
 			productRefGroup = E727A696299D36CD00CAFCF7 /* Products */;
 			projectDirPath = "";
@@ -281,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				201D5A7B299E6652000E615D /* API Caller.swift in Sources */,
+				E72F569B299FBED800619B32 /* Message.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
 				E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */,
 			);
@@ -444,7 +446,7 @@
 				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = GameWizard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -473,7 +475,7 @@
 				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = GameWizard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -607,25 +609,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E7BE1440299E6B1E0042BFCE /* OpenAISwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E7BE143F299E6B1E0042BFCE /* XCRemoteSwiftPackageReference "OpenAISwift" */;
-			productName = OpenAISwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E727A68D299D36CD00CAFCF7 /* Project object */;
 }
