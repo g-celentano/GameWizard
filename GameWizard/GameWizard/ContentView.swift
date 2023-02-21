@@ -19,7 +19,7 @@ struct ContentView: View {
     
     @State var textFieldValue : String = ""
     @State var messages : [Message] = [
-    //Message(botResponse: false, text: "Ciao"),
+    Message(botResponse: false, text: "Ciao"),
     //Message(botResponse: true, text: "Ciao a te")
     ]
     @State var botting : Bool = false // used to altern messages on the left and on the right sides
@@ -39,18 +39,21 @@ struct ContentView: View {
                         .font(.system(size: 20))
                 }*/
                 ScrollView{
-                  
+                    
                     ForEach(messages){message in
                         HStack {
-                                Text( message.text )
-                                    .font(.title3)
-                                    .padding()
-                                    .frame(minWidth: width*0.4, alignment: .leading)
-                                     .background(.white)//temporarily, will need an image as background
-                                     .clipShape(RoundedRectangle(cornerRadius: 10))//temporarily, will need an image as background
+                               HStack{
+                                    Text( message.text )
+                                        .lineLimit(nil)
+                                        .font(.title3)
+                                        .padding()
+                                        .frame(minWidth: width*0.4 ,minHeight: height * 0.05,  alignment: .leading)
+                                        .background(.white) // put custom bg
+                                        .clipShape(RoundedRectangle(cornerRadius: 10)) // put custom bg
+                               }
+                               .frame(maxWidth: width*0.7, alignment: message.botResponse ? .leading : .trailing) // max message expansion
                         }
-                        .frame(maxWidth: width*0.9, maxHeight: height*0.1, alignment: message.botResponse ? .leading : .trailing )
-                        
+                        .frame(maxWidth: width*0.9, alignment: message.botResponse ? .leading : .trailing )
                     }
                     
                     

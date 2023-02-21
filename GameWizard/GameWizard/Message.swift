@@ -15,3 +15,19 @@ struct Message: Identifiable {
     let text : String
     
 }
+/*
+struct MessageBox : Shape{
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let width = rect.size.width
+        let height = rect.size.height
+        
+
+        //see how to draw shapes
+
+        
+        return path
+    }
+}
+*/
