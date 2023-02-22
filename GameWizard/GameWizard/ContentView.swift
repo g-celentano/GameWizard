@@ -11,7 +11,7 @@ import SwiftUI
 let height = UIScreen.main.bounds.height
 let width  = UIScreen.main.bounds.width
 
-var testJSON = Post()
+
 
 
 
