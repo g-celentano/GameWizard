@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20A1583F29A7A2520069300B /* Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A1583E29A7A2520069300B /* Searcher.swift */; };
 		20AA065729A6772100FA3DE6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065629A6772100FA3DE6 /* Message.swift */; };
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
 		E717E98329A67EBA007855C9 /* JSONLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONLoad.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				20AA065629A6772100FA3DE6 /* Message.swift */,
 				20AA065B29A6775600FA3DE6 /* Recommender.swift */,
 				E717E98529A67ECE007855C9 /* Games.swift */,
+				20A1583E29A7A2520069300B /* Searcher.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20AA065729A6772100FA3DE6 /* Message.swift in Sources */,
+				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
 				20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
 				E717E98629A67ECE007855C9 /* Games.swift in Sources */,

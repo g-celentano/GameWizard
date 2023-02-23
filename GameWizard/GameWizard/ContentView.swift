@@ -53,7 +53,7 @@ struct ContentView: View {
                                     .padding()
                                     //.frame(minWidth: messages.last == message && message.isBotResponse() ? lastMexWidt :  global_width*0.4 ,minHeight: global_height * 0.05, maxHeight: .infinity,  alignment: .leading)
                                     .frame(minWidth:  global_width*0.4 ,minHeight: global_height * 0.05, maxHeight: .infinity,  alignment: .leading)
-                                    .clipShape(MessageBox(x0_y0: CGPoint(x: 0.0 ,y: 0.0),
+                                    /*.clipShape(MessageBox(x0_y0: CGPoint(x: 0.0 ,y: 0.0),
                                                           x1_y0: CGPoint(x: message.isBotResponse() ? botBoxes[messages.firstIndex(of: message) ?? 0].width : userBoxes[messages.firstIndex(of: message) ?? 0].width,
                                                                          y: 0.0 ),
                                                           x1_y1: CGPoint(x: message.isBotResponse() ? botBoxes[messages.firstIndex(of: message) ?? 0].width : userBoxes[messages.firstIndex(of: message) ?? 0].width,
@@ -62,7 +62,7 @@ struct ContentView: View {
                                     .background(.white)
                                     .readSize { newSize in
                                         //message.setSize(w: nil , h: nil ,s: newSize)
-                                    }
+                                    }*/
                             }
                             .frame(minWidth: global_width*0.04, maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
                             
@@ -86,7 +86,7 @@ struct ContentView: View {
                         .onSubmit {
                             lastMexWidt = 0.0
                             messages.append(Message(botR: false, t: textFieldValue))
-                            userBoxes.append(CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>))
+                            //userBoxes.append(CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>))
                             
                             
                             lastMexWidt = global_width * 0.05
