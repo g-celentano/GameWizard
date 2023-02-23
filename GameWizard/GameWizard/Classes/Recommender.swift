@@ -6,11 +6,53 @@
 //
 
 
-/*
+
 import Foundation
 import CoreML
 import NaturalLanguage
 
+
+class Recommender {
+    private let tokenizer = NLTokenizer(unit: .word)
+    private let tagger = NLTagger(tagSchemes: [.sentimentScore])
+    
+    func get_tokens(text: String) -> [Substring] {
+        var tokens : [Substring] = []
+        self.tokenizer.string = text
+        self.tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { tokenRange, _ in
+            print(text[tokenRange])
+            tokens.append(text[tokenRange])
+            return true
+        }
+        return tokens
+    }
+    
+    func get_sentiment(text:String) -> String {
+        self.tagger.string = text
+        var retValue = ""
+
+        // Ask for the results
+        let sentiment = self.tagger.tag(at: text.startIndex, unit: .paragraph, scheme: .sentimentScore).0
+
+        // Read the sentiment back and print it
+        let score = Double(sentiment?.rawValue ?? "0") ?? 0
+
+        // Print the right smiley based on sentiment
+        if score == 0{
+            retValue = "🙂"
+        }
+        else if score < 0{
+            retValue = "😢"
+        }
+        else {
+            retValue = "😁"
+        }
+        
+        return retValue
+    }
+}
+
+/*
 let text = """
 All human beings are born free and equal in dignity and rights.
 They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
