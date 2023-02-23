@@ -22,6 +22,7 @@
 		E727A6AA299D36CE00CAFCF7 /* GameWizardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6A9299D36CE00CAFCF7 /* GameWizardTests.swift */; };
 		E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */; };
 		E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */; };
+		E72EDBF529A7A77A00350DEB /* RetroGaming.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */; };
 		E730A8AE29A6940D00AAA293 /* games.json in Resources */ = {isa = PBXBuildFile; fileRef = E730A8AD29A6940D00AAA293 /* games.json */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		E727A6AF299D36CE00CAFCF7 /* GameWizardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameWizardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITests.swift; sourceTree = "<group>"; };
 		E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RetroGaming.ttf; sourceTree = "<group>"; };
 		E72F569C299FC18F00619B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E730A8AD29A6940D00AAA293 /* games.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = games.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +122,7 @@
 		E727A697299D36CD00CAFCF7 /* GameWizard */ = {
 			isa = PBXGroup;
 			children = (
-				E730A8AD29A6940D00AAA293 /* games.json */,
+				E72EDBF129A7A65900350DEB /* Data */,
 				20AA065A29A6773200FA3DE6 /* Classes */,
 				E72F569C299FC18F00619B32 /* Info.plist */,
 				E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */,
@@ -154,6 +156,15 @@
 				E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */,
 			);
 			path = GameWizardUITests;
+			sourceTree = "<group>";
+		};
+		E72EDBF129A7A65900350DEB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */,
+				E730A8AD29A6940D00AAA293 /* games.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 				E727A6A0299D36CE00CAFCF7 /* Preview Assets.xcassets in Resources */,
 				E730A8AE29A6940D00AAA293 /* games.json in Resources */,
 				E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */,
+				E72EDBF529A7A77A00350DEB /* RetroGaming.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
