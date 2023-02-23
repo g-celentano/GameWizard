@@ -7,10 +7,18 @@
 
 import SwiftUI
 
+extension String {
+   func widthOfString(usingFont font: UIFont) -> CGSize {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size
+    }
+}
+
 
 let global_height = UIScreen.main.bounds.height
 let global_width  = UIScreen.main.bounds.width
-let games : [Game] = load("games")
+let games : [Game] = load("Data/games")
 let recommender : Recommender = Recommender()
 
 struct ContentView: View {
@@ -40,74 +48,66 @@ struct ContentView: View {
                  Text("Click here to import the Steam Library")
                  .font(.system(size: 20))
                  }*/
-                ScrollView{
-                    
-                    ForEach(messages){ message in
-                        HStack {
-                            HStack{
+                ScrollViewReader{ reader in
+                    ScrollView{
+                        
+                        
+                        ForEach(messages){ message in
+                           
+                            HStack {
+                                HStack{
+                                   
+                                    //Text(messages.last == message && message.isBotResponse() && lastMexWidt < global_width*0.4 ? "" : message.getText() )
+                            
+                                    Text(message.getText())
+                                        .id(message.id)
+                                        .font(Font.custom("RetroGaming", size: 16))
+                                        .padding()
+                                        .background(.white)
+                                        .clipped()
+                                        .overlay(MessageBox().stroke(.black, lineWidth: 2))
+                                        .lineLimit(nil)
+                                        .clipShape(MessageBox())
+                                        
                                 
-                                //Text(messages.last == message && message.isBotResponse() && lastMexWidt < global_width*0.4 ? "" : message.getText() )
-                                Text(message.getText())
-                                    .lineLimit(nil)
-                                    .font(.title3)
-                                    .padding()
-                                    //.frame(minWidth: messages.last == message && message.isBotResponse() ? lastMexWidt :  global_width*0.4 ,minHeight: global_height * 0.05, maxHeight: .infinity,  alignment: .leading)
-                                    .frame(minWidth:  global_width*0.4 ,minHeight: global_height * 0.05, maxHeight: .infinity,  alignment: .leading)
-                                    /*.clipShape(MessageBox(x0_y0: CGPoint(x: 0.0 ,y: 0.0),
-                                                          x1_y0: CGPoint(x: message.isBotResponse() ? botBoxes[messages.firstIndex(of: message) ?? 0].width : userBoxes[messages.firstIndex(of: message) ?? 0].width,
-                                                                         y: 0.0 ),
-                                                          x1_y1: CGPoint(x: message.isBotResponse() ? botBoxes[messages.firstIndex(of: message) ?? 0].width : userBoxes[messages.firstIndex(of: message) ?? 0].width,
-                                                                         y: global_height*0.05),
-                                                          x0_y1: CGPoint(x: 0.0, y: message.isBotResponse() ? botBoxes[messages.firstIndex(of: message) ?? 0].height : userBoxes[messages.firstIndex(of: message) ?? 0].height))) //check if dims are nil
-                                    .background(.white)
-                                    .readSize { newSize in
-                                        //message.setSize(w: nil , h: nil ,s: newSize)
-                                    }*/
+                                
+                                    
+                                        
+                                }
+                                .frame(minWidth: global_width*0.04, maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
+                                .onChange(of: messages) { newValue in
+                                    reader.scrollTo(message.id)
+                                }
+                                
                             }
-                            .frame(minWidth: global_width*0.04, maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
+                            .frame(maxWidth: global_width*0.9, alignment: message.isBotResponse() ? .leading : .trailing )
                             
                         }
-                        .frame(maxWidth: global_width*0.9, alignment: message.isBotResponse() ? .leading : .trailing )
+                        
+                        
                     }
+                    .frame(maxWidth: global_width, maxHeight: .infinity, alignment: .bottom)
+                    .padding()
                     
                     
                 }
-                .frame(maxWidth: global_width, maxHeight: .infinity, alignment: .bottom)
-                .padding()
-                
                 
                 
     
                 HStack{
+                    
+                        
                     TextField("Type Here...", text: $textFieldValue)
-                        .submitLabel(.send)
+                        //.submitLabel(.send)
                         .padding(.leading)
-                        .frame(maxWidth: global_width*0.9, maxHeight: global_height*0.05)
-                        .onSubmit {
-                            lastMexWidt = 0.0
-                            messages.append(Message(botR: false, t: textFieldValue))
-                            //userBoxes.append(CGSize(width: <#T##CGFloat#>, height: <#T##CGFloat#>))
-                            
-                            
-                            lastMexWidt = global_width * 0.05
-                            
-                            let response = recommender.get_sentiment(text: textFieldValue)
-                            messages.append(Message(botR: true, t: response))
-                            
-                            
-                            
-                            /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { // used to replicate response time
-                                
-                                withAnimation {
-                                    lastMexWidt = global_width * 0.4
-                                }
-                                
-                            })*/
-                            textFieldValue = ""
-                            
-                        }
+                        .font(Font.custom("RetroGaming", size: 17))
+                        .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05)
+                        //.onSubmit(submit)
+                  
                     Button {
-                        print("ciao")
+                        if !textFieldValue.isEmpty {
+                            submit()
+                        }
                     } label: {
                         ZStack{
                             Image(systemName: textFieldValue.isEmpty ? "mic.fill" : "paperplane.fill" )
@@ -121,10 +121,17 @@ struct ContentView: View {
                     
                     
                 }
-                .frame(maxWidth: global_width * 0.95, maxHeight: global_height * 0.06, alignment: .center)
+                
+                .frame(maxWidth: global_width*0.98, maxHeight: global_height * 0.07, alignment: .center)
                 .background(.white)
-                .cornerRadius(18)
-                .padding(.vertical)
+                .clipped()
+                .overlay(MessageBox().stroke(.black, lineWidth: 5))
+                .clipShape(MessageBox())
+                
+               // .cornerRadius(18)
+               // .padding(.vertical)
+                
+                .background(Color("BgColor"))
             
                 
             }
@@ -132,6 +139,32 @@ struct ContentView: View {
             
             
         }
+        
+        
+    }
+    func submit(){
+        lastMexWidt = 0.0
+        messages.append(Message(botR: false, t: textFieldValue))
+        
+        print(textFieldValue.widthOfString(usingFont:UIFont(name:"RetroGaming", size: 16)!))
+        print(global_height*0.05)
+        lastMexWidt = global_width * 0.05
+        
+        let response = recommender.get_sentiment(text: textFieldValue)
+        messages.append(Message(botR: true, t: response))
+        
+        
+        
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { // used to replicate response time
+            
+            withAnimation {
+                lastMexWidt = global_width * 0.4
+            }
+            
+        })*/
+        textFieldValue = ""
+        
+        
     }
     
     struct ContentView_Previews: PreviewProvider {

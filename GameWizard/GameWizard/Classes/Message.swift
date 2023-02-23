@@ -73,29 +73,43 @@ class Message: Identifiable, Equatable {
     
 }
 
+
+
+
 struct MessageBox : Shape {
-    let x0_y0 : CGPoint
-    let x1_y0 : CGPoint
-    let x1_y1 : CGPoint
-    let x0_y1 : CGPoint
+    
     func path(in rect: CGRect)-> Path{
         Path{ path in
-            path.move(to: x0_y0)
-            path.addLine(to: x1_y0)
-            path.addLine(to: x1_y1)
-            path.addLine(to: x0_y1)
+           let w = rect.width
+           let h = rect.height
+           let x0 = rect.origin.x
+           let y0 = rect.origin.y
+           
+           path.move(to: CGPoint(x: x0 + w*0.05, y: y0))
+           path.addLine(to: CGPoint(x: w - w*0.05, y: y0))
+           path.addLine(to: CGPoint(x: w - w*0.05, y: y0+h*0.08))
+           path.addLine(to: CGPoint(x: w, y: y0+h*0.08))
+           path.addLine(to: CGPoint(x: w, y: h-h*0.08))
+           path.addLine(to: CGPoint(x: w - w*0.05, y: h-h*0.08))
+           path.addLine(to: CGPoint(x: w - w*0.05, y: h))
+           path.addLine(to: CGPoint(x: x0 + w*0.05, y: h))
+           path.addLine(to: CGPoint(x: x0 + w*0.05, y: h-h*0.08))
+           path.addLine(to: CGPoint(x: x0, y: h-h*0.08))
+           path.addLine(to: CGPoint(x: x0, y: y0+h*0.08))
+           path.addLine(to: CGPoint(x: x0 + w*0.05, y: y0+h*0.08))
+           path.addLine(to: CGPoint(x: x0 + w*0.05, y: y0))
+            
         }
     }
+    
 }
 
 struct MessageBG_Previews : PreviewProvider {
     static var previews: some View{
       VStack {
-          MessageBox(x0_y0: CGPoint(x: global_width*0.99, y: 0),
-                     x1_y0: CGPoint(x: global_width*0.01, y: 0),
-                     x1_y1: CGPoint(x: global_width*0.01, y: global_height*0.2),
-                     x0_y1: CGPoint(x: global_width*0.99, y: global_height*0.2))
-       }
+          MessageBox()
+      }
+      .frame(minWidth: global_width*0.3, maxWidth: global_width*0.7, minHeight: global_height*0.2, maxHeight: global_height*0.2)
       
     }
 }
