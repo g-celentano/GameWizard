@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		200F545429A9118D00606EF6 /* games 2.json in Resources */ = {isa = PBXBuildFile; fileRef = 200F545229A9118D00606EF6 /* games 2.json */; };
-		200F545529A9118D00606EF6 /* keywords 2.json in Resources */ = {isa = PBXBuildFile; fileRef = 200F545329A9118D00606EF6 /* keywords 2.json */; };
 		20A1583F29A7A2520069300B /* Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A1583E29A7A2520069300B /* Searcher.swift */; };
 		20AA065729A6772100FA3DE6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065629A6772100FA3DE6 /* Message.swift */; };
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
@@ -50,8 +48,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		200F545229A9118D00606EF6 /* games 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "games 2.json"; path = "../../../dataset/games 2.json"; sourceTree = "<group>"; };
-		200F545329A9118D00606EF6 /* keywords 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "keywords 2.json"; path = "../../../dataset/keywords 2.json"; sourceTree = "<group>"; };
 		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
@@ -172,8 +168,6 @@
 		E72EDBF129A7A65900350DEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				200F545229A9118D00606EF6 /* games 2.json */,
-				200F545329A9118D00606EF6 /* keywords 2.json */,
 				E72EDBF629A8F4C500350DEB /* keywords_unique.json */,
 				E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */,
 				E730A8AD29A6940D00AAA293 /* games.json */,
@@ -290,8 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E727A6A0299D36CE00CAFCF7 /* Preview Assets.xcassets in Resources */,
-				200F545529A9118D00606EF6 /* keywords 2.json in Resources */,
-				200F545429A9118D00606EF6 /* games 2.json in Resources */,
 				E730A8AE29A6940D00AAA293 /* games.json in Resources */,
 				E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */,
 				E72EDBF729A8F4C500350DEB /* keywords_unique.json in Resources */,

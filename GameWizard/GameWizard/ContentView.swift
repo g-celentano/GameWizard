@@ -18,7 +18,7 @@ extension String {
 
 let global_height = UIScreen.main.bounds.height
 let global_width  = UIScreen.main.bounds.width
-let games : [Game] = load("games 2")
+let games : [Game] = load("games")
 let recommender : Recommender = Recommender()
 
 struct ContentView: View {
@@ -30,8 +30,8 @@ struct ContentView: View {
     @State var botResponse : String = ""
     @State var lastMexWidt : Double = 0.0
     @State var messages : [Message] = [
-        Message(botR: false, t: "Ciao "),
-        Message(botR: true, t: "Ciao a te")
+        //Message(botR: false, t: "Ciao "),
+       // Message(botR: true, t: "Ciao a te")
     ]
     
     var body: some View {
@@ -107,11 +107,9 @@ struct ContentView: View {
                     } label: {
                         ZStack{
                             Image(systemName: textFieldValue.isEmpty ? "mic.fill" : "paperplane.fill" )
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                         }
                         .frame(width: global_width*0.1, height: global_width*0.1, alignment: .center)
-                        .background(.blue)
-                        .clipShape(Circle())
                         .padding(.trailing)
                     }
                     
