@@ -7,7 +7,7 @@
 
 import Foundation
 
-func searchKeyword(keywords: [String], games: [Game]) -> Game? {
+func searchKeyword(keywords: [String], games: [Game]) -> String {
     var maxMatches = 0
     var matchedGame : Game?
     var index = 0
@@ -22,12 +22,7 @@ func searchKeyword(keywords: [String], games: [Game]) -> Game? {
             {
                 matches += 1
             }
-                                                
-            if keywords.contains(where: { games[index].keywords[keyIndex].name.lowercased().contains($0.lowercased())
-                })
-            {
-                matches += 1
-            }
+                                            
             keyIndex += 1
         }
                                                 
@@ -35,8 +30,12 @@ func searchKeyword(keywords: [String], games: [Game]) -> Game? {
             maxMatches = matches
             matchedGame = game
         }
+        
         index += 1
-        }
+        keyIndex = 0
+    }
+    
+        return matchedGame?.name ?? "No game"
+
                                                 
-    return matchedGame
 }
