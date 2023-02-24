@@ -30,8 +30,8 @@ struct ContentView: View {
     @State var botResponse : String = ""
     @State var lastMexWidt : Double = 0.0
     @State var messages : [Message] = [
-        //Message(botR: false, t: "Ciao "),
-        //Message(botR: true, t: "Ciao a te")
+        Message(botR: false, t: "Ciao "),
+        Message(botR: true, t: "Ciao a te")
     ]
     
     var body: some View {
@@ -61,23 +61,26 @@ struct ContentView: View {
                             
                                     Text(message.getText())
                                         .id(message.id)
+                                        .fixedSize()
                                         .font(Font.custom("RetroGaming", size: 16))
                                         .padding()
                                         .background(.white)
-                                        .clipped()
-                                        .overlay(MessageBox().stroke(.black, lineWidth: 2))
                                         .lineLimit(nil)
                                         .clipShape(MessageBox())
+                                        .overlay(MessageBox()
+                                                    .stroke(.black, lineWidth: 2))
+                                    
                                         
                                 
                                 
                                     
                                         
                                 }
-                                .frame(minWidth: global_width*0.04, maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
+                                .frame( maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
                                 .onChange(of: messages) { newValue in
                                     reader.scrollTo(message.id)
                                 }
+                                .padding(message.isBotResponse() ? .leading : .trailing, global_width * 0.02)
                                 
                             }
                             .frame(maxWidth: global_width*0.9, alignment: message.isBotResponse() ? .leading : .trailing )
