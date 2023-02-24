@@ -58,32 +58,25 @@ struct ContentView: View {
                                 HStack{
                                    
                                     //Text(messages.last == message && message.isBotResponse() && lastMexWidt < global_width*0.4 ? "" : message.getText() )
-                            
                                     Text(message.getText())
                                         .id(message.id)
-                                        .fixedSize()
-                                        .font(Font.custom("RetroGaming", size: 16))
                                         .padding()
+                                        .font(Font.custom("RetroGaming", size: 16))
                                         .background(.white)
                                         .lineLimit(nil)
                                         .clipShape(MessageBox())
-                                        .overlay(MessageBox()
-                                                    .stroke(.black, lineWidth: 2))
-                                    
-                                        
-                                
-                                
-                                    
-                                        
+                                        .overlay(MessageBox().stroke(.black, lineWidth: 3))
                                 }
-                                .frame( maxWidth: global_width*0.7,minHeight: global_height*0.05, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
+                                .frame( maxWidth: global_width*0.7, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
                                 .onChange(of: messages) { newValue in
                                     reader.scrollTo(message.id)
                                 }
+                                
                                 .padding(message.isBotResponse() ? .leading : .trailing, global_width * 0.02)
                                 
                             }
                             .frame(maxWidth: global_width*0.9, alignment: message.isBotResponse() ? .leading : .trailing )
+                            .padding(.top, global_width*0.015)
                             
                         }
                         
