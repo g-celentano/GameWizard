@@ -18,7 +18,7 @@ extension String {
 
 let global_height = UIScreen.main.bounds.height
 let global_width  = UIScreen.main.bounds.width
-let games : [Game] = load("games")
+let games : [Game] = load("games 2")
 let recommender : Recommender = Recommender()
 
 struct ContentView: View {
@@ -146,8 +146,8 @@ struct ContentView: View {
         print(global_height*0.05)
         lastMexWidt = global_width * 0.05
         
-        //let response = recommender.get_sentiment(text: textFieldValue)
-        //messages.append(Message(botR: true, t: response))
+        let response = searchKeyword(keywords: recommender.get_tokens(text: textFieldValue), games: games)
+        messages.append(Message(botR: true, t: response))
         
         /*
         let tokens = recommender.get_tokens(text: textFieldValue) 
