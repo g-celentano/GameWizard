@@ -18,7 +18,7 @@ extension String {
 
 let global_height = UIScreen.main.bounds.height
 let global_width  = UIScreen.main.bounds.width
-let games : [Game] = load("Data/games")
+let games : [Game] = load("games")
 let recommender : Recommender = Recommender()
 
 struct ContentView: View {
@@ -150,11 +150,17 @@ struct ContentView: View {
         print(global_height*0.05)
         lastMexWidt = global_width * 0.05
         
-        let response = recommender.get_sentiment(text: textFieldValue)
-        messages.append(Message(botR: true, t: response))
+        //let response = recommender.get_sentiment(text: textFieldValue)
+        //messages.append(Message(botR: true, t: response))
         
+        /*
+        let tokens = recommender.get_tokens(text: textFieldValue) 
+        let response = searchKeyword(keywords: tokens, games: games)
+        if response != nil{
+            messages.append(Message(botR: true, t: response?.name ?? "Nothing found"))
+        }
         
-        
+        */
         /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { // used to replicate response time
             
             withAnimation {

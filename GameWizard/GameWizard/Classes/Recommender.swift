@@ -16,12 +16,12 @@ class Recommender {
     private let tokenizer = NLTokenizer(unit: .word)
     private let tagger = NLTagger(tagSchemes: [.sentimentScore])
     
-    func get_tokens(text: String) -> [Substring] {
-        var tokens : [Substring] = []
+    func get_tokens(text: String) -> [String] {
+        var tokens : [String] = []
         self.tokenizer.string = text
         self.tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { tokenRange, _ in
             print(text[tokenRange])
-            tokens.append(text[tokenRange])
+            tokens.append(String(text[tokenRange]))
             return true
         }
         return tokens
