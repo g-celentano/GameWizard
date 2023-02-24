@@ -11,13 +11,13 @@ import Foundation
 struct Game: Codable {
 
     let id : Int
-    let first_release_date : Int
-    let game_modes : [GameMode]
-    let genres : [Genre]
-    let keywords : [KeyWord]
+    let first_release_date : Int?
+    let game_modes : [GameMode]?
+    let genres : [Genre]?
+    let keywords : [KeyWord]?
     let name : String
-    let platforms : [Platform]
-    let similar_games : [SimilarGame]
+    let platforms : [Platform]?
+    let similar_games : [SimilarGame]?
     
     
 }

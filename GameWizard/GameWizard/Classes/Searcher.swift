@@ -15,15 +15,17 @@ func searchKeyword(keywords: [String], games: [Game]) -> String {
     
     for game in games {
         var matches = 0
-        for _ in game.keywords {
-            if keywords.contains(where: {
-                games[index].keywords[keyIndex].name.lowercased().contains($0.lowercased())
+        if game.keywords != nil {
+            for _ in game.keywords! {
+                if keywords.contains(where: {
+                    games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
                 })
-            {
-                matches += 1
+                {
+                    matches += 1
+                }
+                
+                keyIndex += 1
             }
-                                            
-            keyIndex += 1
         }
                                                 
         if matches > maxMatches {
