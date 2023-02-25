@@ -26,7 +26,7 @@ struct MyGames : View {
 
     }
     
-    
+    @State var isPresented = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View{
@@ -35,13 +35,31 @@ struct MyGames : View {
                 Color("BgColor")
                     .ignoresSafeArea(.all)
                 
-                List(myGames){ game in
-                    Text(game.name)
-                        .font(Font.custom("RetroGaming", size: 16))
+                myGames.isEmpty ? nil :
+                List{
+                    ForEach(myGames){ game in
+                        Text(game.name)
+                            .font(Font.custom("RetroGaming", size: 16))
+                    }
+                    .onDelete(perform: delete)
                     
                 }
                 .scrollContentBackground(.hidden)
                 .clipped()
+                .toolbar(content: {
+                        EditButton()
+                            .font(Font.custom("RetroGaming", size: 16))
+                            .foregroundColor(.white)
+                    Button{
+                        isPresented.toggle()
+                    } label:{
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                    }
+                      
+                    
+                })
+                
                    
             }
             .frame(maxWidth: .infinity, maxHeight: global_height)
@@ -64,7 +82,15 @@ struct MyGames : View {
         .navigationTitle("My Games")
         .navigationBarTitleDisplayMode(.large)
         .navigationBarBackButtonHidden(true)
-        
+        .sheet(isPresented: $isPresented, content: {
+            NavigationStack{
+                AddGame()
+            }
+        })
+    }
+    
+    func delete(at offsets : IndexSet){
+        myGames.remove(atOffsets: offsets)
     }
     
     

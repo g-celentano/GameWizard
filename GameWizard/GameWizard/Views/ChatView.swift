@@ -95,12 +95,20 @@ struct ChatView: View {
                     HStack{
                         
                             
-                        TextField("Type Here...", text: $textFieldValue)
+                        TextField("", text: $textFieldValue)
                             //.submitLabel(.send)
                             .padding(.horizontal)
                             .font(Font.custom("RetroGaming", size: 17))
                             .foregroundColor(.black)
                             .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05)
+                            .background(
+                                Text("Type here...")
+                                    .font(Font.custom("RetroGaming", size: 17))
+                                    .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05, alignment: .leading)
+                                    .foregroundColor(.gray)
+                                    .padding(.horizontal)
+                                    .opacity(textFieldValue.isEmpty ? 1.0 : 0.0)
+                            )
                             //.onSubmit(submit)
                       
                         Button {
