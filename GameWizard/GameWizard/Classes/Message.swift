@@ -105,7 +105,8 @@ struct MessageBox : Shape {
             path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.1))
             path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.05))
             path.addLine(to: CGPoint(x: x0 + w*0.1  , y: y0 + h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.1, y: y0))
+            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: y0))
+            
             
         }
     }
@@ -115,7 +116,7 @@ struct MessageBox : Shape {
 struct MessageBG_Previews : PreviewProvider {
     static var previews: some View{
       VStack {
-          MessageBox()
+          MessageBox().stroke(.black, lineWidth: 10)
       }
       .frame(minWidth: global_width*0.3, maxWidth: global_width*0.7, minHeight: global_height*0.2, maxHeight: global_height*0.2)
       

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Game: Codable {
+struct Game: Codable, Identifiable {
 
     let id : Int
     let first_release_date : Int?

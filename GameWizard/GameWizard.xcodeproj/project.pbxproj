@@ -12,6 +12,12 @@
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
+		E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
+		E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
+		E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
+		E705E59429AA3B4600D2FB1F /* MyGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E59329AA3B4600D2FB1F /* MyGames.swift */; };
+		E705E59529AA3B4600D2FB1F /* MyGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E59329AA3B4600D2FB1F /* MyGames.swift */; };
+		E705E59629AA3B4600D2FB1F /* MyGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E59329AA3B4600D2FB1F /* MyGames.swift */; };
 		E717E98429A67EBA007855C9 /* JSONLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98329A67EBA007855C9 /* JSONLoad.swift */; };
 		E717E98629A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
 		E717E98729A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
@@ -51,6 +57,8 @@
 		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
+		E705E58F29AA3A3600D2FB1F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		E705E59329AA3B4600D2FB1F /* MyGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGames.swift; sourceTree = "<group>"; };
 		E717E98329A67EBA007855C9 /* JSONLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONLoad.swift; sourceTree = "<group>"; };
 		E717E98529A67ECE007855C9 /* Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
 		E727A695299D36CD00CAFCF7 /* GameWizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameWizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +114,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		E705E58E29AA39F400D2FB1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E705E58F29AA3A3600D2FB1F /* ChatView.swift */,
+				E705E59329AA3B4600D2FB1F /* MyGames.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E727A68C299D36CD00CAFCF7 = {
 			isa = PBXGroup;
 			children = (
@@ -129,11 +146,12 @@
 		E727A697299D36CD00CAFCF7 /* GameWizard */ = {
 			isa = PBXGroup;
 			children = (
+				E727A69A299D36CD00CAFCF7 /* ContentView.swift */,
+				E705E58E29AA39F400D2FB1F /* Views */,
 				E72EDBF129A7A65900350DEB /* Data */,
 				20AA065A29A6773200FA3DE6 /* Classes */,
 				E72F569C299FC18F00619B32 /* Info.plist */,
 				E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */,
-				E727A69A299D36CD00CAFCF7 /* ContentView.swift */,
 				E727A69C299D36CE00CAFCF7 /* Assets.xcassets */,
 				E727A69E299D36CE00CAFCF7 /* Preview Content */,
 			);
@@ -318,7 +336,9 @@
 				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
 				20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
+				E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E717E98629A67ECE007855C9 /* Games.swift in Sources */,
+				E705E59429AA3B4600D2FB1F /* MyGames.swift in Sources */,
 				E717E98429A67EBA007855C9 /* JSONLoad.swift in Sources */,
 				E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */,
 			);
@@ -328,7 +348,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E717E98729A67ECE007855C9 /* Games.swift in Sources */,
+				E705E59529AA3B4600D2FB1F /* MyGames.swift in Sources */,
 				E727A6AA299D36CE00CAFCF7 /* GameWizardTests.swift in Sources */,
 				20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */,
 			);
@@ -340,6 +362,8 @@
 			files = (
 				E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */,
 				E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */,
+				E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */,
+				E705E59629AA3B4600D2FB1F /* MyGames.swift in Sources */,
 				20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E717E98829A67ECE007855C9 /* Games.swift in Sources */,
 			);
@@ -483,7 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AGNFXA4GF9;
+				DEVELOPMENT_TEAM = AW53X29GKN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GameWizard/Info.plist;
@@ -496,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aithanos.GameWizard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SunHeartSea.GameWizard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -512,7 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AGNFXA4GF9;
+				DEVELOPMENT_TEAM = AW53X29GKN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GameWizard/Info.plist;
@@ -525,7 +549,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aithanos.GameWizard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SunHeartSea.GameWizard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
