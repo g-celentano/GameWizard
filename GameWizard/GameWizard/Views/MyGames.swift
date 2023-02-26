@@ -6,7 +6,17 @@
 //
 
 import SwiftUI
-var myGames : [Game] = games
+
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue: Value = 0
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+}
+
+
+
 
 struct MyGames : View {
     
@@ -20,14 +30,12 @@ struct MyGames : View {
             .font : UIFont(name: "RetroGaming", size: 18)!,
             .foregroundColor : UIColor.white
         ]
-        
-        
-        
-
     }
-    
+    @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
+    @Environment(\.managedObjectContext) var moc
     @State var isPresented = false
     @Environment(\.dismiss) private var dismiss
+    @State var toolbarColor = Color.black
     
     var body: some View{
         NavigationStack{
@@ -35,36 +43,38 @@ struct MyGames : View {
                 Color("BgColor")
                     .ignoresSafeArea(.all)
                 
-                myGames.isEmpty ? nil :
-                List{
-                    ForEach(myGames){ game in
-                        Text(game.name)
-                            .font(Font.custom("RetroGaming", size: 16))
+                localGames.isEmpty ? nil :
+                    List{
+                        ForEach(localGames, id: \.self){ game in
+                            Text(game.gameName ?? "No name")
+                                .font(Font.custom("RetroGaming", size: 16))
+                        }
+                        .onDelete(perform: delete)
+                        
                     }
-                    .onDelete(perform: delete)
-                    
-                }
-                .scrollContentBackground(.hidden)
-                .clipped()
-                .toolbar(content: {
-                        EditButton()
-                            .font(Font.custom("RetroGaming", size: 16))
-                            .foregroundColor(.white)
-                    Button{
-                        isPresented.toggle()
-                    } label:{
-                    Image(systemName: "plus")
-                        .foregroundColor(.white)
+                    .background(GeometryReader{ proxy in
+                        Color.clear.preference(key: ViewOffsetKey.self ,value: proxy.frame(in: .global).origin.y)
+                    })
+                    .onPreferenceChange(ViewOffsetKey.self){
+                        
+                        if $0 < global_height*0.13{
+                            toolbarColor = .white
+                        } else {
+                            toolbarColor = .black
+                        }
                     }
-                      
-                    
-                })
-                
-                   
+                    .scrollContentBackground(.hidden)
+                    .clipped()
+                    .toolbar(content: {
+                            EditButton()
+                                .font(Font.custom("RetroGaming", size: 16))
+                                .foregroundColor(toolbarColor)
+                    })
             }
             .frame(maxWidth: .infinity, maxHeight: global_height)
+            
         }
-       .toolbar(content: {
+       .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button{
                     dismiss()
@@ -75,10 +85,18 @@ struct MyGames : View {
                             .font(Font.custom("RetroGaming", size: 16))
                             
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(toolbarColor)
                 }
             }
-        })
+           ToolbarItem(placement: .navigationBarTrailing) {
+               Button{
+                   isPresented.toggle()
+               } label:{
+               Image(systemName: "plus")
+                   .foregroundColor(toolbarColor)
+               }
+           }
+        }
         .navigationTitle("My Games")
         .navigationBarTitleDisplayMode(.large)
         .navigationBarBackButtonHidden(true)
@@ -87,10 +105,15 @@ struct MyGames : View {
                 AddGame()
             }
         })
+        
     }
     
     func delete(at offsets : IndexSet){
-        myGames.remove(atOffsets: offsets)
+        for offset in offsets {
+            let game = localGames[offset]
+            moc.delete(game)
+        }
+        try? moc.save()
     }
     
     

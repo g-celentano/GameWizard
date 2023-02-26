@@ -10,12 +10,7 @@ import SwiftUI
 
 struct ChatView: View {
     
-    @State var userBoxes : [CGSize] = []
-    @State var botBoxes : [CGSize] = []
-    
     @State var textFieldValue : String = ""
-    @State var botResponse : String = ""
-    @State var lastMexWidt : Double = 0.0
     @State var messages : [Message] = [
         //Message(botR: false, t: "Ciao "),
         //Message(botR: true, t: "Ciao a te")
@@ -28,12 +23,6 @@ struct ChatView: View {
                     .ignoresSafeArea(.all)
                 
                 VStack{
-                    /*Button {
-                     callAPI()
-                     } label: {
-                     Text("Click here to import the Steam Library")
-                     .font(.system(size: 20))
-                     }*/
                     HStack{
                         NavigationLink(destination: MyGames()) {
                             HStack{
@@ -58,17 +47,16 @@ struct ChatView: View {
                                
                                 HStack {
                                     HStack{
-                                       
-                                        //Text(messages.last == message && message.isBotResponse() && lastMexWidt < global_width*0.4 ? "" : message.getText() )
                                         Text(message.getText())
                                             .id(message.id)
                                             .padding()
+                                            .padding(.horizontal)
                                             .font(Font.custom("RetroGaming", size: 16))
                                             .foregroundColor(.black)
                                             .background(.white)
                                             .lineLimit(nil)
                                             .clipShape(MessageBox())
-                                            .overlay(MessageBox().stroke(.black, lineWidth: 3))
+                                            .overlay(MessageBox().stroke(.black, lineWidth: 6))
                                     }
                                     .frame( maxWidth: global_width*0.7, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
                                     .onChange(of: messages) { newValue in
@@ -94,10 +82,8 @@ struct ChatView: View {
         
                     HStack{
                         
-                            
                         TextField("", text: $textFieldValue)
-                            //.submitLabel(.send)
-                            .padding(.horizontal)
+                            .padding(.horizontal, global_width*0.05)
                             .font(Font.custom("RetroGaming", size: 17))
                             .foregroundColor(.black)
                             .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05)
@@ -106,10 +92,9 @@ struct ChatView: View {
                                     .font(Font.custom("RetroGaming", size: 17))
                                     .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05, alignment: .leading)
                                     .foregroundColor(.gray)
-                                    .padding(.horizontal)
+                                    .padding(.horizontal, global_width*0.05)
                                     .opacity(textFieldValue.isEmpty ? 1.0 : 0.0)
                             )
-                            //.onSubmit(submit)
                       
                         Button {
                             if !textFieldValue.isEmpty {
@@ -129,12 +114,8 @@ struct ChatView: View {
                     .frame(maxWidth: global_width, maxHeight: global_height * 0.08, alignment: .center)
                     .background(.white)
                     .clipped()
-                    .overlay(MessageBox().stroke(.black, lineWidth: 5))
+                    .overlay(MessageBox().stroke(.black, lineWidth: 8))
                     .clipShape(MessageBox())
-                    
-                    
-                   // .cornerRadius(18)
-                   // .padding(.vertical)
                     
                     .background(Color("BgColor"))
                 
@@ -149,10 +130,8 @@ struct ChatView: View {
         
     }
     func submit(){
-        lastMexWidt = 0.0
         messages.append(Message(botR: false, t: textFieldValue))
         
-        lastMexWidt = global_width * 0.05
         
         let response = searchKeyword(keywords: recommender.get_tokens(text: textFieldValue), games: games)
         messages.append(Message(botR: true, t: response))
@@ -165,13 +144,6 @@ struct ChatView: View {
         }
         
         */
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { // used to replicate response time
-            
-            withAnimation {
-                lastMexWidt = global_width * 0.4
-            }
-            
-        })*/
         textFieldValue = ""
         
         

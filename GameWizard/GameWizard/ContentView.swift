@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-extension String {
-   func widthOfString(usingFont font: UIFont) -> CGSize {
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size
-    }
-}
 
 
 let global_height = UIScreen.main.bounds.height

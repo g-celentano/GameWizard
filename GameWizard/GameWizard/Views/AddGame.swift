@@ -8,12 +8,9 @@
 import SwiftUI
 
 
-struct localGameGenre : Identifiable, Hashable {
-    let id = UUID()
-    var gameGenre : String
-}
 
 struct AddGame : View{
+ 
     
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -25,12 +22,14 @@ struct AddGame : View{
             .font : UIFont(name: "RetroGaming", size: 18)!,
             .foregroundColor : UIColor.white
         ]
-        
+       
     }
     
+    
+    @FetchRequest(sortDescriptors: []) var myGames2 : FetchedResults<MyGame>
+    @Environment(\.managedObjectContext) var moc
     @State var gameName : String = ""
-    @State var genres : [localGameGenre] = []
-    @State var releaseDate : String = ""
+    @State var genres : [String] = []
     @Environment(\.dismiss) var dismiss
     
     
@@ -44,7 +43,7 @@ struct AddGame : View{
                 VStack{
                     TextField("", text: $gameName)
                         .submitLabel(.done)
-                        .padding(.horizontal)
+                        .padding(.horizontal, global_width*0.05)
                         .font(Font.custom("RetroGaming", size: 17))
                         .foregroundColor(.black)
                         .frame(maxWidth: global_width*0.9)
@@ -53,16 +52,16 @@ struct AddGame : View{
                                 .font(Font.custom("RetroGaming", size: 17))
                                 .frame(maxWidth: global_width*0.9, alignment: .leading)
                                 .foregroundColor(.gray)
-                                .padding(.horizontal)
+                                .padding(.horizontal, global_width*0.05)
                                 .opacity(gameName.isEmpty ? 1.0 : 0.0)
                         )
                         .padding(.vertical)
                         .background(.white)
                         .clipped()
-                        .overlay(MessageBox().stroke(.black, lineWidth: 5))
+                        .overlay(MessageBox().stroke(.black, lineWidth: 8))
                         .clipShape(MessageBox())
                     
-                    
+                        
                         HStack{
                             Text("Game Genres")
                                 .font(Font.custom("RetroGaming", size: 24))
@@ -70,11 +69,11 @@ struct AddGame : View{
                             Spacer()
                             Button{
                                 if genres.last != nil {
-                                    if !genres.last!.gameGenre.isEmpty {
-                                        genres.append(localGameGenre(gameGenre: ""))
+                                    if !genres.last!.isEmpty {
+                                        genres.append("")
                                     }
                                 } else {
-                                    genres.append(localGameGenre(gameGenre: ""))
+                                    genres.append("")
                                 }
                                 
                             } label: {
@@ -85,10 +84,10 @@ struct AddGame : View{
                         }
                         .frame(maxWidth: global_width*0.9)
                         ScrollView{
-                            ForEach($genres){ genre in
-                                TextField("", text: genre.gameGenre)
+                            ForEach(genres.indices, id : \.self){ index in
+                                TextField("", text: $genres[index])
                                     .submitLabel(.done)
-                                    .padding(.horizontal)
+                                    .padding(.horizontal, global_width*0.05)
                                     .font(Font.custom("RetroGaming", size: 17))
                                     .foregroundColor(.black)
                                     .frame(maxWidth: global_width*0.9)
@@ -97,13 +96,13 @@ struct AddGame : View{
                                             .font(Font.custom("RetroGaming", size: 17))
                                             .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05, alignment: .leading)
                                             .foregroundColor(.gray)
-                                            .padding(.horizontal)
-                                            .opacity(genre.gameGenre.wrappedValue.isEmpty ? 1.0 : 0.0)
+                                            .padding(.horizontal, global_width*0.05)
+                                            .opacity(genres[index].isEmpty ? 1.0 : 0.0)
                                     )
                                     .padding(.vertical)
                                     .background(.white)
                                     .clipped()
-                                    .overlay(MessageBox().stroke(.black, lineWidth: 5))
+                                    .overlay(MessageBox().stroke(.black, lineWidth: 8))
                                     .clipShape(MessageBox())
                                 
                             }
@@ -111,7 +110,14 @@ struct AddGame : View{
                         .frame(maxWidth: global_width*0.9, maxHeight: .infinity)
                         
                     Button{
-                        
+                        if !(gameName.isEmpty && genres.isEmpty){
+                            let newGame = MyGame(context: moc)
+                            newGame.id = UUID()
+                            newGame.gameName = gameName
+                            newGame.genres = genres
+                            try? moc.save()
+                            dismiss()
+                        }
                     }label: {
                         Text("Add")
                             .font(Font.custom("RetroGaming",size: 24))

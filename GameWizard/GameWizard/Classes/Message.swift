@@ -85,7 +85,7 @@ struct MessageBox : Shape {
            let x0 = rect.origin.x
            let y0 = rect.origin.y
            
-            path.move(to: CGPoint(x: x0 + w*0.1, y: y0))
+           /* path.move(to: CGPoint(x: x0 + w*0.1, y: y0))
             path.addLine(to: CGPoint(x: w - w*0.1, y: y0))
             path.addLine(to: CGPoint(x: w - w*0.1, y: y0+h*0.05))
             path.addLine(to: CGPoint(x: w - w*0.05, y: y0+h*0.05))
@@ -105,7 +105,31 @@ struct MessageBox : Shape {
             path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.1))
             path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.05))
             path.addLine(to: CGPoint(x: x0 + w*0.1  , y: y0 + h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: y0))
+            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: y0))*/
+            
+            path.move(to: CGPoint(x: x0 + global_width*0.05, y: y0))
+            path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0))
+            path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.025, y:y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.025, y:y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.0125, y:y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.0125, y:h - global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.025, y:h - global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.025, y:h - global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.05, y:h - global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.05, y:h))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.05, y:h))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.05, y:h - global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: h - global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: h - global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.0125, y: h - global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.0125, y: y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 ))
+            path.closeSubpath()
+            
             
             
         }
@@ -118,7 +142,7 @@ struct MessageBG_Previews : PreviewProvider {
       VStack {
           MessageBox().stroke(.black, lineWidth: 10)
       }
-      .frame(minWidth: global_width*0.3, maxWidth: global_width*0.7, minHeight: global_height*0.2, maxHeight: global_height*0.2)
+      .frame(width: global_width*0.9, height: global_height*0.1)
       
     }
 }

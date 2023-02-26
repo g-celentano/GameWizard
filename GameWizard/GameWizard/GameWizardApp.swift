@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct GameWizardApp: App {
+    @StateObject private var gamesController = MyGamesDataController()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, gamesController.container.viewContext)
                 .preferredColorScheme(.dark)
         }
     }
