@@ -15,7 +15,7 @@ struct AddGame : View{
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .font : UIFont(name: "RetroGaming", size: 32)!,
-            .foregroundColor : UIColor.black,
+            .foregroundColor : UIColor.systemGray6,
         ]
         
         UINavigationBar.appearance().titleTextAttributes = [
@@ -45,27 +45,27 @@ struct AddGame : View{
                         .submitLabel(.done)
                         .padding(.horizontal, global_width*0.05)
                         .font(Font.custom("RetroGaming", size: 17))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color(uiColor: .systemGray6))
                         .frame(maxWidth: global_width*0.9)
                         .background(
                             Text("Game Name")
                                 .font(Font.custom("RetroGaming", size: 17))
                                 .frame(maxWidth: global_width*0.9, alignment: .leading)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Color(uiColor: .systemGray))
                                 .padding(.horizontal, global_width*0.05)
                                 .opacity(gameName.isEmpty ? 1.0 : 0.0)
                         )
                         .padding(.vertical)
                         .background(.white)
                         .clipped()
-                        .overlay(MessageBox().stroke(.black, lineWidth: 8))
+                        .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                         .clipShape(MessageBox())
                     
                         
                         HStack{
                             Text("Game Genres")
                                 .font(Font.custom("RetroGaming", size: 24))
-                                .foregroundColor(.black)
+                                .foregroundColor(Color(uiColor: .systemGray6))
                             Spacer()
                             Button{
                                 if genres.last != nil {
@@ -78,7 +78,7 @@ struct AddGame : View{
                                 
                             } label: {
                                 Image(systemName: "plus")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(uiColor: .systemGray6))
                                     .scaleEffect(1.25)
                             }
                         }
@@ -89,20 +89,20 @@ struct AddGame : View{
                                     .submitLabel(.done)
                                     .padding(.horizontal, global_width*0.05)
                                     .font(Font.custom("RetroGaming", size: 17))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(uiColor: .systemGray6))
                                     .frame(maxWidth: global_width*0.9)
                                     .background(
                                         Text("Game Genre")
                                             .font(Font.custom("RetroGaming", size: 17))
                                             .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05, alignment: .leading)
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(Color(uiColor: .systemGray))
                                             .padding(.horizontal, global_width*0.05)
                                             .opacity(genres[index].isEmpty ? 1.0 : 0.0)
                                     )
                                     .padding(.vertical)
                                     .background(.white)
                                     .clipped()
-                                    .overlay(MessageBox().stroke(.black, lineWidth: 8))
+                                    .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                                     .clipShape(MessageBox())
                                 
                             }
@@ -121,11 +121,11 @@ struct AddGame : View{
                     }label: {
                         Text("Add")
                             .font(Font.custom("RetroGaming",size: 24))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(uiColor: .systemGray6))
                             .frame(width: global_width*0.85)
                             .padding(.vertical)
                             .background(.white)
-                            .overlay(MessageBox().stroke(.black, lineWidth: 5))
+                            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
                             .clipShape(MessageBox())
                     }
                     
@@ -144,7 +144,7 @@ struct AddGame : View{
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.down")
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(uiColor: .systemGray6))
                             .scaleEffect(1.3)
                     }
                 }

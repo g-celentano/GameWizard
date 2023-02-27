@@ -13,8 +13,10 @@ struct ChatView: View {
     @State var textFieldValue : String = ""
     @State var messages : [Message] = [
         //Message(botR: false, t: "Ciao "),
-        //Message(botR: true, t: "Ciao a te")
+       // Message(botR: true, t: "Ciao a te")
     ]
+    @State var text = ""
+    @State var lastBotResponse = ""
     
     var body: some View {
         NavigationStack{
@@ -28,10 +30,10 @@ struct ChatView: View {
                             HStack{
                                  Text("My games")
                                      .font(Font.custom("RetroGaming", size: 18))
-                                     .foregroundColor(.black)
+                                     .foregroundColor(Color(uiColor: .systemGray6))
                                 
                                 Image(systemName: "chevron.right")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(uiColor: .systemGray6))
                             }.frame(alignment: .center)
                          }
                          .padding()
@@ -39,35 +41,34 @@ struct ChatView: View {
                         
                     }
                     .frame(maxWidth: .infinity, maxHeight: global_height*0.01, alignment: .trailing)
+                    
+                    
                     ScrollViewReader{ reader in
                         ScrollView{
-                            
-                            
                             ForEach(messages){ message in
-                               
                                 HStack {
                                     HStack{
-                                        Text(message.getText())
+                                        Text(messages.last! == message && message.isBotResponse() ? text : message.getText())
                                             .id(message.id)
                                             .padding()
                                             .padding(.horizontal)
                                             .font(Font.custom("RetroGaming", size: 16))
-                                            .foregroundColor(.black)
-                                            .background(.white)
+                                            .foregroundColor(Color(uiColor: .systemGray6))
+                                            .background(Color(uiColor: .white))
                                             .lineLimit(nil)
                                             .clipShape(MessageBox())
-                                            .overlay(MessageBox().stroke(.black, lineWidth: 6))
+                                            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 2))
                                     }
                                     .frame( maxWidth: global_width*0.7, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
-                                    .onChange(of: messages) { newValue in
-                                        reader.scrollTo(message.id)
-                                    }
                                     .padding(message.isBotResponse() ? .leading : .trailing, global_width * 0.015)
                                     
                                 }
                                 .frame(maxWidth: .infinity, alignment: message.isBotResponse() ? .leading : .trailing )
                                 .padding(.top, global_width*0.015)
                                 
+                            }
+                            .onChange(of: messages) { newValue in
+                                reader.scrollTo(messages.last!.id)
                             }
                             
                             
@@ -77,24 +78,24 @@ struct ChatView: View {
                         
                         
                     }
-                    
-                    
         
                     HStack{
-                        
                         TextField("", text: $textFieldValue)
                             .padding(.horizontal, global_width*0.05)
+                            .padding(.vertical)
                             .font(Font.custom("RetroGaming", size: 17))
                             .foregroundColor(.black)
-                            .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05)
+                            .frame(maxWidth: global_width*0.8)
                             .background(
                                 Text("Type here...")
                                     .font(Font.custom("RetroGaming", size: 17))
-                                    .frame(maxWidth: global_width*0.8, maxHeight: global_height*0.05, alignment: .leading)
-                                    .foregroundColor(.gray)
+                                    .frame(maxWidth: global_width*0.8, alignment: .leading)
+                                    .foregroundColor(.black)
                                     .padding(.horizontal, global_width*0.05)
+                                    .padding(.vertical)
                                     .opacity(textFieldValue.isEmpty ? 1.0 : 0.0)
                             )
+                            .disabled(messages.last != nil ? !(messages.last?.isBotResponse())!: false)
                       
                         Button {
                             if !textFieldValue.isEmpty {
@@ -103,10 +104,10 @@ struct ChatView: View {
                         } label: {
                             ZStack{
                                 Image(systemName: textFieldValue.isEmpty ? "mic.fill" : "paperplane.fill" )
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(uiColor: .systemGray6))
                             }
                             .frame(width: global_width*0.1, height: global_width*0.1, alignment: .center)
-                            .scaleEffect(1.2)
+                            .scaleEffect(1.5)
                         }
                         
                         
@@ -114,9 +115,8 @@ struct ChatView: View {
                     .frame(maxWidth: global_width, maxHeight: global_height * 0.08, alignment: .center)
                     .background(.white)
                     .clipped()
-                    .overlay(MessageBox().stroke(.black, lineWidth: 8))
+                    .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                     .clipShape(MessageBox())
-                    
                     .background(Color("BgColor"))
                 
                     
@@ -129,24 +129,33 @@ struct ChatView: View {
         
         
     }
+    
+    func typeWriter(at position: Int = 0) {
+            if position == 0 {
+                text = ""
+            }
+            if position < lastBotResponse.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    text.append(lastBotResponse[position])
+                    typeWriter(at: position + 1)
+                }
+            }
+        }
+    
     func submit(){
         messages.append(Message(botR: false, t: textFieldValue))
+        lastBotResponse = ""
         
-        
-        let response = searchKeyword(keywords: recommender.get_tokens(text: textFieldValue), games: games)
-        messages.append(Message(botR: true, t: response))
-        
-        /*
-        let tokens = recommender.get_tokens(text: textFieldValue)
-        let response = searchKeyword(keywords: tokens, games: games)
-        if response != nil{
-            messages.append(Message(botR: true, t: response?.name ?? "Nothing found"))
+        DispatchQueue.global(qos:.userInteractive).async {
+            let message = messages.last?.getText() ?? ""
+            let response = searchKeyword(keywords: recommender.get_tokens(text: message), games: games)
+            lastBotResponse = response
+            typeWriter()
+            messages.append(Message(botR: true, t: response))
         }
+       
         
-        */
         textFieldValue = ""
-        
-        
     }
     
     struct Chat_Preview: PreviewProvider {

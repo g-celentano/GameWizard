@@ -23,11 +23,11 @@ struct MyGames : View {
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [
             .font : UIFont(name: "RetroGaming", size: 32)!,
-            .foregroundColor : UIColor.black,
+            .foregroundColor : UIColor.systemGray6,
         ]
         
         UINavigationBar.appearance().titleTextAttributes = [
-            .font : UIFont(name: "RetroGaming", size: 18)!,
+            .font : UIFont(name: "RetroGaming", size: 20)!,
             .foregroundColor : UIColor.white
         ]
     }
@@ -35,7 +35,7 @@ struct MyGames : View {
     @Environment(\.managedObjectContext) var moc
     @State var isPresented = false
     @Environment(\.dismiss) private var dismiss
-    @State var toolbarColor = Color.black
+    @State var toolbarColor = Color(uiColor: .systemGray6)
     
     var body: some View{
         NavigationStack{
@@ -44,23 +44,26 @@ struct MyGames : View {
                     .ignoresSafeArea(.all)
                 
                 localGames.isEmpty ? nil :
+                
                     List{
                         ForEach(localGames, id: \.self){ game in
                             Text(game.gameName ?? "No name")
                                 .font(Font.custom("RetroGaming", size: 16))
+                                .listRowSeparatorTint(Color("BgColor"))
                         }
                         .onDelete(perform: delete)
                         
                     }
+                    .listRowSeparator(.visible)
                     .background(GeometryReader{ proxy in
                         Color.clear.preference(key: ViewOffsetKey.self ,value: proxy.frame(in: .global).origin.y)
                     })
                     .onPreferenceChange(ViewOffsetKey.self){
                         
                         if $0 < global_height*0.13{
-                            toolbarColor = .white
+                            toolbarColor = Color(uiColor: .white)
                         } else {
-                            toolbarColor = .black
+                            toolbarColor = Color(uiColor: .systemGray6)
                         }
                     }
                     .scrollContentBackground(.hidden)

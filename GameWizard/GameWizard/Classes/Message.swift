@@ -14,6 +14,12 @@ struct SizePreferenceKey : PreferenceKey {
      static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
+extension String {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
+    }
+}
+
 extension View {
   func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
     background(
@@ -26,7 +32,7 @@ extension View {
   }
 }
 
-class Message: Identifiable, Equatable {
+class Message: Identifiable, Equatable, Hashable {
     
     //fields
     let id = UUID()
@@ -39,19 +45,14 @@ class Message: Identifiable, Equatable {
         self.botResponse = botR
         self.text = t
     }
-    
-    static func == (lhs: Message, rhs: Message) -> Bool {
-        if  lhs.botResponse == rhs.botResponse &&
-            lhs.text == rhs.text &&
-            lhs.id == rhs.id {
-            return true
-        } else {
-            return false
-        }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
-    
-    
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        return lhs.botResponse == rhs.botResponse && lhs.text == rhs.text && lhs.id == rhs.id
+        
+    }
     func setBotResponse(botRes : Bool) {
         self.botResponse = botRes
     }
@@ -69,6 +70,8 @@ class Message: Identifiable, Equatable {
     func getText() -> String {
         return self.text
     }
+    
+    
     
     
 }
@@ -129,6 +132,7 @@ struct MessageBox : Shape {
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 + global_height*0.005))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 ))
             path.closeSubpath()
+
             
             
             
@@ -140,7 +144,7 @@ struct MessageBox : Shape {
 struct MessageBG_Previews : PreviewProvider {
     static var previews: some View{
       VStack {
-          MessageBox().stroke(.black, lineWidth: 10)
+          MessageBox().stroke(.black, lineWidth: 6)
       }
       .frame(width: global_width*0.9, height: global_height*0.1)
       

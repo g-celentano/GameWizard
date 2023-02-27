@@ -20,7 +20,7 @@ class Recommender {
         var tokens : [String] = []
         self.tokenizer.string = text
         self.tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { tokenRange, _ in
-            print(text[tokenRange])
+            
             tokens.append(String(text[tokenRange]))
             return true
         }
