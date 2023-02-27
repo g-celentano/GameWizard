@@ -132,19 +132,33 @@ struct AddGame : View{
                                     .clipped()
                                     .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                                     .clipShape(MessageBox())
+                                    .onTapGesture {
+                                        gameName = game.name
+                                        for genre in game.genres! {
+                                            genres.append(genre.name)
+                                        }
+                                    }
                                 
                             }
                         }
                         .frame(maxWidth: global_width*0.9, maxHeight: .infinity)
                         
                         Button{
-                            if !(gameName.isEmpty && genres.isEmpty){
+                            var contains = false
+                            for game in myGames2 {
+                                if game.gameName == gameName && game.genres == genres{
+                                    contains = true
+                                }
+                            }
+                            if suggestions.count <= 1 && suggestions.last!.name == gameName && !contains {
                                 let newGame = MyGame(context: moc)
-                                newGame.id = UUID()
-                                newGame.gameName = gameName
-                                newGame.genres = genres
-                                try? moc.save()
-                                dismiss()
+                                if contains == false {
+                                    newGame.id = UUID()
+                                    newGame.gameName = gameName
+                                    newGame.genres = genres
+                                    try? moc.save()
+                                    dismiss()
+                                }
                             }
                         }label: {
                             Text("Add")
