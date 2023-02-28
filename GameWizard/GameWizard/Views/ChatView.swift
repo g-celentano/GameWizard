@@ -148,7 +148,7 @@ struct ChatView: View {
         
         DispatchQueue.global(qos:.userInteractive).async {
             let message = messages.last?.getText() ?? ""
-            let response = searchKeyword(keywords: recommender.get_tokens(text: message), games: games)
+            let response = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
             lastBotResponse = response
             typeWriter()
             messages.append(Message(botR: true, t: response))
