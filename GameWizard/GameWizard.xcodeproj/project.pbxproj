@@ -12,6 +12,9 @@
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
+		20CD66E029AE0EBC000592AD /* Keywords.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 20CD66DF29AE0EBC000592AD /* Keywords.mlmodel */; };
+		20CD66E129AE0EBC000592AD /* Keywords.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 20CD66DF29AE0EBC000592AD /* Keywords.mlmodel */; };
+		20CD66E229AE0EBC000592AD /* Keywords.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 20CD66DF29AE0EBC000592AD /* Keywords.mlmodel */; };
 		E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
 		E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
 		E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
@@ -66,6 +69,7 @@
 		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
+		20CD66DF29AE0EBC000592AD /* Keywords.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Keywords.mlmodel; sourceTree = "<group>"; };
 		E705E58F29AA3A3600D2FB1F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E705E59329AA3B4600D2FB1F /* MyGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGames.swift; sourceTree = "<group>"; };
 		E705E59729AAC65E00D2FB1F /* AddGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGame.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 		E72EDBF129A7A65900350DEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				20CD66DF29AE0EBC000592AD /* Keywords.mlmodel */,
 				E72EDBF629A8F4C500350DEB /* keywords_unique.json */,
 				E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */,
 				E730A8AD29A6940D00AAA293 /* games.json */,
@@ -351,6 +356,7 @@
 				E705E59829AAC65E00D2FB1F /* AddGame.swift in Sources */,
 				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
 				E705E5A129ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
+				20CD66E029AE0EBC000592AD /* Keywords.mlmodel in Sources */,
 				20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
 				E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */,
@@ -367,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */,
+				20CD66E129AE0EBC000592AD /* Keywords.mlmodel in Sources */,
 				E717E98729A67ECE007855C9 /* Games.swift in Sources */,
 				E705E59529AA3B4600D2FB1F /* MyGames.swift in Sources */,
 				E705E5A229ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
@@ -389,6 +396,7 @@
 				E705E59A29AAC65E00D2FB1F /* AddGame.swift in Sources */,
 				20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E717E98829A67ECE007855C9 /* Games.swift in Sources */,
+				20CD66E229AE0EBC000592AD /* Keywords.mlmodel in Sources */,
 				E705E59E29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

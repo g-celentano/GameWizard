@@ -50,6 +50,32 @@ class Recommender {
         
         return retValue
     }
+    
+    func get_keywords(text: String) -> Bool {
+        guard let modelFile = Bundle.main.url(forResource: "Keywords", withExtension: ".mlmodel")
+        else {
+            fatalError("Could not find Model file.")
+        }
+        let string = MLString(text: text)
+        // Initialize the NLTagger with scheme type as "lemma"
+        let tagger = NLTagger(tagSchemes: [.lemma])
+        do {
+            let model = try MLModel(contentsOf: modelFile)
+            try print(model.prediction(from: string))
+        } catch {
+            fatalError("Error loading Model file.")
+        }
+        // Set the string to be processed
+        tagger.string = text
+        // Loop over all the tokens and print their lemma
+        tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lemma) { tag, tokenRange in
+          if let tag = tag {
+              print("\(text[tokenRange]): \(tag.rawValue)")
+          }
+          return true
+        }
+        return true
+    }
 }
 
 /*
