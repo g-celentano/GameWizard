@@ -12,6 +12,8 @@
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
 		20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
+		20ACCED529AE3CBC00CA2276 /* Keywords.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 20ACCED429AE3CBC00CA2276 /* Keywords.mlmodelc */; };
+		20ACCED729AE409600CA2276 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 20ACCED629AE409600CA2276 /* key.json */; };
 		E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
 		E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
 		E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E705E58F29AA3A3600D2FB1F /* ChatView.swift */; };
@@ -39,9 +41,6 @@
 		E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */; };
 		E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */; };
 		E72EDBF529A7A77A00350DEB /* RetroGaming.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */; };
-		E72EDBF729A8F4C500350DEB /* keywords_unique.json in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF629A8F4C500350DEB /* keywords_unique.json */; };
-		E72EDBF829A8F4C500350DEB /* keywords_unique.json in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF629A8F4C500350DEB /* keywords_unique.json */; };
-		E72EDBF929A8F4C500350DEB /* keywords_unique.json in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF629A8F4C500350DEB /* keywords_unique.json */; };
 		E730A8AE29A6940D00AAA293 /* games.json in Resources */ = {isa = PBXBuildFile; fileRef = E730A8AD29A6940D00AAA293 /* games.json */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +65,8 @@
 		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
+		20ACCED429AE3CBC00CA2276 /* Keywords.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Keywords.mlmodelc; sourceTree = "<group>"; };
+		20ACCED629AE409600CA2276 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = "<group>"; };
 		E705E58F29AA3A3600D2FB1F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E705E59329AA3B4600D2FB1F /* MyGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGames.swift; sourceTree = "<group>"; };
 		E705E59729AAC65E00D2FB1F /* AddGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGame.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		E727A6B3299D36CE00CAFCF7 /* GameWizardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITests.swift; sourceTree = "<group>"; };
 		E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RetroGaming.ttf; sourceTree = "<group>"; };
-		E72EDBF629A8F4C500350DEB /* keywords_unique.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = keywords_unique.json; path = ../../../dataset/keywords_unique.json; sourceTree = "<group>"; };
 		E72F569C299FC18F00619B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E730A8AD29A6940D00AAA293 /* games.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = games.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,7 +201,8 @@
 		E72EDBF129A7A65900350DEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				E72EDBF629A8F4C500350DEB /* keywords_unique.json */,
+				20ACCED629AE409600CA2276 /* key.json */,
+				20ACCED429AE3CBC00CA2276 /* Keywords.mlmodelc */,
 				E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */,
 				E730A8AD29A6940D00AAA293 /* games.json */,
 			);
@@ -316,11 +317,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20ACCED529AE3CBC00CA2276 /* Keywords.mlmodelc in Resources */,
 				E727A6A0299D36CE00CAFCF7 /* Preview Assets.xcassets in Resources */,
 				E730A8AE29A6940D00AAA293 /* games.json in Resources */,
 				E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */,
-				E72EDBF729A8F4C500350DEB /* keywords_unique.json in Resources */,
 				E72EDBF529A7A77A00350DEB /* RetroGaming.ttf in Resources */,
+				20ACCED729AE409600CA2276 /* key.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +330,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E72EDBF829A8F4C500350DEB /* keywords_unique.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +337,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E72EDBF929A8F4C500350DEB /* keywords_unique.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AW53X29GKN;
+				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GameWizard/Info.plist;
@@ -560,7 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GameWizard/Preview Content\"";
-				DEVELOPMENT_TEAM = AW53X29GKN;
+				DEVELOPMENT_TEAM = AGNFXA4GF9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GameWizard/Info.plist;

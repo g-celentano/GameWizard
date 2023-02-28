@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreML
 
 
 struct Game: Codable, Identifiable {
@@ -45,4 +46,19 @@ struct Platform : Codable {
 struct SimilarGame : Codable {
     let id : Int
     let name : String
+}
+
+class MLString: MLFeatureProvider {
+    let text: String
+    var featureNames: Set<String>
+    
+    init(text: String) {
+        self.text = text
+        featureNames = []
+    }
+    
+    func featureValue(for featureName: String) -> MLFeatureValue? {
+        let value = MLFeatureValue(string: text)
+        return value
+    }
 }

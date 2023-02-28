@@ -50,6 +50,35 @@ class Recommender {
         
         return retValue
     }
+    
+    func get_keywords(text: String) -> [String] {
+        guard let modelFile = Bundle.main.url(forResource: "Keywords", withExtension: ".mlmodelc")
+        else {
+            fatalError("Could not find Model file.")
+        }
+        // Initialize the NLTagger with scheme type as "lemma"
+        let tagger = NLTagger(tagSchemes: [.lemma])
+        var array: [String] = []
+        var model: NLGazetteer
+        do {
+            model = try NLGazetteer(contentsOf: modelFile)
+        } catch {
+            fatalError()
+        }
+        tagger.setGazetteers([model], for: .lemma)
+        // Set the string to be processed
+        tagger.string = text
+        // Loop over all the tokens and print their lemma
+        tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lemma) { tag, tokenRange in
+          if let tag = tag {
+              if (tag.rawValue == "keywords") {
+                  array.append(String(text[tokenRange]))
+              }
+          }
+          return true
+        }
+        return array
+    }
 }
 
 /*
