@@ -7,37 +7,91 @@
 
 import Foundation
 
-func searchKeyword(keywords: [String], games: [Game]) -> String {
+func searchKeyword(keywords: [String], games: [Game]) -> String? {
     var maxMatches = 0
     var matchedGame : Game?
     var index = 0
     var keyIndex = 0
     
-    for game in games {
-        var matches = 0
-        if game.keywords != nil {
-            for _ in game.keywords! {
-                if keywords.contains(where: {
-                    games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                })
-                {
-                    matches += 1
+        for game in games {
+            var matches = 0
+            if game.keywords != nil {
+                for _ in game.keywords! {
+                    if keywords.contains(where: {
+                        games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                    })
+                    {
+                        matches += 1
+                    }
+                   
+                    
+                    keyIndex += 1
                 }
-                
-                keyIndex += 1
             }
+                                                    
+            if matches > maxMatches {
+                maxMatches = matches
+                matchedGame = game
+                
+            }
+            
+            index += 1
+            keyIndex = 0
         }
-                                                
-        if matches > maxMatches {
-            maxMatches = matches
-            matchedGame = game
-        }
-        
-        index += 1
+        index = 0
         keyIndex = 0
+        maxMatches = 0
+    
+    return matchedGame?.name ?? ""
+                         
+}
+
+
+func searchKeywords(keywords: [String], games: [Game]) -> [String?] {
+    var maxMatches = 0
+    var matchedGame : Game?
+    var index = 0
+    var keyIndex = 0
+    var founds : [String?] = []
+    var maxTries = 0
+    
+    while founds.count < 4 && maxTries < 4 {
+        for game in games {
+            var matches = 0
+            if game.keywords != nil {
+                for _ in game.keywords! {
+                    if keywords.contains(where: {
+                        games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                    })
+                    {
+                        matches += 1
+                    }
+                
+                    keyIndex += 1
+                }
+            }
+                                                    
+            if matches > maxMatches && !founds.contains(game.name) {
+                maxMatches = matches
+                matchedGame = game
+                
+            }
+            
+            index += 1
+            keyIndex = 0
+        }
+        if matchedGame?.name != nil && matchedGame?.name != "" {
+            founds.append(matchedGame?.name)
+        }
+        maxTries += 1
+        index = 0
+        keyIndex = 0
+        maxMatches = 0
     }
     
-        return matchedGame?.name ?? "No game"
+    
+        //return matchedGame?.name ?? "No game"
+    return founds
 
                                                 
 }

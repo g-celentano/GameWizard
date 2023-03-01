@@ -83,33 +83,11 @@ struct MessageBox : Shape {
     
     func path(in rect: CGRect)-> Path{
         Path{ path in
-           let w = rect.width
-           let h = rect.height
-           let x0 = rect.origin.x
-           let y0 = rect.origin.y
+            let w = rect.width
+            let h = rect.height
+            let x0 = rect.origin.x
+            let y0 = rect.origin.y
            
-           /* path.move(to: CGPoint(x: x0 + w*0.1, y: y0))
-            path.addLine(to: CGPoint(x: w - w*0.1, y: y0))
-            path.addLine(to: CGPoint(x: w - w*0.1, y: y0+h*0.05))
-            path.addLine(to: CGPoint(x: w - w*0.05, y: y0+h*0.05))
-            path.addLine(to: CGPoint(x: w - w*0.05, y: y0+h*0.1))
-            path.addLine(to: CGPoint(x: w , y: y0+h*0.1))
-            path.addLine(to: CGPoint(x: w , y: h - h*0.1))
-            path.addLine(to: CGPoint(x: w - w*0.05 , y: h - h*0.1))
-            path.addLine(to: CGPoint(x: w - w*0.05 , y: h - h*0.05))
-            path.addLine(to: CGPoint(x: w - w*0.1 , y: h - h*0.05))
-            path.addLine(to: CGPoint(x: w - w*0.1 , y: h ))
-            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: h ))
-            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: h - h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.05 , y: h - h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.05 , y: h - h*0.1))
-            path.addLine(to: CGPoint(x: x0  , y: h - h*0.1))
-            path.addLine(to: CGPoint(x: x0  , y: y0 + h*0.1))
-            path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.1))
-            path.addLine(to: CGPoint(x: x0 + w*0.05  , y: y0 + h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.1  , y: y0 + h*0.05))
-            path.addLine(to: CGPoint(x: x0 + w*0.1 , y: y0))*/
-            
             path.move(to: CGPoint(x: x0 + global_width*0.05, y: y0))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0 + global_height*0.005))
@@ -132,10 +110,6 @@ struct MessageBox : Shape {
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 + global_height*0.005))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 ))
             path.closeSubpath()
-
-            
-            
-            
         }
     }
     

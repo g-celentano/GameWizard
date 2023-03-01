@@ -8,12 +8,13 @@
 import SwiftUI
 
 
+
 struct ChatView: View {
     
     @State var textFieldValue : String = ""
     @State var messages : [Message] = [
         //Message(botR: false, t: "Ciao "),
-       // Message(botR: true, t: "Ciao a te")
+        //Message(botR: true, t: "Ciao a te")
     ]
     @State var text = ""
     @State var lastBotResponse = ""
@@ -28,12 +29,15 @@ struct ChatView: View {
                     HStack{
                         NavigationLink(destination: MyGames()) {
                             HStack{
-                                 Text("My games")
+                                 /*Text("My games")
                                      .font(Font.custom("RetroGaming", size: 18))
-                                     .foregroundColor(Color(uiColor: .systemGray6))
-                                
-                                Image(systemName: "chevron.right")
+                                     .foregroundColor(Color(uiColor: .systemGray6))*/
+                                Image(systemName: "list.bullet.rectangle")
                                     .foregroundColor(Color(uiColor: .systemGray6))
+                                    .scaleEffect(1.5)
+                                
+                               /* Image(systemName: "chevron.right")
+                                    .foregroundColor(Color(uiColor: .systemGray6))*/
                             }.frame(alignment: .center)
                          }
                          .padding()
@@ -84,13 +88,13 @@ struct ChatView: View {
                             .padding(.horizontal, global_width*0.05)
                             .padding(.vertical)
                             .font(Font.custom("RetroGaming", size: 17))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(uiColor: .systemGray6))
                             .frame(maxWidth: global_width*0.8)
                             .background(
                                 Text("Type here...")
                                     .font(Font.custom("RetroGaming", size: 17))
                                     .frame(maxWidth: global_width*0.8, alignment: .leading)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color(uiColor: .systemGray))
                                     .padding(.horizontal, global_width*0.05)
                                     .padding(.vertical)
                                     .opacity(textFieldValue.isEmpty ? 1.0 : 0.0)
@@ -125,6 +129,7 @@ struct ChatView: View {
                 
                 
             }
+            
         }
         
         
@@ -144,14 +149,94 @@ struct ChatView: View {
     
     func submit(){
         messages.append(Message(botR: false, t: textFieldValue))
+        get_negations(text: textFieldValue)
         lastBotResponse = ""
         
         DispatchQueue.global(qos:.userInteractive).async {
             let message = messages.last?.getText() ?? ""
-            let response = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
+            let whitespaces = message.split(separator: " ")
+            
+            
+            if whitespaces.count > 2{
+            if message.contains("games") {
+                let newMessage = message.replacingOccurrences(of: "games", with: "")
+                let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games)
+                
+                
+                if !response_games.isEmpty {
+                        var botRes = "There are some games I found : \n"
+                        for g in response_games{
+                            if g == response_games.last! {
+                                botRes.append(" ✰ \(g!)")
+                            } else {
+                                botRes.append(" ✰ \(g!) \n")
+                            }
+                            
+                        }
+                        
+                            lastBotResponse = botRes
+                            typeWriter()
+                            messages.append(Message(botR: true, t: botRes))
+                        
+                    } else {
+                        lastBotResponse = "I didn't find any game"
+                        typeWriter()
+                        messages.append(Message(botR: true, t: "I didn't find any game"))
+                    }
+                } else if message.contains("game") {
+                    let newMessage = message.replacingOccurrences(of: "game", with: "")
+                    let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games)
+                    
+                    if !(response_games?.isEmpty ?? false) {
+                        var botRes = "I found "
+                        botRes.append(response_games!)
+                        botRes.append(" that you may like")
+                        
+                        lastBotResponse = botRes
+                        typeWriter()
+                        messages.append(Message(botR: true, t: botRes))
+                        }
+                    else {
+                        lastBotResponse = "No game was found"
+                        typeWriter()
+                        messages.append(Message(botR: true, t: "No game was found"))
+                    }
+            
+                    
+                } else {
+                    let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
+                    
+                    if !(response_games?.isEmpty ?? false) {
+                        var botRes = "Here's what I found "
+                        botRes.append(response_games!)
+                        botRes.append(" that you may like")
+                        
+                        lastBotResponse = botRes
+                        typeWriter()
+                        messages.append(Message(botR: true, t: botRes))
+                        }
+                    else {
+                        lastBotResponse = "I didn't find anything"
+                        typeWriter()
+                        messages.append(Message(botR: true, t: "I didn't find anything"))
+                    }
+            
+                }
+            } else {
+                lastBotResponse = "Sorry I did not understand"
+                typeWriter()
+                messages.append(Message(botR: true, t: "Sorry I did not understand"))
+            }
+
+            
+            
+            
+            
+           /*let response = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
+            
             lastBotResponse = response
             typeWriter()
-            messages.append(Message(botR: true, t: response))
+            messages.append(Message(botR: true, t: response))*/
         }
        
         

@@ -71,6 +71,7 @@ class Recommender {
         // Loop over all the tokens and print their lemma
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lemma) { tag, tokenRange in
           if let tag = tag {
+              //print(tokenRange)
               if (tag.rawValue == "keywords") {
                   array.append(String(text[tokenRange]))
               }
@@ -80,6 +81,7 @@ class Recommender {
         return array
     }
 }
+
 
 /*
 let text = """

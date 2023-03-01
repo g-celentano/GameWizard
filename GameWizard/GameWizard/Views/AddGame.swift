@@ -121,27 +121,29 @@ struct AddGame : View{
                         game.name.hasPrefix(gameName)}) : []
                         
                         ScrollView{
-                            ForEach(suggestions){ game in
-                                Text(game.name)
-                                    .frame(width: global_width*0.9)
-                                    .padding(.horizontal, global_width*0.05)
-                                    .font(Font.custom("RetroGaming", size: 17))
-                                    .foregroundColor(Color(uiColor: .systemGray6))
-                                    .padding(.vertical)
-                                    .background(.white)
-                                    .clipped()
-                                    .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                                    .clipShape(MessageBox())
-                                    .onTapGesture {
-                                        gameName = game.name
-                                        for genre in game.genres! {
-                                            genres.append(genre.name)
-                                        }
+                                ForEach(suggestions){ game in
+                                    LazyHStack{
+                                        Text(game.name)
+                                            .frame(width: global_width*0.9)
+                                            .padding(.horizontal, global_width*0.05)
+                                            .font(Font.custom("RetroGaming", size: 17))
+                                            .foregroundColor(Color(uiColor: .systemGray6))
+                                            .padding(.vertical)
+                                            .background(.white)
+                                            .clipped()
+                                            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
+                                            .clipShape(MessageBox())
+                                            .onTapGesture {
+                                                gameName = game.name
+                                                for genre in game.genres! {
+                                                    genres.append(genre.name)
+                                                }
+                                            }
                                     }
-                                
-                            }
-                        }
-                        .frame(maxWidth: global_width*0.9, maxHeight: .infinity)
+                                    
+                                }
+                            }.frame(maxWidth: global_width*0.9, maxHeight: .infinity)
+                    
                         
                         Button{
                             var contains = false
@@ -150,6 +152,7 @@ struct AddGame : View{
                                     contains = true
                                 }
                             }
+                            
                             if suggestions.count <= 1 && suggestions.last!.name == gameName && !contains {
                                 let newGame = MyGame(context: moc)
                                 if contains == false {

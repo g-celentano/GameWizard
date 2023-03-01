@@ -74,8 +74,7 @@ struct MyGames : View {
                                 .foregroundColor(toolbarColor)
                     })
             }
-            .frame(maxWidth: .infinity, maxHeight: global_height)
-            
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
        .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
