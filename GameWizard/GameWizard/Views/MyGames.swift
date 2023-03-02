@@ -38,6 +38,7 @@ struct MyGames : View {
     @Environment(\.dismiss) private var dismiss
     @State var toolbarColor = Color(uiColor: .systemGray6)
     @State var isEditing = false
+    @AppStorage("currentView") var currentView = 2
     
     var body: some View{
         //NavigationStack{
@@ -66,6 +67,13 @@ struct MyGames : View {
                         } label:{
                         Image(systemName: "plus")
                             .scaleEffect(1.6)
+                        }.padding()
+                        Button{
+                            currentView = 1
+                            dismiss()
+                        } label:{
+                            Image(systemName: "questionmark.circle")
+                                .scaleEffect(1.6)
                         }
                     }
                     .foregroundColor(Color(uiColor: .systemGray6))
