@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		205C71C529B0EC000031529E /* Keywords.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 205C71C329B0EC000031529E /* Keywords.mlmodel */; };
 		205C71C629B0EC000031529E /* GameNames.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 205C71C429B0EC000031529E /* GameNames.mlmodel */; };
+		206AD16229B102260047338C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206AD16129B102260047338C /* OnboardingView.swift */; };
 		20A1583F29A7A2520069300B /* Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A1583E29A7A2520069300B /* Searcher.swift */; };
 		20AA065729A6772100FA3DE6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065629A6772100FA3DE6 /* Message.swift */; };
 		20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA065B29A6775600FA3DE6 /* Recommender.swift */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		205C71C329B0EC000031529E /* Keywords.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Keywords.mlmodel; sourceTree = "<group>"; };
 		205C71C429B0EC000031529E /* GameNames.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GameNames.mlmodel; sourceTree = "<group>"; };
+		206AD16129B102260047338C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		20A1583E29A7A2520069300B /* Searcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
 		20AA065629A6772100FA3DE6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		20AA065B29A6775600FA3DE6 /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				E705E59729AAC65E00D2FB1F /* AddGame.swift */,
 				E70BA8CC29B0B49000522941 /* Lists.swift */,
 				E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */,
+				206AD16129B102260047338C /* OnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				E717E98429A67EBA007855C9 /* JSONLoad.swift in Sources */,
 				E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */,
 				E705E59C29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,
+				206AD16229B102260047338C /* OnboardingView.swift in Sources */,
 				205C71C629B0EC000031529E /* GameNames.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
