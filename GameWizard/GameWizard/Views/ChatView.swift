@@ -149,7 +149,6 @@ struct ChatView: View {
     
     func submit(){
         messages.append(Message(botR: false, t: textFieldValue))
-        get_negations(text: textFieldValue)
         lastBotResponse = ""
         
         DispatchQueue.global(qos:.userInteractive).async {
