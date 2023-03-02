@@ -61,7 +61,7 @@ func searchKeywords(keywords: [String], games: [Game]) -> [String?] {
             if game.keywords != nil {
                 for _ in game.keywords! {
                     if keywords.contains(where: {
-                        games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                        games[index].keywords![keyIndex].name.lowercased().hasPrefix($0.lowercased())
                     })
                     {
                         matches += 1
