@@ -7,22 +7,12 @@
 
 import SwiftUI
 
-struct ViewOffsetKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue: Value = 0
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
-    }
-}
 
-
-
-
-struct MyGames : View {
+struct AlreadySuggestedView : View {
     
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font : UIFont(name: "RetroGaming", size: 30)!,
+            .font : UIFont(name: "RetroGaming", size: 32)!,
             .foregroundColor : UIColor.systemGray6,
         ]
         
@@ -32,7 +22,7 @@ struct MyGames : View {
             .foregroundColor : UIColor.white
         ]
     }
-    @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
+    @FetchRequest(sortDescriptors: []) var alreadySuggested : FetchedResults<AlreadySuggested>
     @Environment(\.managedObjectContext) var moc
     @State var isPresented = false
     @Environment(\.dismiss) private var dismiss
@@ -42,41 +32,23 @@ struct MyGames : View {
     var body: some View{
         //NavigationStack{
             ZStack{
-               Color("BgColor")
+                Color("BgColor")
                     .ignoresSafeArea(.all)
                 VStack{
                     HStack{
-                        Text("My Games")
-                            .font(Font.custom("RetroGaming", size: 32))
-                        Spacer()
-                        (
-                            localGames.isEmpty ? nil :
-                            Button{
-                                withAnimation{
-                                    isEditing.toggle()
-                                }
-                            } label:{
-                                Text(isEditing ? "Done" : "Edit")
-                                    .font(Font.custom("RetroGaming", size: 18))
-                                    .frame(width: global_width*0.2)
-                            }
-                        )
-                        Button{
-                            isPresented.toggle()
-                        } label:{
-                        Image(systemName: "plus")
-                            .scaleEffect(1.6)
-                        }
+                        Text("Already Suggested")
+                            .font(Font.custom("RetroGaming", size: 30))
+                        
                     }
                     .foregroundColor(Color(uiColor: .systemGray6))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, global_width*0.05)
                     
                 
-                    localGames.isEmpty ? nil :
+                    alreadySuggested.isEmpty ? nil :
                     
                         List{
-                            ForEach(localGames, id: \.self){ game in
+                            ForEach(alreadySuggested, id: \.self){ game in
                                 Text(game.gameName ?? "No name")
                                     .font(Font.custom("RetroGaming", size: 16))
                                     .listRowSeparatorTint(Color("BgColor"))
@@ -88,14 +60,14 @@ struct MyGames : View {
                         .background(GeometryReader{ proxy in
                             Color.clear.preference(key: ViewOffsetKey.self ,value: proxy.frame(in: .global).origin.y)
                         })
-                        .onPreferenceChange(ViewOffsetKey.self){
+                        /*.onPreferenceChange(ViewOffsetKey.self){
                             
                             if $0 < global_height*0.13{
                                 toolbarColor = Color(uiColor: .white)
                             } else {
                                 toolbarColor = Color(uiColor: .systemGray6)
                             }
-                        }
+                        }*/
                         .scrollContentBackground(.hidden)
                         .clipped()
                         .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive))
@@ -123,26 +95,20 @@ struct MyGames : View {
         //.navigationTitle("My Games")
         //.navigationBarTitleDisplayMode(.large)
         //.navigationBarBackButtonHidden(true)
-        .sheet(isPresented: $isPresented, content: {
-            NavigationStack{
-                AddGame()
-            }
-        })
-        
     }
     
     func delete(at offsets : IndexSet){
         for offset in offsets {
-            let game = localGames[offset]
+            let game = alreadySuggested[offset]
             moc.delete(game)
         }
         try? moc.save()
     }
     
     
-    struct MyGames_Preview : PreviewProvider {
+    struct AlreadySuggested_Preview : PreviewProvider {
         static var previews: some View {
-            MyGames()
+            AlreadySuggestedView()
         }
     }
 }

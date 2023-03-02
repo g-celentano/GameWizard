@@ -18,6 +18,8 @@ struct ChatView: View {
     ]
     @State var text = ""
     @State var lastBotResponse = ""
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var already_suggested : FetchedResults<AlreadySuggested>
     
     var body: some View {
         NavigationStack{
@@ -27,7 +29,7 @@ struct ChatView: View {
                 
                 VStack{
                     HStack{
-                        NavigationLink(destination: MyGames()) {
+                        NavigationLink(destination: Lists()) {
                             HStack{
                                  /*Text("My games")
                                      .font(Font.custom("RetroGaming", size: 18))
@@ -46,6 +48,9 @@ struct ChatView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: global_height*0.01, alignment: .trailing)
                     
+                    Image("gattomagico")
+                        .frame(width: global_width, height: global_height*0.2)
+                        .scaleEffect(2)
                     
                     ScrollViewReader{ reader in
                         ScrollView{
@@ -107,7 +112,7 @@ struct ChatView: View {
                             }
                         } label: {
                             ZStack{
-                                Image(systemName: textFieldValue.isEmpty ? "mic.fill" : "paperplane.fill" )
+                                Image(systemName: "paperplane.fill" )
                                     .foregroundColor(Color(uiColor: .systemGray6))
                             }
                             .frame(width: global_width*0.1, height: global_width*0.1, alignment: .center)
@@ -140,7 +145,7 @@ struct ChatView: View {
                 text = ""
             }
             if position < lastBotResponse.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.035) {
                     text.append(lastBotResponse[position])
                     typeWriter(at: position + 1)
                 }
@@ -149,7 +154,6 @@ struct ChatView: View {
     
     func submit(){
         messages.append(Message(botR: false, t: textFieldValue))
-        get_negations(text: textFieldValue)
         lastBotResponse = ""
         
         DispatchQueue.global(qos:.userInteractive).async {
@@ -158,70 +162,152 @@ struct ChatView: View {
             
             
             if whitespaces.count > 2{
-            if message.contains("games") {
-                let newMessage = message.replacingOccurrences(of: "games", with: "")
-                let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games)
-                
-                
-                if !response_games.isEmpty {
-                        var botRes = "There are some games I found : \n"
-                        for g in response_games{
-                            if g == response_games.last! {
-                                botRes.append(" ✰ \(g!)")
-                            } else {
-                                botRes.append(" ✰ \(g!) \n")
+                if message.contains("games") {
+                    let newMessage = message.replacingOccurrences(of: "games", with: "")
+                    let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games)
+                    
+                    
+                    if !response_games.isEmpty {
+                        var actualResponse : [String] = []
+                        var suggNames : [String] = []
+                        if !already_suggested.isEmpty{
+                            for already in already_suggested {
+                                suggNames.append(already.gameName!)
                             }
-                            
                         }
+                        for response in response_games {
+                            if !suggNames.contains(response!){
+                                actualResponse.append(response!)
+                                let suggested = AlreadySuggested(context:moc)
+                                let suggestedGame = games.filter({ game in
+                                    game.name == response
+                                })
+                                suggested.gameName = suggestedGame[0].name
+                                for key in suggestedGame[0].keywords! {
+                                    suggested.keywords?.append(key.name)
+                                }
+                                for genre in suggestedGame[0].genres!{
+                                    suggested.genres?.append(genre.name)
+                                }
+                                for similar in suggestedGame[0].similar_games!{
+                                    suggested.similar_games?.append(similar.name)
+                                }
+                                try? moc.save()
+                                 
+                            }
+                        }
+                            var botRes = "There are some games I found : \n"
+                            for g in actualResponse{
+                                if g == actualResponse.last! {
+                                    botRes.append(" ✰ \(g)")
+                                } else {
+                                    botRes.append(" ✰ \(g) \n")
+                                }
+                                
+                            }
                         
                             lastBotResponse = botRes
                             typeWriter()
                             messages.append(Message(botR: true, t: botRes))
+                            
+                        } else {
+                            lastBotResponse = "I didn't find any game"
+                            typeWriter()
+                            messages.append(Message(botR: true, t: "I didn't find any game"))
+                        }
+                    } else if message.contains("game") {
+                        let newMessage = message.replacingOccurrences(of: "game", with: "")
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games)
+                        
+                        if !(response_games?.isEmpty ?? false) {
+                            var suggNames : [String] = []
+                            if !already_suggested.isEmpty{
+                                for already in already_suggested {
+                                    suggNames.append(already.gameName!)
+                                }
+                            }
+                            if !suggNames.contains(response_games!){
+                                let suggested = AlreadySuggested(context:moc)
+                                let suggestedGame = games.filter({ game in
+                                    game.name == response_games
+                                })
+                                suggested.gameName = suggestedGame[0].name
+                                for key in suggestedGame[0].keywords! {
+                                    suggested.keywords?.append(key.name)
+                                }
+                                for genre in suggestedGame[0].genres!{
+                                    suggested.genres?.append(genre.name)
+                                }
+                                for similar in suggestedGame[0].similar_games!{
+                                    suggested.similar_games?.append(similar.name)
+                                }
+                                try? moc.save()
+                            }
+                            var botRes = "I found "
+                            botRes.append(response_games!)
+                            botRes.append(" that you may like")
+                            
+                            lastBotResponse = botRes
+                            typeWriter()
+                            messages.append(Message(botR: true, t: botRes))
+                            }
+                        else {
+                            lastBotResponse = "No game was found"
+                            typeWriter()
+                            messages.append(Message(botR: true, t: "No game was found"))
+                        }
+                
                         
                     } else {
-                        lastBotResponse = "I didn't find any game"
-                        typeWriter()
-                        messages.append(Message(botR: true, t: "I didn't find any game"))
-                    }
-                } else if message.contains("game") {
-                    let newMessage = message.replacingOccurrences(of: "game", with: "")
-                    let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games)
-                    
-                    if !(response_games?.isEmpty ?? false) {
-                        var botRes = "I found "
-                        botRes.append(response_games!)
-                        botRes.append(" that you may like")
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
                         
-                        lastBotResponse = botRes
-                        typeWriter()
-                        messages.append(Message(botR: true, t: botRes))
+                        if !(response_games?.isEmpty ?? false) {
+                            var botRes = "Here's what I found "
+                            botRes.append(response_games!)
+                            botRes.append(" that you may like")
+                            
+                            lastBotResponse = botRes
+                            typeWriter()
+                            
+                            var suggNames : [String] = []
+                            if !already_suggested.isEmpty{
+                                for already in already_suggested {
+                                    suggNames.append(already.gameName!)
+                                }
+                            }
+                            if !already_suggested.isEmpty{
+                                for already in already_suggested {
+                                    suggNames.append(already.gameName!)
+                                }
+                            }
+                            if !suggNames.contains(response_games!){
+                                let suggested = AlreadySuggested(context:moc)
+                                let suggestedGame = games.filter({ game in
+                                    game.name == response_games
+                                })
+                                suggested.gameName = suggestedGame[0].name
+                                for key in suggestedGame[0].keywords! {
+                                    suggested.keywords?.append(key.name)
+                                }
+                                for genre in suggestedGame[0].genres!{
+                                    suggested.genres?.append(genre.name)
+                                }
+                                for similar in suggestedGame[0].similar_games!{
+                                    suggested.similar_games?.append(similar.name)
+                                }
+                                try? moc.save()
+                            }
+                            messages.append(Message(botR: true, t: botRes))
                         }
-                    else {
-                        lastBotResponse = "No game was found"
-                        typeWriter()
-                        messages.append(Message(botR: true, t: "No game was found"))
-                    }
-            
-                    
-                } else {
-                    let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
-                    
-                    if !(response_games?.isEmpty ?? false) {
-                        var botRes = "Here's what I found "
-                        botRes.append(response_games!)
-                        botRes.append(" that you may like")
-                        
-                        lastBotResponse = botRes
-                        typeWriter()
-                        messages.append(Message(botR: true, t: botRes))
+                            
+                        else {
+                            lastBotResponse = "I didn't find anything"
+                            typeWriter()
+                            messages.append(Message(botR: true, t: "I didn't find anything"))
                         }
-                    else {
-                        lastBotResponse = "I didn't find anything"
-                        typeWriter()
-                        messages.append(Message(botR: true, t: "I didn't find anything"))
+                
                     }
-            
-                }
+                
             } else {
                 lastBotResponse = "Sorry I did not understand"
                 typeWriter()

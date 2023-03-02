@@ -29,6 +29,12 @@
 		E705E5A129ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E705E59F29ABDA7400D2FB1F /* MyGames.xcdatamodeld */; };
 		E705E5A229ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E705E59F29ABDA7400D2FB1F /* MyGames.xcdatamodeld */; };
 		E705E5A329ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E705E59F29ABDA7400D2FB1F /* MyGames.xcdatamodeld */; };
+		E70BA8CD29B0B49000522941 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8CC29B0B49000522941 /* Lists.swift */; };
+		E70BA8CE29B0B49000522941 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8CC29B0B49000522941 /* Lists.swift */; };
+		E70BA8CF29B0B49000522941 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8CC29B0B49000522941 /* Lists.swift */; };
+		E70BA8D129B0B8A200522941 /* AlreadySuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */; };
+		E70BA8D229B0B8A200522941 /* AlreadySuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */; };
+		E70BA8D329B0B8A200522941 /* AlreadySuggested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */; };
 		E717E98429A67EBA007855C9 /* JSONLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98329A67EBA007855C9 /* JSONLoad.swift */; };
 		E717E98629A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
 		E717E98729A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
@@ -72,6 +78,8 @@
 		E705E59729AAC65E00D2FB1F /* AddGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGame.swift; sourceTree = "<group>"; };
 		E705E59B29ABD11000D2FB1F /* MyGamesDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGamesDataController.swift; sourceTree = "<group>"; };
 		E705E5A029ABDA7400D2FB1F /* MyGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGame.xcdatamodel; sourceTree = "<group>"; };
+		E70BA8CC29B0B49000522941 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
+		E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadySuggested.swift; sourceTree = "<group>"; };
 		E717E98329A67EBA007855C9 /* JSONLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONLoad.swift; sourceTree = "<group>"; };
 		E717E98529A67ECE007855C9 /* Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
 		E727A695299D36CD00CAFCF7 /* GameWizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameWizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +141,8 @@
 				E705E58F29AA3A3600D2FB1F /* ChatView.swift */,
 				E705E59329AA3B4600D2FB1F /* MyGames.swift */,
 				E705E59729AAC65E00D2FB1F /* AddGame.swift */,
+				E70BA8CC29B0B49000522941 /* Lists.swift */,
+				E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,11 +357,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E70BA8D129B0B8A200522941 /* AlreadySuggested.swift in Sources */,
 				20AA065729A6772100FA3DE6 /* Message.swift in Sources */,
 				E705E59829AAC65E00D2FB1F /* AddGame.swift in Sources */,
 				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
 				E705E5A129ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
 				20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */,
+				E70BA8CD29B0B49000522941 /* Lists.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,
 				E705E59029AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E717E98629A67ECE007855C9 /* Games.swift in Sources */,
@@ -374,6 +386,8 @@
 				20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E705E59D29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,
 				E705E59929AAC65E00D2FB1F /* AddGame.swift in Sources */,
+				E70BA8D229B0B8A200522941 /* AlreadySuggested.swift in Sources */,
+				E70BA8CE29B0B49000522941 /* Lists.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E727A6B4299D36CE00CAFCF7 /* GameWizardUITests.swift in Sources */,
+				E70BA8CF29B0B49000522941 /* Lists.swift in Sources */,
 				E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */,
 				E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E705E5A329ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
@@ -390,6 +405,7 @@
 				20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E717E98829A67ECE007855C9 /* Games.swift in Sources */,
 				E705E59E29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,
+				E70BA8D329B0B8A200522941 /* AlreadySuggested.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,7 @@ struct AddGame : View{
     @Environment(\.managedObjectContext) var moc
     @State var gameName : String = ""
     @State var genres : [String] = []
+    @State var keywords : [String] = []
     @Environment(\.dismiss) var dismiss
     
     
@@ -138,6 +139,9 @@ struct AddGame : View{
                                                 for genre in game.genres! {
                                                     genres.append(genre.name)
                                                 }
+                                                for key in game.keywords! {
+                                                    keywords.append(key.name)
+                                                }
                                             }
                                     }
                                     
@@ -158,6 +162,7 @@ struct AddGame : View{
                                 if contains == false {
                                     newGame.id = UUID()
                                     newGame.gameName = gameName
+                                    newGame.keywords = keywords
                                     newGame.genres = genres
                                     try? moc.save()
                                     dismiss()
