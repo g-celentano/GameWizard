@@ -34,17 +34,37 @@ struct AlreadySuggestedView : View {
             ZStack{
                 Color("BgColor")
                     .ignoresSafeArea(.all)
+                
                 VStack{
-                    HStack{
+                    /*HStack{
                         Text("Already Suggested")
                             .font(Font.custom("RetroGaming", size: 30))
                         
                     }
                     .foregroundColor(Color(uiColor: .systemGray6))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, global_width*0.05)
+                    .padding(.horizontal, global_width*0.05)*/
                     
-                
+                    HStack{
+                        /*Text("My Games")
+                            .font(Font.custom("RetroGaming", size: 32))*/
+                        Spacer()
+                        (
+                            alreadySuggested.isEmpty ? nil :
+                            Button{
+                                withAnimation{
+                                    isEditing.toggle()
+                                }
+                            } label:{
+                                Text(isEditing ? "Done" : "Edit")
+                                    .font(Font.custom("RetroGaming", size: 18))
+                                    .frame(width: global_width*0.2)
+                            }
+                        )
+                    }
+                    .foregroundColor(Color(uiColor: .systemGray6))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, global_width*0.05)
                     alreadySuggested.isEmpty ? nil :
                     
                         List{

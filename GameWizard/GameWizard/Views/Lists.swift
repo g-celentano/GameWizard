@@ -11,20 +11,75 @@ import SwiftUI
 
 struct Lists: View {
     @Environment(\.dismiss) private var dismiss
+    let pages = ["ALREADY SUGGESTED", "MY GAMES"]
+    @State var selectedPage = "MY GAMES"
     
     var body: some View {
         NavigationView{
-            TabView{
-                MyGames()
+            //TabView{
+            VStack{
+                HStack{
+                    ZStack{
+                        HStack{
+                            Rectangle()
+                                .frame(width: global_width*0.52)
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity, alignment: selectedPage == pages[1] ? .leading : .trailing)
+                        HStack{
+                            Spacer()
+                            Text(pages[1])
+                                .font(Font.custom("RetroGaming", size: global_width*0.03))
+                                .frame(maxWidth: global_width*0.5, maxHeight: .infinity, alignment: .center)
+                                .background(.white.opacity(0.7))
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectedPage = pages[1]
+                                    }
+                                }
+                            Text(pages[0])
+                                .font(Font.custom("RetroGaming", size: global_width*0.03))
+                                .frame(maxWidth: global_width*0.5, maxHeight: .infinity, alignment: .center)
+                                .background(.white.opacity(0.7))
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectedPage = pages[0]
+                                    }
+                                }
+                            Spacer()
+                            
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .foregroundColor(Color(uiColor: .systemGray6))
+                .frame(maxWidth: global_width, maxHeight: global_height*0.05)
+                .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
+                .clipShape(MessageBox())
+                .padding(.vertical, global_height*0.01)
                 
-                AlreadySuggestedView()
                 
+                TabView(selection: $selectedPage){
+                    MyGames().tag(pages[1])
+                    AlreadySuggestedView().tag(pages[0])
+                }
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(.page(backgroundDisplayMode: .never))
+               /* if selectedPage == pages[1] {
+                    AlreadySuggestedView()
+                } else {
+                    MyGames()
+                }
+                    */
             }
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .tabViewStyle(PageTabViewStyle())
             .background(Color("BgColor"))
-            .ignoresSafeArea(.all)
+               
+                
+           //}
+           //.frame(maxWidth: .infinity, maxHeight: .infinity)
+           //.tabViewStyle(PageTabViewStyle())
+           //.background(Color("BgColor"))
+           //.ignoresSafeArea(.all)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar{

@@ -46,8 +46,8 @@ struct MyGames : View {
                     .ignoresSafeArea(.all)
                 VStack{
                     HStack{
-                        Text("My Games")
-                            .font(Font.custom("RetroGaming", size: 32))
+                        /*Text("My Games")
+                            .font(Font.custom("RetroGaming", size: 32))*/
                         Spacer()
                         (
                             localGames.isEmpty ? nil :

@@ -20,6 +20,7 @@ struct ChatView: View {
     @State var lastBotResponse = ""
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var already_suggested : FetchedResults<AlreadySuggested>
+    @State var firstChat = true
     
     var body: some View {
         NavigationStack{
@@ -61,7 +62,7 @@ struct ChatView: View {
                                             .id(message.id)
                                             .padding()
                                             .padding(.horizontal)
-                                            .font(Font.custom("RetroGaming", size: 16))
+                                            .font(Font.custom("RetroGaming", size: global_width*0.042))
                                             .foregroundColor(Color(uiColor: .systemGray6))
                                             .background(Color(uiColor: .white))
                                             .lineLimit(nil)
@@ -92,7 +93,7 @@ struct ChatView: View {
                         TextField("", text: $textFieldValue)
                             .padding(.horizontal, global_width*0.05)
                             .padding(.vertical)
-                            .font(Font.custom("RetroGaming", size: 17))
+                            .font(Font.custom("RetroGaming", size: global_width*0.042))
                             .foregroundColor(Color(uiColor: .systemGray6))
                             .frame(maxWidth: global_width*0.8)
                             .background(
@@ -127,9 +128,21 @@ struct ChatView: View {
                     .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                     .clipShape(MessageBox())
                     .background(Color("BgColor"))
+                    .padding(.vertical)
                 
                     
                 }
+                .onAppear(perform: {
+                    if firstChat {
+                        firstChat = false
+                        lastBotResponse = ""
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            lastBotResponse = "Hello there, how can I help you?\nWrite something like \"Tell me a game about soccer\" "
+                            typeWriter()
+                            messages.append(Message(botR: true, t: "Hello there, how can I help you?\n Write something like \"Tell me a game about soccer\" "))
+                        }
+                    }
+                })
                 .frame(maxWidth: .infinity, maxHeight: global_height, alignment: .bottom)
                 
                 

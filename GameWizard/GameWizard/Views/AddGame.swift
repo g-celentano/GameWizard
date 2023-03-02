@@ -119,7 +119,7 @@ struct AddGame : View{
                     .frame(maxWidth: global_width*0.9)
                     
                     let suggestions = gameName != "" ?  games.filter({ game in
-                        game.name.hasPrefix(gameName)}) : []
+                        game.name.lowercased().hasPrefix(gameName.lowercased())}) : []
                         
                         ScrollView{
                                 ForEach(suggestions){ game in
