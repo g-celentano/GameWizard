@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  GameWizard
+
+  Created by Eugenio Caiazzo on 03/03/23.
+  
+*/
+
+"Understood, take me to the chat." = "Ho capito, portami alla chat";
+"Type here..." = "Scrivi qua...";
+"Hello there, how can I help you?\nWrite something like \"Tell me a game about soccer\" " = "Ciao, come posso aiutarti?\nScrivi qualcosa come \ "Consigliami un gioco di calcio"";
+"There are some games I found : \n" = " Ho trovato alcuni giochi: \n";
+"I didn't find any game" = "Non ho trovato nessun gioco";
+"I found " = " Ho trovato";
+" that you may like" = "che potrebbero piacerti";
+"No game was found" = "Non ho trovato nessun gioco";
+"Here's what I found " = "Ecco cosa ho trovato";
+" that you may like" = "che potrebbe piacerti";
+"I didn't find anything" = "Non ho trovato niente";
+"Sorry I did not understand" = "Scusa, non ho capito";
+"Done" = "Fatto";
+"Edit" = "Modifica";
+"No name" = "Nessun nome";
+"Game Name" = "Nome del gioco";
+"Suggestions" = "Consigliati";
+"Add" = "Aggiungi";
+"Add a new game" = "Aggiungi un nuovo gioco";
+"Back" = "Indietro";
+"This is a placeholder for the onboarding" = "Questo è un placeholder per l'onboarding";
+
