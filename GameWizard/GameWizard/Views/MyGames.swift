@@ -38,7 +38,6 @@ struct MyGames : View {
     @Environment(\.dismiss) private var dismiss
     @State var toolbarColor = Color(uiColor: .systemGray6)
     @State var isEditing = false
-    @AppStorage("currentView") var currentView = 2
     
     var body: some View{
         //NavigationStack{
@@ -57,9 +56,9 @@ struct MyGames : View {
                                     isEditing.toggle()
                                 }
                             } label:{
-                                Text(isEditing ? "Done" : "Edit")
+                                Text(isEditing ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Edit", comment: ""))
                                     .font(Font.custom("RetroGaming", size: 18))
-                                    .frame(width: global_width*0.2)
+                                    .frame(width: global_width*0.25)
                             }
                         )
                         Button{
@@ -68,13 +67,13 @@ struct MyGames : View {
                         Image(systemName: "plus")
                             .scaleEffect(1.6)
                         }.padding()
-                        Button{
+                        /*Button{
                             currentView = 1
                             dismiss()
                         } label:{
                             Image(systemName: "questionmark.circle")
                                 .scaleEffect(1.6)
-                        }
+                        }*/
                     }
                     .foregroundColor(Color(uiColor: .systemGray6))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,10 +81,9 @@ struct MyGames : View {
                     
                 
                     localGames.isEmpty ? nil :
-                    
                         List{
                             ForEach(localGames, id: \.self){ game in
-                                Text(game.gameName ?? "No name")
+                                Text(game.gameName ?? "")
                                     .font(Font.custom("RetroGaming", size: 16))
                                     .listRowSeparatorTint(Color("BgColor"))
                             }

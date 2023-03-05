@@ -19,17 +19,36 @@ extension String {
         self[index(startIndex, offsetBy: offset)]
     }
 }
-
 extension View {
-  func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
-    background(
-      GeometryReader { geometryProxy in
-        Color.clear
-          .preference(key: SizePreferenceKey.self, value: geometryProxy.size)
-      }
-    )
-    .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    func senderLayout(_ text : String, placeholder : String) -> some View {
+      return self
+          .font(Font.custom("RetroGaming", size: global_width*0.042))
+          .foregroundColor(Color(uiColor: .systemGray6))
+          .padding(.vertical)
+          .padding(.horizontal, global_width*0.05)
+          .background(
+            Text(placeholder)
+            .font(Font.custom("RetroGaming", size: 17))
+            .frame(maxWidth: global_width*0.8, alignment: .leading)
+            .foregroundColor(Color(uiColor: .systemGray))
+            .padding(.vertical)
+            .padding(.horizontal, global_width*0.05)
+            .opacity(text.isEmpty ? 1.0 : 0.0)
+          )
   }
+    
+    func messageLayout() -> some View{
+        return self
+            .padding()
+            .padding(.horizontal)
+            .font(Font.custom("RetroGaming", size: global_width*0.042))
+            .foregroundColor(Color(uiColor: .systemGray6))
+            .background(Color(uiColor: .white))
+            .lineLimit(nil)
+            .clipShape(MessageBox())
+            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 2))
+    }
+    
 }
 
 class Message: Identifiable, Equatable, Hashable {
@@ -38,12 +57,14 @@ class Message: Identifiable, Equatable, Hashable {
     let id = UUID()
     private var botResponse : Bool
     private  var text : String
+    private var games_in_message : [Game] = []
     
     
     //methods
-    init(botR : Bool, t : String) {
+    init(botR : Bool, t : String, games: [Game] = [] ) {
         self.botResponse = botR
         self.text = t
+        self.games_in_message = games
     }
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -62,6 +83,19 @@ class Message: Identifiable, Equatable, Hashable {
         self.text = text
     }
     
+    func setGames(games : [Game]){
+        for game in games {
+            self.games_in_message.append(game)
+        }
+    }
+    
+    func addGame(game: Game) {
+        self.games_in_message.append(game)
+    }
+    
+    func getGames() -> [Game]{
+        return self.games_in_message
+    }
     func isBotResponse()->Bool {
         return self.botResponse
     }
@@ -70,7 +104,6 @@ class Message: Identifiable, Equatable, Hashable {
     func getText() -> String {
         return self.text
     }
-    
     
     
     

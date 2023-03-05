@@ -11,6 +11,15 @@ import SwiftUI
 
 struct AddGame : View{
  
+    @FetchRequest(sortDescriptors: []) var myGames2 : FetchedResults<MyGame>
+    @Environment(\.managedObjectContext) var moc
+    @State var gameName : String = ""
+    @State var genres : [String] = []
+    @State var keywords : [String] = []
+    @Environment(\.dismiss) var dismiss
+    @State var contains = false
+    
+    
     
     init(){
         UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -22,18 +31,11 @@ struct AddGame : View{
             .font : UIFont(name: "RetroGaming", size: 18)!,
             .foregroundColor : UIColor.white
         ]
-       
+        
+        
     }
     
-    
-    @FetchRequest(sortDescriptors: []) var myGames2 : FetchedResults<MyGame>
-    @Environment(\.managedObjectContext) var moc
-    @State var gameName : String = ""
-    @State var genres : [String] = []
-    @State var keywords : [String] = []
-    @Environment(\.dismiss) var dismiss
-    
-    
+   
     
     var body: some View{
         NavigationStack{
@@ -43,20 +45,8 @@ struct AddGame : View{
                 
                 VStack{
                         TextField("", text: $gameName)
-                            .submitLabel(.done)
+                            .senderLayout(gameName, placeholder: NSLocalizedString("Game Name", comment: ""))
                             .padding(.horizontal, global_width*0.05)
-                            .font(Font.custom("RetroGaming", size: 17))
-                            .foregroundColor(Color(uiColor: .systemGray6))
-                            .frame(maxWidth: global_width*0.9)
-                            .background(
-                                Text("Game Name")
-                                    .font(Font.custom("RetroGaming", size: 17))
-                                    .frame(maxWidth: global_width*0.9, alignment: .leading)
-                                    .foregroundColor(Color(uiColor: .systemGray))
-                                    .padding(.horizontal, global_width*0.05)
-                                    .opacity(gameName.isEmpty ? 1.0 : 0.0)
-                            )
-                            .padding(.vertical)
                             .background(.white)
                             .clipped()
                             .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
@@ -111,73 +101,82 @@ struct AddGame : View{
                         .frame(maxWidth: global_width*0.9, maxHeight: .infinity)
                          */
                     HStack{
-                        Text("Suggestions")
+                        Text(NSLocalizedString("Suggestions", comment: ""))
                             .font(Font.custom("RetroGaming", size: 24))
                             .foregroundColor(Color(uiColor: .systemGray6))
                         Spacer()
                     }
                     .frame(maxWidth: global_width*0.9)
                     
-                    let suggestions = gameName != "" ?  games.filter({ game in
-                        game.name.lowercased().hasPrefix(gameName.lowercased())}) : []
-                        
-                        ScrollView{
-                                ForEach(suggestions){ game in
-                                    LazyHStack{
-                                        Text(game.name)
-                                            .frame(width: global_width*0.9)
-                                            .padding(.horizontal, global_width*0.05)
-                                            .font(Font.custom("RetroGaming", size: 17))
-                                            .foregroundColor(Color(uiColor: .systemGray6))
-                                            .padding(.vertical)
-                                            .background(.white)
-                                            .clipped()
-                                            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                                            .clipShape(MessageBox())
+                    let suggestions = gameName != "" ? games.filter({ game in
+                        game.name.lowercased().contains(gameName.lowercased())}) : games
+                    
+                    ScrollView{
+                        LazyVStack{
+                            ForEach(suggestions){ game in
+                                    Text(game.name)
+                                        .frame(width:global_width*0.8, height: global_height*0.02)
+                                            .messageLayout()
                                             .onTapGesture {
-                                                gameName = game.name
-                                                for genre in game.genres! {
-                                                    genres.append(genre.name)
+                                                contains = false
+                                                let suggested = games.filter({ g in
+                                                    g.name == game.name
+                                                })[0]
+                                                gameName = suggested.name
+                                                if suggested.genres != nil{
+                                                    for genre in suggested.genres! {
+                                                        genres.append(genre.name)
+                                                    }
                                                 }
-                                                for key in game.keywords! {
-                                                    keywords.append(key.name)
+                                                if suggested.keywords != nil{
+                                                    for key in suggested.keywords! {
+                                                        keywords.append(key.name)
+                                                    }
+                                                }
+                                                
+                                                for game in myGames2 {
+                                                    if game.gameName == gameName{
+                                                        contains = true
+                                                    }
                                                 }
                                             }
-                                    }
-                                    
+                                
                                 }
-                            }.frame(maxWidth: global_width*0.9, maxHeight: .infinity)
+                                .padding(.horizontal)
+                            
+                            }
+                            .frame(maxWidth: global_width, maxHeight: .infinity)
+                            
+                        
+                        }
+                        .frame(maxWidth: global_width, maxHeight: .infinity)
+                        .id(UUID())
+                
+                        
                     
                         
                         Button{
-                            var contains = false
-                            for game in myGames2 {
-                                if game.gameName == gameName && game.genres == genres{
-                                    contains = true
-                                }
-                            }
-                            
-                            if suggestions.count <= 1 && suggestions.last!.name == gameName && !contains {
+                            if suggestions.count <= 1 && suggestions.last!.name == gameName && !contains{
                                 let newGame = MyGame(context: moc)
-                                if contains == false {
-                                    newGame.id = UUID()
-                                    newGame.gameName = gameName
-                                    newGame.keywords = keywords
-                                    newGame.genres = genres
-                                    try? moc.save()
-                                    dismiss()
-                                }
+                                newGame.id = UUID()
+                                newGame.gameName = gameName
+                                newGame.keywords = keywords
+                                newGame.genres = genres
+                                try? moc.save()
+                                dismiss()
                             }
                         }label: {
-                            Text("Add")
+                            Text(NSLocalizedString("Add", comment: ""))
                                 .font(Font.custom("RetroGaming",size: 24))
-                                .foregroundColor(Color(uiColor: .systemGray6))
+                                .foregroundColor(Color(uiColor: .systemGray6) )
                                 .frame(width: global_width*0.85)
                                 .padding(.vertical)
                                 .background(.white)
                                 .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
                                 .clipShape(MessageBox())
+                                .opacity(suggestions.count <= 1 && suggestions.last!.name == gameName && !contains ? 1.0 : 0.7)
                         }
+                        
                         
                         
                         
@@ -212,9 +211,10 @@ struct AddGame : View{
                
                 
                 }
+            
             }
             .navigationBarTitleDisplayMode(.large)
-            .navigationTitle("Add a new game")
+            .navigationTitle(NSLocalizedString("Add a new game", comment: ""))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button{

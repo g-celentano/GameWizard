@@ -5,20 +5,14 @@
   Created by Gaetano Celentano on 05/03/23.
   
 */
-/*
-  Localizable.strings
-  GameWizard
-
-  Created by Gaetano Celentano on 05/03/23.
-  
-*/
 "welcome_first_message_onboarding" = "Hey there, it seems this is the first time you interact with me...";
 "welcome_second_message_onboarding" = " If you tell me some details about what you want I can recommend you some of the games I know... Use the input down here to talk with me, writing something like \"Tell me a game about...\"wahtever you want :) ";
 "welcome_third_message_onboarding" = " But please, do it in English, because I've been trained to only understand English yet :) ";
 
+
 "find_saved_games_onboarding" = "You can find your saved game in the list section of this magic app, reachable by clicking on the icon in the top right corner, after this \"tutorial\" will end. Have a nice chat :))";
-"save \@" = "Salva \@ ne \"I Miei Giochi\"";
-"Type here..." = "Scrivi qui...";
+"save \@" = "Save \@ to \"My Games\"";
+"Type here..." = "Type here...";
 "Games found intro" = "There are some games I found : \n";
 "save_instructions" = "\nIf you want, you can save the games I told you by holding your finger on my last message and selecting which game to save";
 "no game" = "I didn't find any game";
@@ -31,12 +25,12 @@
 "Here's what I found " = "Here's what I found ";
 "Sorry I did not understand" = "Sorry I did not understand";
 "mainChat_intro" = "Hello there, how can I help you?\nWrite something like \"Tell me a game about soccer\" ";
-"Game Name" = "Nome del Gioco";
-"Suggestions" = "Suggerimenti";
-"Add" = "Aggiungi";
-"Add a new game" = "Aggiungi gioco";
-"Done" = "Fatto";
-"Edit" = "Modifica";
-"ALREADY SUGGESTED" = "GIÀ SUGGERITI";
-"MY GAMES" = "I MIEI GIOCHI";
-"Back" = "Indietro";
+"Game Name" = "Game Name";
+"Suggestions" = "Suggestions";
+"Add" = "Add";
+"Add a new game" = "Add a new game";
+"Done" = "Done";
+"Edit" = "Edit";
+"ALREADY SUGGESTED" = "ALREADY SUGGESTED";
+"MY GAMES" = "MY GAMES";
+"Back" = "Back";

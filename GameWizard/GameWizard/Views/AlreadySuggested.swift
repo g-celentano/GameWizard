@@ -56,7 +56,7 @@ struct AlreadySuggestedView : View {
                                     isEditing.toggle()
                                 }
                             } label:{
-                                Text(isEditing ? "Done" : "Edit")
+                                Text(isEditing ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Edit", comment: ""))
                                     .font(Font.custom("RetroGaming", size: 18))
                                     .frame(width: global_width*0.2)
                             }
@@ -69,7 +69,7 @@ struct AlreadySuggestedView : View {
                     
                         List{
                             ForEach(alreadySuggested, id: \.self){ game in
-                                Text(game.gameName ?? "No name")
+                                Text(game.gameName ?? "")
                                     .font(Font.custom("RetroGaming", size: 16))
                                     .listRowSeparatorTint(Color("BgColor"))
                             }

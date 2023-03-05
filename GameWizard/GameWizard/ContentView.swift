@@ -16,6 +16,7 @@ let recommender : Recommender = Recommender()
 
 var totalViews = 1
 
+
 struct ContentView: View {
    @AppStorage("currentView") var currentView = 1
     var body: some View {

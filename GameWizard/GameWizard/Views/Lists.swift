@@ -11,8 +11,8 @@ import SwiftUI
 
 struct Lists: View {
     @Environment(\.dismiss) private var dismiss
-    let pages = ["ALREADY SUGGESTED", "MY GAMES"]
-    @State var selectedPage = "MY GAMES"
+    let pages = [NSLocalizedString("ALREADY SUGGESTED", comment: ""), NSLocalizedString("MY GAMES", comment: "")]
+    @State var selectedPage = NSLocalizedString("MY GAMES", comment: "")
     
     var body: some View {
         NavigationView{
@@ -89,7 +89,7 @@ struct Lists: View {
                 }label: {
                     HStack{
                         Image(systemName: "chevron.left")
-                        Text("Back")
+                        Text(NSLocalizedString("Back", comment: ""))
                             .font(Font.custom("RetroGaming", size: 16))
                             
                     }
