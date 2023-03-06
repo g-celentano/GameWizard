@@ -7,9 +7,15 @@
 
 import SwiftUI
 
-
+enum Field: Hashable {
+        case input
+        case none
+    }
 
 struct ChatView: View {
+    
+    
+
     
     @State var textFieldValue : String = ""
     @State var messages : [Message] = [
@@ -23,6 +29,7 @@ struct ChatView: View {
     @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
     @State var firstChat = true
     @State var games_in_response : [Game] = []
+    @FocusState var textFieldFocus : Field?
     
     var body: some View {
         NavigationStack{
@@ -86,7 +93,13 @@ struct ChatView: View {
                                                             }
                                                             
                                                         } label:{
-                                                            Text(NSLocalizedString("save \(g.name)", comment: ""))
+                                                            Text(
+                                                                g.name.withCString{
+                                                                    String(format : NSLocalizedString("save %s", comment: ""), $0)
+                                                                }
+                                                                )
+                                                                
+                                                            
                                                         }
                                                     }
                                                 }
@@ -118,6 +131,7 @@ struct ChatView: View {
                         TextField("", text: $textFieldValue)
                             .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
                             .disabled(messages.last != nil ? !(messages.last?.isBotResponse())!: false)
+                            .focused($textFieldFocus, equals : .input)
                       
                         Button {
                             if !textFieldValue.isEmpty {
@@ -146,6 +160,9 @@ struct ChatView: View {
                 
                     
                 }
+                .onTapGesture(perform: {
+                    textFieldFocus = nil
+                })
                 .onAppear(perform: {
                     if firstChat {
                         firstChat = false
@@ -277,9 +294,9 @@ struct ChatView: View {
                                 }
                                 try? moc.save()
                             }
-                            var botRes = NSLocalizedString("I found ", comment: "")
-                            botRes.append(response_games!)
-                            botRes.append(NSLocalizedString(" that you may like", comment: ""))
+                            let botRes = response_games!.withCString {
+                                String(format: NSLocalizedString("I found %s", comment: ""), $0)
+                            }
                             let game = games.filter { g in
                                 g.name == response_games!
                             }
@@ -299,9 +316,9 @@ struct ChatView: View {
                         let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
                         
                         if !(response_games?.isEmpty ?? false) {
-                            var botRes = NSLocalizedString("Here's what I found ", comment: "")
-                            botRes.append(response_games!)
-                            botRes.append(NSLocalizedString(" that you may like.", comment: ""))
+                            let botRes = response_games!.withCString {
+                                String(format: NSLocalizedString("Here's what I found %s", comment: ""), $0)
+                            }
                             let game = games.filter { g in
                                 g.name == response_games!
                             }

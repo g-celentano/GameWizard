@@ -18,6 +18,8 @@ struct AddGame : View{
     @State var keywords : [String] = []
     @Environment(\.dismiss) var dismiss
     @State var contains = false
+    @State var nameGood = false
+    @FocusState var gameNameFocus : Field?
     
     
     
@@ -51,6 +53,7 @@ struct AddGame : View{
                             .clipped()
                             .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                             .clipShape(MessageBox())
+                            .focused($gameNameFocus, equals: .input)
                         
                         /*
                         HStack{
@@ -119,6 +122,7 @@ struct AddGame : View{
                                             .messageLayout()
                                             .onTapGesture {
                                                 contains = false
+                                                nameGood = false
                                                 let suggested = games.filter({ g in
                                                     g.name == game.name
                                                 })[0]
@@ -139,6 +143,11 @@ struct AddGame : View{
                                                         contains = true
                                                     }
                                                 }
+                                                for sugg in suggestions {
+                                                    if sugg.name == gameName{
+                                                        nameGood = true
+                                                    }
+                                                }
                                             }
                                 
                                 }
@@ -156,7 +165,7 @@ struct AddGame : View{
                     
                         
                         Button{
-                            if suggestions.count <= 1 && suggestions.last!.name == gameName && !contains{
+                            if nameGood && !contains{
                                 let newGame = MyGame(context: moc)
                                 newGame.id = UUID()
                                 newGame.gameName = gameName
@@ -174,7 +183,7 @@ struct AddGame : View{
                                 .background(.white)
                                 .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
                                 .clipShape(MessageBox())
-                                .opacity(suggestions.count <= 1 && suggestions.last!.name == gameName && !contains ? 1.0 : 0.7)
+                                .opacity(nameGood && !contains ? 1.0 : 0.7)
                         }
                         
                         
@@ -212,6 +221,9 @@ struct AddGame : View{
                 
                 }
             
+            }
+            .onTapGesture {
+                gameNameFocus = nil
             }
             .navigationBarTitleDisplayMode(.large)
             .navigationTitle(NSLocalizedString("Add a new game", comment: ""))
