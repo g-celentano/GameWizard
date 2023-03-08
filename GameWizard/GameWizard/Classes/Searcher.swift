@@ -6,22 +6,34 @@
 //
 
 import Foundation
+import CoreData
+import SwiftUI
 
-func searchKeyword(keywords: [String], games: [Game]) -> String? {
+func searchKeyword(keywords: [String], games: [Game], alreadySuggested: FetchedResults<AlreadySuggested>) -> String? {
     var maxMatches = 0
     var matchedGame : Game?
     var index = 0
     var keyIndex = 0
-    
         for game in games {
             var matches = 0
             if game.keywords != nil {
                 for _ in game.keywords! {
-                    if keywords.contains(where: {
-                        games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                    })
-                    {
-                        matches += 1
+                    if !alreadySuggested.isEmpty{
+                        if keywords.contains(where: {
+                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                        }) && !alreadySuggested.contains(where: {
+                            games[index].name.lowercased().contains($0.gameName!.lowercased())
+                        })
+                        {
+                            matches += 1
+                        }
+                    } else {
+                        if keywords.contains(where: {
+                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                        }) 
+                        {
+                            matches += 1
+                        }
                     }
                    
                     
@@ -47,7 +59,7 @@ func searchKeyword(keywords: [String], games: [Game]) -> String? {
 }
 
 
-func searchKeywords(keywords: [String], games: [Game]) -> [String?] {
+func searchKeywords(keywords: [String], games: [Game], alreadySuggested: FetchedResults<AlreadySuggested>) -> [String?] {
     var maxMatches = 0
     var matchedGame : Game?
     var index = 0
@@ -60,11 +72,22 @@ func searchKeywords(keywords: [String], games: [Game]) -> [String?] {
             var matches = 0
             if game.keywords != nil {
                 for _ in game.keywords! {
-                    if keywords.contains(where: {
-                        games[index].keywords![keyIndex].name.lowercased().hasPrefix($0.lowercased())
-                    })
-                    {
-                        matches += 1
+                    if !alreadySuggested.isEmpty{
+                        if keywords.contains(where: {
+                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                        }) && !alreadySuggested.contains(where: {
+                            games[index].name.lowercased().contains($0.gameName!.lowercased())
+                        })
+                        {
+                            matches += 1
+                        }
+                    } else {
+                        if keywords.contains(where: {
+                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
+                        })
+                        {
+                            matches += 1
+                        }
                     }
                 
                     keyIndex += 1

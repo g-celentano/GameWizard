@@ -18,10 +18,16 @@ struct OnboardingView: View {
     @State var text = ""
     @State var lastBotResponse = ""
     @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
+    @FetchRequest(sortDescriptors: []) var already: FetchedResults<AlreadySuggested>
+    
+    
+    
     @Environment(\.managedObjectContext) var moc
     @State var noInput = true
     @State var selectedGame : String = ""
-
+    
+    @State var allowInput = false
+    @State var inputHeightBool = false
     
     var body: some View {
        ZStack {
@@ -29,27 +35,6 @@ struct OnboardingView: View {
                 .ignoresSafeArea(.all)
             
             VStack{
-                HStack{
-                    NavigationLink(destination: Lists()) {
-                        HStack{
-                             /*Text("My games")
-                                 .font(Font.custom("RetroGaming", size: 18))
-                                 .foregroundColor(Color(uiColor: .systemGray6))*/
-                            Image("libraryicon")
-                                .foregroundColor(Color(uiColor: .systemGray6))
-                                .scaleEffect(0.4)
-                                .padding(.trailing, -global_width*0.06)
-                                .padding(.top)
-                            
-                           /* Image(systemName: "chevron.right")
-                                .foregroundColor(Color(uiColor: .systemGray6))*/
-                        }.frame(alignment: .center)
-                     }
-                     .padding()
-                     .padding(.top)
-                    
-                }
-                .frame(maxWidth: .infinity, maxHeight: global_height*0.01, alignment: .trailing)
                 
                 Image("gattomagico")
                     .frame(width: global_width, height: global_height*0.2)
@@ -71,8 +56,13 @@ struct OnboardingView: View {
                                                         lastBotResponse = NSLocalizedString("find_saved_games_onboarding", comment: "")
                                                         typeWriter()
                                                         messages.append(Message(botR: true, t: lastBotResponse))
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 10){
-                                                            currentView = 2
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 8){
+                                                            lastBotResponse = NSLocalizedString("are you ready", comment: "")
+                                                            typeWriter()
+                                                            messages.append(Message(botR: true, t: lastBotResponse))
+                                                            withAnimation(.easeIn){
+                                                                textFieldValue = "start"
+                                                            }
                                                         }
                                                         let localGamesNames = localGames.filter { myG in
                                                             myG.gameName == g.name
@@ -94,7 +84,9 @@ struct OnboardingView: View {
                                                         
                                                         
                                                     } label:{
-                                                        Text(NSLocalizedString("save \(g.name)", comment: ""))
+                                                        Text(g.name.withCString{
+                                                            String(format : NSLocalizedString("save %s", comment: ""), $0)
+                                                        })
                                                     }
                                                 }
                                             }
@@ -111,13 +103,14 @@ struct OnboardingView: View {
                             .padding(.top, global_width*0.015)
                             
                         }
-                        .onChange(of: messages.count) { newValue in
-                            withAnimation(.linear){
-                                reader.scrollTo(messages.last!.id, anchor: .bottom)
-                            }
+                        
+                        
+                    }
+                    .onChange(of: messages.count) { newValue in
+                        withAnimation{
+                            reader.scrollTo(messages.last!.id, anchor: .bottom)
                         }
-                        
-                        
+                            
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.top)
@@ -127,26 +120,35 @@ struct OnboardingView: View {
     
                 HStack{
                     TextField("", text: $textFieldValue)
+                        .font(Font.custom("RetroGaming", size: textFieldValue == "start" ? global_width*0.08:global_width*0.042))
+                        .foregroundColor(Color(uiColor: textFieldValue == "start" ? .systemRed : .systemGray6 ))
                         .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
-                        .disabled(messages.last != nil ? !(messages.last?.isBotResponse())!: false)
+                        .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
                         .disabled(noInput)
+                        .disabled(textFieldValue == "start")
+                        .multilineTextAlignment(textFieldValue == "start" ? .center : .leading)
+                        
+                    
                   
                     Button {
                         if !textFieldValue.isEmpty {
                             submit()
                         }
                     } label: {
-                        ZStack{
+                        VStack{
+                            //Image("Cat_Paw_2")
                             Image("sendicon")
-                                .foregroundColor(Color(uiColor: .systemGray6))
-                                .scaleEffect(0.09)
+                                .scaleEffect(0.15)
+                               // .padding(.bottom)
                         }
-                        .frame(width: global_width*0.1, height: global_width*0.1, alignment: .center)
+                        .frame(width: textFieldValue == "start" ? 0.0 :  global_width*0.1, height:textFieldValue == "start" ? 0.0 : global_width*0.1)
+                        .opacity(textFieldValue == "start" ? 0.0 : 1.0)
                     }
+                    .disabled(textFieldValue == "start")
                     
                     
                 }
-                .frame(maxWidth: global_width, maxHeight: global_height * 0.08, alignment: .center)
+                .frame(maxWidth: allowInput ?  global_width : 0.0, maxHeight: global_height * 0.08, alignment: .center)
                 .padding(.horizontal)
                 .background(.white)
                 .clipped()
@@ -154,6 +156,12 @@ struct OnboardingView: View {
                 .clipShape(MessageBox())
                 .background(Color("BgColor"))
                 .padding(.vertical)
+                .opacity(inputHeightBool ? 1.0 : 0.0)
+                .onTapGesture {
+                    if textFieldValue == "start" {
+                            currentView = 2
+                    }
+                }
             
                 
             }
@@ -165,17 +173,24 @@ struct OnboardingView: View {
                     typeWriter()
                     messages.append(Message(botR: true, t: lastBotResponse))
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 9){
                     lastBotResponse = NSLocalizedString("welcome_second_message_onboarding", comment: "")
                     typeWriter()
                     messages.append(Message(botR: true, t: lastBotResponse))
                     noInput = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5){
+                        inputHeightBool = true
+                        withAnimation(.easeInOut(duration: 1.5)){
+                            allowInput = true
+                        }
+                    }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 12){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 19.5){
                     lastBotResponse = NSLocalizedString("welcome_third_message_onboarding", comment: "")
                     typeWriter()
                     messages.append(Message(botR: true, t: lastBotResponse))
                     noInput = false
+                    
                 }
             })
             .frame(maxWidth: .infinity, maxHeight: global_height, alignment: .bottom)
@@ -209,7 +224,7 @@ struct OnboardingView: View {
             if whitespaces.count > 2{
                 if message.contains(NSLocalizedString("games", comment: "")) {
                     let newMessage = message.replacingOccurrences(of: NSLocalizedString("games", comment: ""), with: "")
-                    let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games)
+                    let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games, alreadySuggested: already)
                     
                     
                     if !response_games.isEmpty {
@@ -228,14 +243,17 @@ struct OnboardingView: View {
                             games_in_response.append(giuoco[0])
                             
                         }
-                        botRes.append(NSLocalizedString("save_instructions", comment: ""))
                     
                         lastBotResponse = botRes
                         typeWriter()
                         messages.append(Message(botR: true, t: botRes, games: games_in_response))
                         
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5){
+                            lastBotResponse = NSLocalizedString("save_instructions", comment: "")
+                            typeWriter()
+                            messages.append(Message(botR: true, t: lastBotResponse))
+                        }
                         
-                            
                         } else {
                             lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
@@ -243,13 +261,12 @@ struct OnboardingView: View {
                         }
                     } else if message.contains(NSLocalizedString("game", comment: "")) {
                         let newMessage = message.replacingOccurrences(of: NSLocalizedString("game", comment: ""), with: "")
-                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games)
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games, alreadySuggested: already)
                         
                         if !(response_games?.isEmpty ?? false) {
-                            var botRes = NSLocalizedString("I found", comment: "")
-                            botRes.append(response_games!)
-                            botRes.append(NSLocalizedString(" that you may like.", comment: ""))
-                            botRes.append(NSLocalizedString("save_instructions", comment: ""))
+                            let botRes = response_games!.withCString {
+                                String(format: NSLocalizedString("I found %s", comment: ""), $0)
+                            }
                             let game = games.filter { g in
                                 g.name == response_games!
                             }
@@ -257,32 +274,43 @@ struct OnboardingView: View {
                             typeWriter()
                             messages.append(Message(botR: true, t: botRes, games: [game[0]]))
                             
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5){
+                                lastBotResponse = NSLocalizedString("save_instructions", comment: "")
+                                typeWriter()
+                                messages.append(Message(botR: true, t: lastBotResponse))
+                            }
+                            
                             }
                         else {
-                            lastBotResponse = NSLocalizedString("no game 2", comment: "")
+                            lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
                         }
                 
                         
                     } else {
-                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games, alreadySuggested: already)
                         
                         if !(response_games?.isEmpty ?? false) {
-                            var botRes = NSLocalizedString("Here's what I found ", comment: "")
-                            botRes.append(response_games!)
-                            botRes.append(NSLocalizedString(" that you may like.", comment: ""))
-                            botRes.append(NSLocalizedString("save_instructions", comment: ""))
+                            let botRes = response_games!.withCString {
+                                String(format: NSLocalizedString("Here's what I found %s", comment: ""), $0)
+                            }
                             let game = games.filter { g in
                                 g.name == response_games!
                             }
                             lastBotResponse = botRes
                             typeWriter()
                             messages.append(Message(botR: true, t: botRes, games: [game[0]]))
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5){
+                                lastBotResponse = NSLocalizedString("save_instructions", comment: "")
+                                typeWriter()
+                                messages.append(Message(botR: true, t: lastBotResponse))
+                            }
                         }
                             
                         else {
-                            lastBotResponse = NSLocalizedString("no game 3", comment: "")
+                            lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
                         }

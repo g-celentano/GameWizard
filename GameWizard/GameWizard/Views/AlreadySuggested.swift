@@ -58,7 +58,7 @@ struct AlreadySuggestedView : View {
                             } label:{
                                 Text(isEditing ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Edit", comment: ""))
                                     .font(Font.custom("RetroGaming", size: 18))
-                                    .frame(width: global_width*0.2)
+                                    .frame(width: global_width*0.25)
                             }
                         )
                     }

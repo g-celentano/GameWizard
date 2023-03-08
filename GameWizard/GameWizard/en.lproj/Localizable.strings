@@ -5,25 +5,26 @@
   Created by Gaetano Celentano on 05/03/23.
   
 */
-"welcome_first_message_onboarding" = "Hey there, it seems this is the first time you interact with me...";
-"welcome_second_message_onboarding" = " If you tell me some details about what you want I can recommend you some of the games I know... Use the input down here to talk with me, writing something like \"Tell me a game about...\"wahtever you want :) ";
-"welcome_third_message_onboarding" = " But please, do it in English, because I've been trained to only understand English yet :) ";
+"welcome_first_message_onboarding" = "Meow there! It seems like this is the first time you come into my lair. I am a skillful wizard here to help you find the purrfect game to play. Whatever your mood is I've got your back. Let's get started!";
+"welcome_second_message_onboarding" = "If you provide me some details about your desired game, I will use my feline instincts and my unmatched wizardry to help you. Use the enchanted input below to converse with me, by typing something akin to 'Tell me of a game about...' followed by thy chosen subject.";
+"welcome_third_message_onboarding" ="(Purrhaps I should clarify that, while I am a knowledgeable feline, I comprehend only the English language for now.)";
 
 
-"find_saved_games_onboarding" = "You can find your saved game in the list section of this magic app, reachable by clicking on the icon in the top right corner, after this \"tutorial\" will end. Have a nice chat :))";
+"find_saved_games_onboarding" = "Nice Done!\nOnce this \"tutorial\" concludes, you may find your saved game in the list section of this enchanting app. Access it by clicking the disc icon that will appear in the top right corner. Meow!";
+
+"are you ready"= "Tap the button below whenever you're ready to begin the meowgic!";
 "save %s" = "Save \"%s\" to \"My Games\"";
 "Type here..." = "Type here...";
-"Games found intro" = "There are some games I found : \n";
-"save_instructions" = "\nIf you want, you can save the games I told you by holding your finger on my last message and selecting which game to save";
-"no game" = "I didn't find any game";
-"no game 2" = "No game was found";
-"no game 3" = "I didn't find anything";
+
+"Games found intro" = "rrrrrrr... I would recommend: \n";
+
+"save_instructions" = "If you want to keep track of the games I've suggested, just hold down on my last message and choose which game you want to save. Give it a go!";
+"no game" = "Oh no! It looks like my crystal ball needs some polishing. I couldn't find any game that matches your preferences. ";
 "game" = "game";
 "games" = "games";
-"I found %s" = "I found \"%s\" that you may like";
-"Here's what I found %s" = "Here's what I found: \"%s\", I hope that you like it";
+"I found %s" = "Rrrrrrr... I would recommend \"%s\"";
 "Sorry I did not understand" = "Sorry I did not understand";
-"mainChat_intro" = "Hello there, how can I help you?\nWrite something like \"Tell me a game about soccer\" ";
+"mainChat_intro" = "Welcome back, human! It's always great to see you again. Get ready for some meowgic!";
 "Game Name" = "Game Name";
 "Suggestions" = "Suggestions";
 "Add" = "Add";

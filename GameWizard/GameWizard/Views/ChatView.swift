@@ -115,9 +115,10 @@ struct ChatView: View {
                                 
                             }
                             .onChange(of: messages.count) { newValue in
-                                withAnimation(.linear){
+                                withAnimation{
                                     reader.scrollTo(messages.last!.id, anchor: .bottom)
                                 }
+                                    
                             }
                             
                         }
@@ -130,7 +131,7 @@ struct ChatView: View {
                     HStack{
                         TextField("", text: $textFieldValue)
                             .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
-                            .disabled(messages.last != nil ? !(messages.last?.isBotResponse())!: false)
+                            .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
                             .focused($textFieldFocus, equals : .input)
                       
                         Button {
@@ -138,12 +139,14 @@ struct ChatView: View {
                                 submit()
                             }
                         } label: {
-                            ZStack{
+                            VStack{
+                                //Image("Cat_Paw_2")
                                 Image("sendicon")
-                                    .foregroundColor(Color(uiColor: .systemGray6))
-                                    .scaleEffect(0.09)
+                                    .scaleEffect(0.15)
+                                   // .padding(.bottom)
+                                
                             }
-                            .frame(width: global_width*0.1, height: global_width*0.1, alignment: .center)
+                            .frame(width: global_width*0.1, height: global_width*0.1)
                             
                         }
                         
@@ -200,6 +203,7 @@ struct ChatView: View {
         messages.append(Message(botR: false, t: textFieldValue))
         lastBotResponse = ""
         
+        
         DispatchQueue.global(qos:.userInteractive).async {
             let message = messages.last?.getText() ?? ""
             let whitespaces = message.split(separator: " ")
@@ -208,7 +212,7 @@ struct ChatView: View {
             if whitespaces.count > 2{
                 if message.contains(NSLocalizedString("games", comment: "")) {
                     let newMessage = message.replacingOccurrences(of: NSLocalizedString("games", comment: ""), with: "")
-                    let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games)
+                    let response_games = searchKeywords(keywords: recommender.get_keywords(text: newMessage), games: games, alreadySuggested: already_suggested)
                     
                     
                     if !response_games.isEmpty {
@@ -268,7 +272,7 @@ struct ChatView: View {
                         }
                     } else if message.contains(NSLocalizedString("game", comment: "")) {
                         let newMessage = message.replacingOccurrences(of: NSLocalizedString("game", comment: ""), with: "")
-                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games)
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: newMessage), games: games, alreadySuggested: already_suggested)
                         
                         if !(response_games?.isEmpty ?? false) {
                             var suggNames : [String] = []
@@ -306,14 +310,14 @@ struct ChatView: View {
                             messages.append(Message(botR: true, t: botRes, games: [game[0]]))
                             }
                         else {
-                            lastBotResponse = NSLocalizedString("no game 2", comment: "")
+                            lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
                         }
                 
                         
                     } else {
-                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
+                        let response_games = searchKeyword(keywords: recommender.get_keywords(text: message), games: games, alreadySuggested: already_suggested)
                         
                         if !(response_games?.isEmpty ?? false) {
                             let botRes = response_games!.withCString {
@@ -358,7 +362,7 @@ struct ChatView: View {
                         }
                             
                         else {
-                            lastBotResponse = NSLocalizedString("no game 3", comment: "")
+                            lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
                         }

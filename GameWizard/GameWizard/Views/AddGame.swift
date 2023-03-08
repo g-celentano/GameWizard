@@ -121,8 +121,6 @@ struct AddGame : View{
                                         .frame(width:global_width*0.8, height: global_height*0.02)
                                             .messageLayout()
                                             .onTapGesture {
-                                                contains = false
-                                                nameGood = false
                                                 let suggested = games.filter({ g in
                                                     g.name == game.name
                                                 })[0]
@@ -135,17 +133,6 @@ struct AddGame : View{
                                                 if suggested.keywords != nil{
                                                     for key in suggested.keywords! {
                                                         keywords.append(key.name)
-                                                    }
-                                                }
-                                                
-                                                for game in myGames2 {
-                                                    if game.gameName == gameName{
-                                                        contains = true
-                                                    }
-                                                }
-                                                for sugg in suggestions {
-                                                    if sugg.name == gameName{
-                                                        nameGood = true
                                                     }
                                                 }
                                             }
@@ -184,6 +171,21 @@ struct AddGame : View{
                                 .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
                                 .clipShape(MessageBox())
                                 .opacity(nameGood && !contains ? 1.0 : 0.7)
+                                .onChange(of: gameName) { newValue in
+                                    contains = false
+                                    nameGood = false
+                                    
+                                    for game in myGames2 {
+                                        if game.gameName == gameName{
+                                            contains = true
+                                        }
+                                    }
+                                    for sugg in suggestions {
+                                        if sugg.name == gameName{
+                                            nameGood = true
+                                        }
+                                    }
+                                }
                         }
                         
                         
