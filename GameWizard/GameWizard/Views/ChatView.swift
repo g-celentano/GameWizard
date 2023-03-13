@@ -13,21 +13,17 @@ enum Field: Hashable {
     }
 
 struct ChatView: View {
-    
-    
-
-    
     @State var textFieldValue : String = ""
     @State var messages : [Message] = [
         //Message(botR: false, t: "Ciao "),
         //Message(botR: true, t: "Ciao a te")
     ]
-    @State var text = ""
-    @State var lastBotResponse = ""
+    @State var text: String = ""
+    @State var lastBotResponse: String = ""
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var already_suggested : FetchedResults<AlreadySuggested>
     @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
-    @State var firstChat = true
+    @State var firstChat: Bool = true
     @State var games_in_response : [Game] = []
     @FocusState var textFieldFocus : Field?
     
@@ -44,9 +40,9 @@ struct ChatView: View {
                                  /*Text("My games")
                                      .font(Font.custom("RetroGaming", size: 18))
                                      .foregroundColor(Color(uiColor: .systemGray6))*/
-                                Image( "libraryicon")
+                                Image("cdrom")
                                     .foregroundColor(Color(uiColor: .systemGray6))
-                                    .scaleEffect(0.4)
+                                    .scaleEffect(0.45)
                                     .padding(.trailing, -global_width*0.06)
                                     .padding(.top)
                                 
@@ -64,69 +60,67 @@ struct ChatView: View {
                         .frame(width: global_width, height: global_height*0.2)
                         .scaleEffect(2)
                     
-                    ScrollViewReader{ reader in
+                    
                         ScrollView{
-                            ForEach(messages){ message in
-                                HStack {
-                                    HStack{
-                                        Text(messages.last! == message && message.isBotResponse() ? text : message.getText())
-                                            .messageLayout()
-                                            .id(message.id)
-                                            .contextMenu{
-                                                Group{
-                                                    ForEach(message.getGames()){ g in
-                                                        Button{
-                                                            let localGamesNames = localGames.filter { myG in
-                                                                myG.gameName == g.name
-                                                            }.last
-                                                            if localGamesNames == nil {
-                                                                let newGame = MyGame(context: moc)
-                                                                newGame.id = UUID()
-                                                                newGame.gameName = g.name
-                                                                for key in g.keywords! {
-                                                                    newGame.keywords?.append(key.name)
+                            ScrollViewReader { reader in
+                                ForEach(messages){ message in
+                                    HStack {
+                                        HStack{
+                                            Text(messages.last! == message && message.isBotResponse() ? text : message.getText())
+                                                .messageLayout()
+                                                .id(message.id)
+                                                .contextMenu{
+                                                    Group{
+                                                        ForEach(message.getGames()){ g in
+                                                            Button{
+                                                                let localGamesNames = localGames.filter { myG in
+                                                                    myG.gameName == g.name
+                                                                }.last
+                                                                if localGamesNames == nil {
+                                                                    let newGame = MyGame(context: moc)
+                                                                    newGame.id = UUID()
+                                                                    newGame.gameName = g.name
+                                                                    for key in g.keywords! {
+                                                                        newGame.keywords?.append(key.name)
+                                                                    }
+                                                                    for genre in g.genres! {
+                                                                        newGame.genres?.append(genre.name)
+                                                                    }
+                                                                    try? moc.save()
                                                                 }
-                                                                for genre in g.genres! {
-                                                                    newGame.genres?.append(genre.name)
-                                                                }
-                                                                try? moc.save()
-                                                            }
-                                                            
-                                                        } label:{
-                                                            Text(
-                                                                g.name.withCString{
-                                                                    String(format : NSLocalizedString("save %s", comment: ""), $0)
-                                                                }
+                                                                
+                                                            } label:{
+                                                                Text(
+                                                                    g.name.withCString{
+                                                                        String(format : NSLocalizedString("save %s", comment: ""), $0)
+                                                                    }
                                                                 )
                                                                 
-                                                            
+                                                                
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
                                             
+                                        }
+                                        .frame( maxWidth: global_width*0.7, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
+                                        .padding(message.isBotResponse() ? .leading : .trailing, global_width * 0.015)
+                                        
                                     }
-                                    .frame( maxWidth: global_width*0.7, maxHeight: .infinity,alignment: message.isBotResponse() ? .leading : .trailing) // max message expansion
-                                    .padding(message.isBotResponse() ? .leading : .trailing, global_width * 0.015)
+                                    .frame(maxWidth: .infinity, alignment: message.isBotResponse() ? .leading : .trailing )
+                                    .padding(.top, global_width*0.015)
                                     
                                 }
-                                .frame(maxWidth: .infinity, alignment: message.isBotResponse() ? .leading : .trailing )
-                                .padding(.top, global_width*0.015)
-                                
-                            }
-                            .onChange(of: messages.count) { newValue in
-                                withAnimation{
-                                    reader.scrollTo(messages.last!.id, anchor: .bottom)
+                                .onChange(of: messages.count) { _ in
+                                    withAnimation(.linear){
+                                            reader.scrollTo(messages.last, anchor: .bottom)
+                                        }
                                 }
-                                    
                             }
-                            
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         .padding(.top)
                         
-                        
-                    }
         
                     HStack{
                         TextField("", text: $textFieldValue)
@@ -264,11 +258,13 @@ struct ChatView: View {
                             lastBotResponse = botRes
                             typeWriter()
                             messages.append(Message(botR: true, t: botRes, games: games_in_response))
+                             
                             
                         } else {
                             lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
+                             
                         }
                     } else if message.contains(NSLocalizedString("game", comment: "")) {
                         let newMessage = message.replacingOccurrences(of: NSLocalizedString("game", comment: ""), with: "")
@@ -308,11 +304,13 @@ struct ChatView: View {
                             lastBotResponse = botRes
                             typeWriter()
                             messages.append(Message(botR: true, t: botRes, games: [game[0]]))
+                             
                             }
                         else {
                             lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
+                             
                         }
                 
                         
@@ -321,7 +319,7 @@ struct ChatView: View {
                         
                         if !(response_games?.isEmpty ?? false) {
                             let botRes = response_games!.withCString {
-                                String(format: NSLocalizedString("Here's what I found %s", comment: ""), $0)
+                                String(format: NSLocalizedString("I found %s", comment: ""), $0)
                             }
                             let game = games.filter { g in
                                 g.name == response_games!
@@ -359,12 +357,14 @@ struct ChatView: View {
                                 try? moc.save()
                             }
                             messages.append(Message(botR: true, t: botRes, games: [game[0]]))
+                             
                         }
                             
                         else {
                             lastBotResponse = NSLocalizedString("no game", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
+                             
                         }
                 
                     }
@@ -373,20 +373,10 @@ struct ChatView: View {
                 lastBotResponse = NSLocalizedString("Sorry I did not understand", comment: "")
                 typeWriter()
                 messages.append(Message(botR: true, t: lastBotResponse))
+                 
             }
 
-            
-            
-            
-            
-           /*let response = searchKeyword(keywords: recommender.get_keywords(text: message), games: games)
-            
-            lastBotResponse = response
-            typeWriter()
-            messages.append(Message(botR: true, t: response))*/
         }
-       
-        
         textFieldValue = ""
     }
     

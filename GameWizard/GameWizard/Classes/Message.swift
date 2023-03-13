@@ -106,7 +106,6 @@ class Message: Identifiable, Equatable, Hashable {
     }
     
     
-    
 }
 
 

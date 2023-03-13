@@ -293,7 +293,7 @@ struct OnboardingView: View {
                         
                         if !(response_games?.isEmpty ?? false) {
                             let botRes = response_games!.withCString {
-                                String(format: NSLocalizedString("Here's what I found %s", comment: ""), $0)
+                                String(format: NSLocalizedString("I found %s", comment: ""), $0)
                             }
                             let game = games.filter { g in
                                 g.name == response_games!

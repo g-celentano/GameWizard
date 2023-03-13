@@ -22,21 +22,27 @@ struct Lists: View {
                     ZStack{
                         HStack{
                             Rectangle()
-                                .frame(width: global_width*0.52)
+                                .frame(width: global_width*0.515)
                                 .foregroundColor(.white)
                         }
                         .frame(maxWidth: .infinity, alignment: selectedPage == pages[1] ? .leading : .trailing)
                         HStack{
                             Spacer()
-                            Text(pages[1])
-                                .font(Font.custom("RetroGaming", size: global_width*0.03))
-                                .frame(maxWidth: global_width*0.5, maxHeight: .infinity, alignment: .center)
-                                .background(.white.opacity(0.7))
-                                .onTapGesture {
-                                    withAnimation {
-                                        selectedPage = pages[1]
-                                    }
+                            //HStack{
+                                Text(pages[1])
+                                    .font(Font.custom("RetroGaming", size: global_width*0.03))
+                              //  Image("floppy")
+                               //     .scaleEffect(0.15)
+                               //     .frame(width: global_width*0.05)
+                           // }
+                            .frame(maxWidth: global_width*0.5, maxHeight: .infinity, alignment: .center)
+                            .background(.white.opacity(0.7))
+                            .onTapGesture {
+                                withAnimation {
+                                    selectedPage = pages[1]
                                 }
+                            }
+                            
                             Text(pages[0])
                                 .font(Font.custom("RetroGaming", size: global_width*0.03))
                                 .frame(maxWidth: global_width*0.5, maxHeight: .infinity, alignment: .center)
