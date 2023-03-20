@@ -23,7 +23,10 @@
 "game" = "game";
 "games" = "games";
 "I found %s" = "Rrrrrrr... I would recommend \"%s\"";
-"Sorry I did not understand" = "Sorry I did not understand";
+"Sorry" = "Sorry I did not understand, you may need to add more elements to your spell...";
+"Secret" = "Oh, it seems you have used the secret spell...\n Remember, if you want to break it, you just have to tap on me (the donkey, if you didn't got that...)";
+"SecretAlready" = "You have already used that spell, you can't throw it again and again... e jamme ja\nTap on me if you want to break it...";
+
 "mainChat_intro" = "Welcome back, human! It's always great to see you again. Get ready for some meowgic!";
 "Game Name" = "Game Name";
 "Suggestions" = "Suggestions";

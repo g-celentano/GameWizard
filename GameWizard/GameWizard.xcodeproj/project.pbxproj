@@ -41,6 +41,19 @@
 		E717E98629A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
 		E717E98729A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
 		E717E98829A67ECE007855C9 /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = E717E98529A67ECE007855C9 /* Games.swift */; };
+		E718469E29C451F70074E10D /* intents.json in Resources */ = {isa = PBXBuildFile; fileRef = E718469C29C451F70074E10D /* intents.json */; };
+		E71846A029C454AD0074E10D /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718469F29C454AD0074E10D /* ResponseHandler.swift */; };
+		E71846A129C454AD0074E10D /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718469F29C454AD0074E10D /* ResponseHandler.swift */; };
+		E71846A229C454AD0074E10D /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718469F29C454AD0074E10D /* ResponseHandler.swift */; };
+		E71846A629C4694C0074E10D /* classes.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A429C4694C0074E10D /* classes.json */; };
+		E71846A729C4694C0074E10D /* classes.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A429C4694C0074E10D /* classes.json */; };
+		E71846A829C4694C0074E10D /* classes.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A429C4694C0074E10D /* classes.json */; };
+		E71846A929C4694C0074E10D /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A529C4694C0074E10D /* words.json */; };
+		E71846AA29C4694C0074E10D /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A529C4694C0074E10D /* words.json */; };
+		E71846AB29C4694C0074E10D /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = E71846A529C4694C0074E10D /* words.json */; };
+		E71846B229C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
+		E71846B329C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
+		E71846B429C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
 		E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */; };
 		E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A69A299D36CD00CAFCF7 /* ContentView.swift */; };
 		E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E727A69C299D36CE00CAFCF7 /* Assets.xcassets */; };
@@ -89,6 +102,11 @@
 		E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlreadySuggested.swift; sourceTree = "<group>"; };
 		E717E98329A67EBA007855C9 /* JSONLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONLoad.swift; sourceTree = "<group>"; };
 		E717E98529A67ECE007855C9 /* Games.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
+		E718469C29C451F70074E10D /* intents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intents.json; sourceTree = "<group>"; };
+		E718469F29C454AD0074E10D /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
+		E71846A429C4694C0074E10D /* classes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classes.json; sourceTree = "<group>"; };
+		E71846A529C4694C0074E10D /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
+		E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = chatbotMLmodel.mlpackage; sourceTree = "<group>"; };
 		E727A695299D36CD00CAFCF7 /* Whoosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whoosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWizardApp.swift; sourceTree = "<group>"; };
 		E727A69A299D36CD00CAFCF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +158,7 @@
 				E717E98529A67ECE007855C9 /* Games.swift */,
 				20A1583E29A7A2520069300B /* Searcher.swift */,
 				E705E59B29ABD11000D2FB1F /* MyGamesDataController.swift */,
+				E718469F29C454AD0074E10D /* ResponseHandler.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -222,6 +241,10 @@
 		E72EDBF129A7A65900350DEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */,
+				E71846A429C4694C0074E10D /* classes.json */,
+				E71846A529C4694C0074E10D /* words.json */,
+				E718469C29C451F70074E10D /* intents.json */,
 				205C71C429B0EC000031529E /* GameNames.mlmodel */,
 				205C71C329B0EC000031529E /* Keywords.mlmodel */,
 				20ACCED629AE409600CA2276 /* key.json */,
@@ -340,7 +363,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71846A929C4694C0074E10D /* words.json in Resources */,
 				E727A6A0299D36CE00CAFCF7 /* Preview Assets.xcassets in Resources */,
+				E718469E29C451F70074E10D /* intents.json in Resources */,
+				E71846A629C4694C0074E10D /* classes.json in Resources */,
 				E7C50D4229B4B4B7008EB7F4 /* Localizable.strings in Resources */,
 				E730A8AE29A6940D00AAA293 /* games.json in Resources */,
 				E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */,
@@ -353,6 +379,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71846AA29C4694C0074E10D /* words.json in Resources */,
+				E71846A729C4694C0074E10D /* classes.json in Resources */,
 				E7C50D4329B4B4B7008EB7F4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,6 +389,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71846AB29C4694C0074E10D /* words.json in Resources */,
+				E71846A829C4694C0074E10D /* classes.json in Resources */,
 				E7C50D4429B4B4B7008EB7F4 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70BA8D129B0B8A200522941 /* AlreadySuggested.swift in Sources */,
+				E71846A029C454AD0074E10D /* ResponseHandler.swift in Sources */,
 				20AA065729A6772100FA3DE6 /* Message.swift in Sources */,
 				E705E59829AAC65E00D2FB1F /* AddGame.swift in Sources */,
 				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
@@ -388,6 +419,7 @@
 				E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */,
 				E705E59C29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,
 				206AD16229B102260047338C /* OnboardingView.swift in Sources */,
+				E71846B229C487650074E10D /* chatbotMLmodel.mlpackage in Sources */,
 				205C71C629B0EC000031529E /* GameNames.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,7 +430,9 @@
 			files = (
 				E705E59129AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E717E98729A67ECE007855C9 /* Games.swift in Sources */,
+				E71846B329C487650074E10D /* chatbotMLmodel.mlpackage in Sources */,
 				E705E59529AA3B4600D2FB1F /* MyGames.swift in Sources */,
+				E71846A129C454AD0074E10D /* ResponseHandler.swift in Sources */,
 				E705E5A229ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
 				E727A6AA299D36CE00CAFCF7 /* GameWizardTests.swift in Sources */,
 				20AA065D29A6775600FA3DE6 /* Recommender.swift in Sources */,
@@ -418,8 +452,10 @@
 				E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */,
 				E705E59229AA3A3600D2FB1F /* ChatView.swift in Sources */,
 				E705E5A329ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
+				E71846A229C454AD0074E10D /* ResponseHandler.swift in Sources */,
 				E705E59629AA3B4600D2FB1F /* MyGames.swift in Sources */,
 				E705E59A29AAC65E00D2FB1F /* AddGame.swift in Sources */,
+				E71846B429C487650074E10D /* chatbotMLmodel.mlpackage in Sources */,
 				20AA065E29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E717E98829A67ECE007855C9 /* Games.swift in Sources */,
 				E705E59E29ABD11000D2FB1F /* MyGamesDataController.swift in Sources */,

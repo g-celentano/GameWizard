@@ -14,6 +14,7 @@ func searchKeyword(keywords: [String], games: [Game], alreadySuggested: FetchedR
     var matchedGame : Game?
     var index = 0
     var keyIndex = 0
+    
         for game in games {
             var matches = 0
             if game.keywords != nil {

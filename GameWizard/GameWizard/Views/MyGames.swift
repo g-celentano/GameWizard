@@ -39,10 +39,14 @@ struct MyGames : View {
     @State var toolbarColor = Color(uiColor: .systemGray6)
     @State var isEditing = false
     
+    @AppStorage("bg") var bg_color_storage : String = "BgColor"
+    @State var bgValue = "BgColor"
+    
+    
     var body: some View{
         //NavigationStack{
             ZStack{
-               Color("BgColor")
+               Color(bgValue)
                     .ignoresSafeArea(.all)
                 VStack{
                     HStack{
@@ -115,6 +119,9 @@ struct MyGames : View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear{
+                bgValue = bg_color_storage
+            }
        // }
        /*.toolbar {
            ToolbarItem(placement: .navigationBarTrailing) {

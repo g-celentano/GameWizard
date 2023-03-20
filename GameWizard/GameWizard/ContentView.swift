@@ -13,6 +13,7 @@ let global_height = UIScreen.main.bounds.height
 let global_width  = UIScreen.main.bounds.width
 let games : [Game] = load("games")
 let recommender : Recommender = Recommender()
+let response_handler : ResponseHandler = ResponseHandler()
 
 var totalViews = 1
 

@@ -21,6 +21,10 @@ struct AddGame : View{
     @State var nameGood = false
     @FocusState var gameNameFocus : Field?
     
+    @AppStorage("bg") var bg_color_storage : String = "BgColor"
+    @State var bgValue = "BgColor"
+    
+    
     
     
     init(){
@@ -42,7 +46,7 @@ struct AddGame : View{
     var body: some View{
         NavigationStack{
             ZStack{
-                Color("BgColor")
+                Color(bgValue)
                     .ignoresSafeArea(.all)
                 
                 VStack{
@@ -222,6 +226,9 @@ struct AddGame : View{
                
                 
                 }
+            .onAppear{
+                bgValue = bg_color_storage
+            }
             
             }
             .onTapGesture {

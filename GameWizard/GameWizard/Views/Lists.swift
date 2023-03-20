@@ -13,6 +13,8 @@ struct Lists: View {
     @Environment(\.dismiss) private var dismiss
     let pages = [NSLocalizedString("ALREADY SUGGESTED", comment: ""), NSLocalizedString("MY GAMES", comment: "")]
     @State var selectedPage = NSLocalizedString("MY GAMES", comment: "")
+    @AppStorage("bg") var bg_color_storage : String = "BgColor"
+    @State var bgValue = "BgColor"
     
     var body: some View {
         NavigationView{
@@ -78,7 +80,7 @@ struct Lists: View {
                 }
                     */
             }
-            .background(Color("BgColor"))
+            .background(Color(bgValue))
                
                 
            //}
@@ -86,6 +88,9 @@ struct Lists: View {
            //.tabViewStyle(PageTabViewStyle())
            //.background(Color("BgColor"))
            //.ignoresSafeArea(.all)
+        }
+        .onAppear{
+            bgValue = bg_color_storage
         }
         .navigationBarBackButtonHidden(true)
         .toolbar{

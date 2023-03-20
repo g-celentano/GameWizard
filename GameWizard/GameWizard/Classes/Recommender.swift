@@ -76,13 +76,11 @@ class Recommender {
             fatalError()
         }
         tagger.setGazetteers([keywordsModel], for: .lemma)
-        // Set the string to be processed
         tagger.string = text
-        // Loop over all the tokens and print their lemma
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lemma) { tag, tokenRange in
           if let tag = tag {
               //print(tokenRange)
-              print("\(text[tokenRange]): \(tag.rawValue)")
+              //print("\(text[tokenRange]): \(tag.rawValue)")
               if (tag.rawValue == "keywords") {
                   array.append(String(text[tokenRange]))
               }
