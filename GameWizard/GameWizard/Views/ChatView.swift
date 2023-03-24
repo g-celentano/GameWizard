@@ -196,8 +196,13 @@ struct ChatView: View {
         
         DispatchQueue.global(qos:.userInteractive).async {
             let message = messages.last?.getText() ?? ""
-            print(message)
-            if message != "Forza Napoli" {
+            let botResponse = response_handler.getResponse(userMessage: message, already: already_suggested, context: moc)
+            lastBotResponse = botResponse.message
+            typeWriter()
+            messages.append(Message(botR: true, t: lastBotResponse, games: botResponse.response_games))
+            
+            
+            /*if message != "Forza Napoli" {
                 let botResponse = response_handler.getResponse(userMessage: message, already: already_suggested, context: moc)
                 lastBotResponse = botResponse.message
                 typeWriter()
@@ -219,7 +224,7 @@ struct ChatView: View {
                     messages.append(Message(botR: true, t: lastBotResponse))
                 }
                 
-            }
+            }*/
              
         }
         textFieldValue = ""
