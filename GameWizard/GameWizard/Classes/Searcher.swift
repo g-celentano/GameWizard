@@ -14,40 +14,31 @@ func searchKeyword(keywords: [String], games: [Game], alreadySuggested: FetchedR
     var matchedGame : Game?
     var index = 0
     var keyIndex = 0
+    let todayDate = Date()
+    let todayTimeStamp = Int(todayDate.timeIntervalSince1970)
+    
     
         for game in games {
             var matches = 0
             if game.keywords != nil {
                 for _ in game.keywords! {
-                    if !alreadySuggested.isEmpty{
-                        if keywords.contains(where: {
-                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                        }) && !alreadySuggested.contains(where: {
-                            games[index].name.lowercased().contains($0.gameName!.lowercased())
-                        })
-                        {
+                    if !alreadySuggested.isEmpty {
+                        if keywords.contains(where: { games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())}) &&
+                           !alreadySuggested.contains(where: { games[index].name.lowercased().contains($0.gameName!.lowercased()) }) {
                             matches += 1
                         }
                     } else {
-                        if keywords.contains(where: {
-                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                        }) 
-                        {
+                        if keywords.contains(where: { games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())}) {
                             matches += 1
                         }
                     }
-                   
-                    
                     keyIndex += 1
                 }
             }
-                                                    
             if matches > maxMatches {
                 maxMatches = matches
                 matchedGame = game
-                
             }
-            
             index += 1
             keyIndex = 0
         }
@@ -56,7 +47,6 @@ func searchKeyword(keywords: [String], games: [Game], alreadySuggested: FetchedR
         maxMatches = 0
     
     return matchedGame?.name ?? ""
-                         
 }
 
 
@@ -67,6 +57,8 @@ func searchKeywords(keywords: [String], games: [Game], alreadySuggested: Fetched
     var keyIndex = 0
     var founds : [String?] = []
     var maxTries = 0
+    let todayDate = Date()
+    let todayTimeStamp = Int(todayDate.timeIntervalSince1970)
     
     while founds.count < 4 && maxTries < 4 {
         for game in games {
@@ -74,23 +66,14 @@ func searchKeywords(keywords: [String], games: [Game], alreadySuggested: Fetched
             if game.keywords != nil {
                 for _ in game.keywords! {
                     if !alreadySuggested.isEmpty{
-                        if keywords.contains(where: {
-                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                        }) && !alreadySuggested.contains(where: {
-                            games[index].name.lowercased().contains($0.gameName!.lowercased())
-                        })
-                        {
+                        if keywords.contains(where: { games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())}) && !alreadySuggested.contains(where: { games[index].name.lowercased().contains($0.gameName!.lowercased()) }) {
                             matches += 1
                         }
                     } else {
-                        if keywords.contains(where: {
-                            games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased())
-                        })
-                        {
+                        if keywords.contains(where: { games[index].keywords![keyIndex].name.lowercased().contains($0.lowercased()) }) {
                             matches += 1
                         }
                     }
-                
                     keyIndex += 1
                 }
             }
@@ -98,7 +81,6 @@ func searchKeywords(keywords: [String], games: [Game], alreadySuggested: Fetched
             if matches > maxMatches && !founds.contains(game.name) {
                 maxMatches = matches
                 matchedGame = game
-                
             }
             
             index += 1

@@ -8,6 +8,7 @@
 import Foundation
 import CoreGraphics
 import SwiftUI
+import SVGKit
 
 struct SizePreferenceKey : PreferenceKey {
     static var defaultValue: CGSize = .zero
@@ -43,10 +44,11 @@ extension View {
             .padding(.horizontal)
             .font(Font.custom("RetroGaming", size: global_width*0.042))
             .foregroundColor(Color(uiColor: .systemGray6))
-            .background(Color(uiColor: .white))
+            .background(.white, in: MessageBoxV2BG())
             .lineLimit(nil)
-            .clipShape(MessageBox())
-            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 2))
+            .overlay{
+                MessageBoxV2Border().stroke(.black, lineWidth: 4.5)
+            }
     }
     
 }
@@ -99,8 +101,6 @@ class Message: Identifiable, Equatable, Hashable {
     func isBotResponse()->Bool {
         return self.botResponse
     }
-    
-    
     func getText() -> String {
         return self.text
     }
@@ -113,6 +113,7 @@ class Message: Identifiable, Equatable, Hashable {
 
 struct MessageBox : Shape {
     
+    
     func path(in rect: CGRect)-> Path{
         Path{ path in
             let w = rect.width
@@ -123,22 +124,22 @@ struct MessageBox : Shape {
             path.move(to: CGPoint(x: x0 + global_width*0.05, y: y0))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y: y0 + global_height*0.005))
-            path.addLine(to: CGPoint(x: w - global_width*0.025, y:y0 + global_height*0.005))
-            path.addLine(to: CGPoint(x: w - global_width*0.025, y:y0 + global_height*0.015))
-            path.addLine(to: CGPoint(x: w - global_width*0.0125, y:y0 + global_height*0.015))
-            path.addLine(to: CGPoint(x: w - global_width*0.0125, y:h - global_height*0.015))
-            path.addLine(to: CGPoint(x: w - global_width*0.025, y:h - global_height*0.015))
-            path.addLine(to: CGPoint(x: w - global_width*0.025, y:h - global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.03, y:y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: w - global_width*0.03, y:y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.015, y:y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.015, y:h - global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.03, y:h - global_height*0.015))
+            path.addLine(to: CGPoint(x: w - global_width*0.03, y:h - global_height*0.005))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y:h - global_height*0.005))
             path.addLine(to: CGPoint(x: w - global_width*0.05, y:h))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y:h))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y:h - global_height*0.005))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: h - global_height*0.005))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: h - global_height*0.015))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.0125, y: h - global_height*0.015))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.0125, y: y0 + global_height*0.015))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: y0 + global_height*0.015))
-            path.addLine(to: CGPoint(x: x0 + global_width*0.025, y: y0 + global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.03, y: h - global_height*0.005))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.03, y: h - global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.015, y: h - global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.015, y: y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.03, y: y0 + global_height*0.015))
+            path.addLine(to: CGPoint(x: x0 + global_width*0.03, y: y0 + global_height*0.005))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 + global_height*0.005))
             path.addLine(to: CGPoint(x: x0 + global_width*0.05, y: y0 ))
             path.closeSubpath()
@@ -147,12 +148,95 @@ struct MessageBox : Shape {
     
 }
 
+struct MessageBoxV2Border: Shape {
+    
+    func path(in rect: CGRect) -> Path {
+        Path{ path in
+            let w = rect.size.width
+            let h = rect.size.height
+            
+            // top horizontal line
+            path.move(to: CGPoint(x: global_width * 0.05, y: 0))
+            path.addLine(to: CGPoint(x: w - global_width * 0.05, y: 0))
+            path.closeSubpath()
+            
+            //top right corner
+            path.move(to: CGPoint(x: w - global_width * 0.05, y: global_height * 0.004))
+            path.addLine(to: CGPoint(x: w - global_width * 0.036 , y: global_height * 0.004))
+            path.closeSubpath()
+            
+            //right vertical line
+            path.move(to: CGPoint(x: w - global_width * 0.031, y: global_height * 0.005))
+            path.addLine(to: CGPoint(x: w - global_width * 0.031, y: h - global_height * 0.005))
+            path.closeSubpath()
+            
+            //bottom right corner
+            path.move(to: CGPoint(x: w - global_width * 0.05, y: h - global_height * 0.004))
+            path.addLine(to: CGPoint(x: w - global_width * 0.036 , y: h - global_height * 0.004))
+            path.closeSubpath()
+            
+            //bottom line
+            path.move(to: CGPoint(x: global_width * 0.05, y: h))
+            path.addLine(to: CGPoint(x: w - global_width * 0.05, y: h))
+            path.closeSubpath()
+            
+            //bottom left corner
+            path.move(to: CGPoint(x: global_width * 0.05, y: h - global_height * 0.004))
+            path.addLine(to: CGPoint(x:  global_width * 0.036 , y: h - global_height * 0.004))
+            path.closeSubpath()
+            
+            //left vertical line
+            path.move(to: CGPoint(x: global_width * 0.031, y: global_height * 0.005))
+            path.addLine(to: CGPoint(x: global_width * 0.031, y: h - global_height * 0.005))
+            path.closeSubpath()
+            
+            //top left corner
+            path.move(to: CGPoint(x: global_width * 0.05, y: global_height * 0.004))
+            path.addLine(to: CGPoint(x: global_width * 0.036 , y: global_height * 0.004))
+            path.closeSubpath()
+            
+            
+            
+        }
+    }
+}
+
+struct MessageBoxV2BG: Shape {
+    
+    func path(in rect: CGRect) -> Path {
+        Path{ path in
+            let w = rect.size.width
+            let h = rect.size.height
+            
+            // Background Piece
+            path.addRect(CGRect(origin: CGPoint(x: global_width * 0.036, y: global_height * 0.002), size: CGSize(width: w - global_width * 0.05 - global_width * 0.023, height: h - global_height * 0.004)))
+            
+        }
+    }
+}
+
+
+
 struct MessageBG_Previews : PreviewProvider {
+    
     static var previews: some View{
       VStack {
-          MessageBox().stroke(.black, lineWidth: 6)
+          MessageBox()
+              .stroke(.black, lineWidth: 4)
+              .frame(width: global_width*0.9, height: global_height*0.1)
+          
+         MessageBoxV2Border()
+              .stroke(.black, lineWidth: 4.5)
+              .background(.white,in: MessageBoxV2BG())
+              .frame(width: global_width*0.9, height: global_height*0.1)
+          
+         Text("Hello World aosdnoaisnod a sdkdnasnd snjadai osidnaoisndoisndoinasoindosaibdoiusabodbasobdouasbodbasojbdouaboisabodubsabdoausbdoubaoudbaoudboasubdaoubdouasbdouasbdouasbdouasbdousabd")
+              .messageLayout()
+          
       }
-      .frame(width: global_width*0.9, height: global_height*0.1)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(Color("BgColor"))
+      
       
     }
 }

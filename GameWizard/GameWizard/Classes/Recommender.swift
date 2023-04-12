@@ -61,7 +61,8 @@ class Recommender {
             fatalError("Could not find Model file.")
         }
         // Initialize the NLTagger with scheme type as "lemma"
-        let tagger = NLTagger(tagSchemes: [.lemma])
+        let tagger = NLTagger(tagSchemes: [.lemma,])
+        let gameTagger = NLTagger(tagSchemes: [.tokenType])
         var array: [String] = []
         var keywordsModel: NLGazetteer
         var gameModel: NLGazetteer
@@ -71,19 +72,20 @@ class Recommender {
             fatalError()
         }
         do {
-            gameModel = try NLGazetteer(contentsOf: modelFile)
+            gameModel = try NLGazetteer(contentsOf: modelFile2)
         } catch {
             fatalError()
         }
         tagger.setGazetteers([keywordsModel], for: .lemma)
+        gameTagger.setGazetteers([gameModel], for: .tokenType)
         tagger.string = text
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .lemma) { tag, tokenRange in
           if let tag = tag {
-              //print(tokenRange)
-              //print("\(text[tokenRange]): \(tag.rawValue)")
+              print("\(text[tokenRange]): \(tag.rawValue)")
               if (tag.rawValue == "keywords") {
                   array.append(String(text[tokenRange]))
               }
+              
           }
           return true
         }

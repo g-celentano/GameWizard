@@ -121,7 +121,14 @@ struct ChatView: View {
                                 }
                                 .onChange(of: messages.count) { _ in
                                     withAnimation(.linear){
-                                            reader.scrollTo(messages.last, anchor: .bottom)
+                                        let last = messages.last
+                                        reader.scrollTo(last!.id, anchor: .top)
+                                        }
+                                }
+                                .onChange(of: text) { _ in
+                                    withAnimation(.linear){
+                                        let last = messages.last
+                                        reader.scrollTo(last!.id, anchor: .top)
                                         }
                                 }
                             }
@@ -148,12 +155,12 @@ struct ChatView: View {
                             .frame(width: global_width*0.1, height: global_width*0.1)
                         }
                     }
-                    .frame(maxWidth: global_width, maxHeight: global_height * 0.08, alignment: .center)
+                    .frame(maxWidth: global_width, maxHeight: global_height * 0.07, alignment: .center)
                     .padding(.horizontal)
-                    .background(.white)
+                    .background(.white, in: MessageBoxV2BG())
                     .clipped()
-                    .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                    .clipShape(MessageBox())
+                    //.overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
+                    .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5.5))
                     .background(Color(bgValue))
                     .padding(.vertical)
                 }

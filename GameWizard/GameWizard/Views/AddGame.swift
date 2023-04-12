@@ -53,10 +53,11 @@ struct AddGame : View{
                         TextField("", text: $gameName)
                             .senderLayout(gameName, placeholder: NSLocalizedString("Game Name", comment: ""))
                             .padding(.horizontal, global_width*0.05)
-                            .background(.white)
+                            .background(.white, in: MessageBoxV2BG())
                             .clipped()
-                            .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                            .clipShape(MessageBox())
+                            .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 4.5))
+                            //.overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
+                            //.clipShape(MessageBox())
                             .focused($gameNameFocus, equals: .input)
                         
                         /*
@@ -171,9 +172,10 @@ struct AddGame : View{
                                 .foregroundColor(Color(uiColor: .systemGray6) )
                                 .frame(width: global_width*0.85)
                                 .padding(.vertical)
-                                .background(.white)
-                                .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
-                                .clipShape(MessageBox())
+                                .background(.white, in: MessageBoxV2BG())
+                                .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
+                                //.overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
+                                //.clipShape(MessageBox())
                                 .opacity(nameGood && !contains ? 1.0 : 0.7)
                                 .onChange(of: gameName) { newValue in
                                     contains = false

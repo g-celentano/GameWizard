@@ -62,8 +62,10 @@ struct Lists: View {
                 }
                 .foregroundColor(Color(uiColor: .systemGray6))
                 .frame(maxWidth: global_width, maxHeight: global_height*0.05)
-                .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                .clipShape(MessageBox())
+                .clipShape(MessageBoxV2BG())
+                .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5))
+                //.overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
+                //.clipShape(MessageBox())
                 .padding(.vertical, global_height*0.01)
                 
                 

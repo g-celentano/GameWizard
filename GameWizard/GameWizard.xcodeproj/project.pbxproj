@@ -54,6 +54,8 @@
 		E71846B229C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
 		E71846B329C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
 		E71846B429C487650074E10D /* chatbotMLmodel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = E71846B129C487650074E10D /* chatbotMLmodel.mlpackage */; };
+		E722A23029DC5AFE00B62C5A /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = E722A22F29DC5AFE00B62C5A /* SVGKit */; };
+		E722A23229DC5AFE00B62C5A /* SVGKitSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E722A23129DC5AFE00B62C5A /* SVGKitSwift */; };
 		E727A699299D36CD00CAFCF7 /* GameWizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A698299D36CD00CAFCF7 /* GameWizardApp.swift */; };
 		E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A69A299D36CD00CAFCF7 /* ContentView.swift */; };
 		E727A69D299D36CE00CAFCF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E727A69C299D36CE00CAFCF7 /* Assets.xcassets */; };
@@ -129,6 +131,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E722A23229DC5AFE00B62C5A /* SVGKitSwift in Frameworks */,
+				E722A23029DC5AFE00B62C5A /* SVGKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +275,8 @@
 			);
 			name = GameWizard;
 			packageProductDependencies = (
+				E722A22F29DC5AFE00B62C5A /* SVGKit */,
+				E722A23129DC5AFE00B62C5A /* SVGKitSwift */,
 			);
 			productName = GameWizard;
 			productReference = E727A695299D36CD00CAFCF7 /* Whoosh.app */;
@@ -346,6 +352,7 @@
 			);
 			mainGroup = E727A68C299D36CD00CAFCF7;
 			packageReferences = (
+				E722A22E29DC5AFE00B62C5A /* XCRemoteSwiftPackageReference "SVGKit" */,
 			);
 			productRefGroup = E727A696299D36CD00CAFCF7 /* Products */;
 			projectDirPath = "";
@@ -619,8 +626,7 @@
 				INFOPLIST_FILE = GameWizard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,8 +654,7 @@
 				INFOPLIST_FILE = GameWizard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -779,6 +784,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E722A22E29DC5AFE00B62C5A /* XCRemoteSwiftPackageReference "SVGKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVGKit/SVGKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E722A22F29DC5AFE00B62C5A /* SVGKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E722A22E29DC5AFE00B62C5A /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKit;
+		};
+		E722A23129DC5AFE00B62C5A /* SVGKitSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E722A22E29DC5AFE00B62C5A /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKitSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E705E59F29ABDA7400D2FB1F /* MyGames.xcdatamodeld */ = {
