@@ -65,6 +65,8 @@
 		E727A6B6299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727A6B5299D36CE00CAFCF7 /* GameWizardUITestsLaunchTests.swift */; };
 		E72EDBF529A7A77A00350DEB /* RetroGaming.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */; };
 		E730A8AE29A6940D00AAA293 /* games.json in Resources */ = {isa = PBXBuildFile; fileRef = E730A8AD29A6940D00AAA293 /* games.json */; };
+		E771355629EAB33800CBD903 /* AnimatedMenuIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771355529EAB33800CBD903 /* AnimatedMenuIcon.swift */; };
+		E771355A29EABB7200CBD903 /* RequestsSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771355929EABB7200CBD903 /* RequestsSuggestions.swift */; };
 		E7C50D4229B4B4B7008EB7F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7C50D4629B4B4B7008EB7F4 /* Localizable.strings */; };
 		E7C50D4329B4B4B7008EB7F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7C50D4629B4B4B7008EB7F4 /* Localizable.strings */; };
 		E7C50D4429B4B4B7008EB7F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7C50D4629B4B4B7008EB7F4 /* Localizable.strings */; };
@@ -122,6 +124,8 @@
 		E72EDBF429A7A77A00350DEB /* RetroGaming.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RetroGaming.ttf; sourceTree = "<group>"; };
 		E72F569C299FC18F00619B32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E730A8AD29A6940D00AAA293 /* games.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = games.json; sourceTree = "<group>"; };
+		E771355529EAB33800CBD903 /* AnimatedMenuIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedMenuIcon.swift; sourceTree = "<group>"; };
+		E771355929EABB7200CBD903 /* RequestsSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsSuggestions.swift; sourceTree = "<group>"; };
 		E7C50D4529B4B4B7008EB7F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E7C50D4729B4B4BD008EB7F4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +180,8 @@
 				E70BA8CC29B0B49000522941 /* Lists.swift */,
 				E70BA8D029B0B8A200522941 /* AlreadySuggested.swift */,
 				206AD16129B102260047338C /* OnboardingView.swift */,
+				E771355529EAB33800CBD903 /* AnimatedMenuIcon.swift */,
+				E771355929EABB7200CBD903 /* RequestsSuggestions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -411,11 +417,13 @@
 			files = (
 				E70BA8D129B0B8A200522941 /* AlreadySuggested.swift in Sources */,
 				E71846A029C454AD0074E10D /* ResponseHandler.swift in Sources */,
+				E771355629EAB33800CBD903 /* AnimatedMenuIcon.swift in Sources */,
 				20AA065729A6772100FA3DE6 /* Message.swift in Sources */,
 				E705E59829AAC65E00D2FB1F /* AddGame.swift in Sources */,
 				20A1583F29A7A2520069300B /* Searcher.swift in Sources */,
 				E705E5A129ABDA7400D2FB1F /* MyGames.xcdatamodeld in Sources */,
 				205C71C529B0EC000031529E /* Keywords.mlmodel in Sources */,
+				E771355A29EABB7200CBD903 /* RequestsSuggestions.swift in Sources */,
 				20AA065C29A6775600FA3DE6 /* Recommender.swift in Sources */,
 				E70BA8CD29B0B49000522941 /* Lists.swift in Sources */,
 				E727A69B299D36CD00CAFCF7 /* ContentView.swift in Sources */,

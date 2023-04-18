@@ -162,17 +162,17 @@ struct MessageBoxV2Border: Shape {
             
             //top right corner
             path.move(to: CGPoint(x: w - global_width * 0.05, y: global_height * 0.004))
-            path.addLine(to: CGPoint(x: w - global_width * 0.036 , y: global_height * 0.004))
+            path.addLine(to: CGPoint(x: w - global_width * 0.038 , y: global_height * 0.004))
             path.closeSubpath()
             
             //right vertical line
-            path.move(to: CGPoint(x: w - global_width * 0.031, y: global_height * 0.005))
-            path.addLine(to: CGPoint(x: w - global_width * 0.031, y: h - global_height * 0.005))
+            path.move(to: CGPoint(x: w - global_width * 0.033, y: global_height * 0.005))
+            path.addLine(to: CGPoint(x: w - global_width * 0.033, y: h - global_height * 0.005))
             path.closeSubpath()
             
             //bottom right corner
             path.move(to: CGPoint(x: w - global_width * 0.05, y: h - global_height * 0.004))
-            path.addLine(to: CGPoint(x: w - global_width * 0.036 , y: h - global_height * 0.004))
+            path.addLine(to: CGPoint(x: w - global_width * 0.038 , y: h - global_height * 0.004))
             path.closeSubpath()
             
             //bottom line
@@ -182,17 +182,17 @@ struct MessageBoxV2Border: Shape {
             
             //bottom left corner
             path.move(to: CGPoint(x: global_width * 0.05, y: h - global_height * 0.004))
-            path.addLine(to: CGPoint(x:  global_width * 0.036 , y: h - global_height * 0.004))
+            path.addLine(to: CGPoint(x:  global_width * 0.038 , y: h - global_height * 0.004))
             path.closeSubpath()
             
             //left vertical line
-            path.move(to: CGPoint(x: global_width * 0.031, y: global_height * 0.005))
-            path.addLine(to: CGPoint(x: global_width * 0.031, y: h - global_height * 0.005))
+            path.move(to: CGPoint(x: global_width * 0.033, y: global_height * 0.005))
+            path.addLine(to: CGPoint(x: global_width * 0.033, y: h - global_height * 0.005))
             path.closeSubpath()
             
             //top left corner
             path.move(to: CGPoint(x: global_width * 0.05, y: global_height * 0.004))
-            path.addLine(to: CGPoint(x: global_width * 0.036 , y: global_height * 0.004))
+            path.addLine(to: CGPoint(x: global_width * 0.038, y: global_height * 0.004))
             path.closeSubpath()
             
             
@@ -209,7 +209,7 @@ struct MessageBoxV2BG: Shape {
             let h = rect.size.height
             
             // Background Piece
-            path.addRect(CGRect(origin: CGPoint(x: global_width * 0.036, y: global_height * 0.002), size: CGSize(width: w - global_width * 0.05 - global_width * 0.023, height: h - global_height * 0.004)))
+            path.addRect(CGRect(origin: CGPoint(x: global_width * 0.038, y: global_height * 0.002), size: CGSize(width: w - global_width * 0.05 - global_width * 0.027, height: h - global_height * 0.004)))
             
         }
     }

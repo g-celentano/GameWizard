@@ -14,10 +14,7 @@ enum Field: Hashable {
 
 struct ChatView: View {
     @State var textFieldValue : String = ""
-    @State var messages : [Message] = [
-        //Message(botR: false, t: "Ciao "),
-        //Message(botR: true, t: "Ciao a te")
-    ]
+    @State var messages : [Message] = []
     @State var text: String = ""
     @State var lastBotResponse: String = ""
     @Environment(\.managedObjectContext) var moc
@@ -25,6 +22,7 @@ struct ChatView: View {
     @FetchRequest(sortDescriptors: []) var localGames : FetchedResults<MyGame>
     @State var firstChat: Bool = true
     @FocusState var textFieldFocus : Field?
+    @State var openMenu = false
     
     @AppStorage("bg") var bg_color_storage : String = "BgColor"
     @State var bgValue = "BgColor"
@@ -137,32 +135,58 @@ struct ChatView: View {
                         .padding(.top)
                         
         
-                    HStack{
-                        TextField("", text: $textFieldValue)
-                            .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
-                            .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
-                            .focused($textFieldFocus, equals : .input)
-                      
-                        Button {
-                            if !textFieldValue.isEmpty {
-                                submit()
-                            }
-                        } label: {
-                            VStack{
-                                Image("sendicon")
-                                    .scaleEffect(0.15)
-                            }
-                            .frame(width: global_width*0.1, height: global_width*0.1)
+                    VStack{
+                        if openMenu {
+                            RequestsSuggestions(textfield: $textFieldValue, openMenu: $openMenu)
+                            Spacer()
+                            Divider()
+                                .frame(width: global_width * 0.8)
                         }
+                        HStack{
+                            TextField("", text: $textFieldValue)
+                                .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
+                                .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
+                                .focused($textFieldFocus, equals : .input)
+                                .onChange(of: textFieldValue) { _ in
+                                    if !textFieldValue.isEmpty {
+                                        withAnimation{
+                                            openMenu = false
+                                        }
+                                    }
+                                }
+                          
+                            if !textFieldValue.isEmpty {
+                                Button {
+                                    submit()
+                                } label: {
+                                    VStack{
+                                        Image("sendicon")
+                                            .scaleEffect(0.15)
+                                            
+                                    }
+                                    .frame(width: global_width*0.12, height: global_width*0.1)
+                                }
+                            } else {
+                                AnimatedMenuIcon(openMenu: $openMenu)
+                                    .onTapGesture{
+                                        withAnimation{
+                                            openMenu.toggle()
+                                        }
+                                    }
+                                    .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
+                            }
+                        }
+                        .padding(.bottom, openMenu ? global_height * 0.005 : 0.0)
+                        
                     }
-                    .frame(maxWidth: global_width, maxHeight: global_height * 0.07, alignment: .center)
+                    .frame(maxWidth: global_width, maxHeight: openMenu ? global_height * 0.28 : global_height * 0.07, alignment: .center)
                     .padding(.horizontal)
                     .background(.white, in: MessageBoxV2BG())
                     .clipped()
-                    //.overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
                     .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5.5))
-                    .background(Color(bgValue))
-                    .padding(.vertical)
+                    .background(.clear)
+                    .padding(.bottom)
+                    
                 }
                 .onTapGesture(perform: {
                     textFieldFocus = nil
@@ -172,7 +196,7 @@ struct ChatView: View {
                     if firstChat {
                         firstChat = false
                         lastBotResponse = ""
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             lastBotResponse = NSLocalizedString("mainChat_intro", comment: "")
                             typeWriter()
                             messages.append(Message(botR: true, t: lastBotResponse))
@@ -185,16 +209,16 @@ struct ChatView: View {
     }
     
     func typeWriter(at position: Int = 0) {
-            if position == 0 {
-                text = ""
-            }
-            if position < lastBotResponse.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.035) {
-                    text.append(lastBotResponse[position])
-                    typeWriter(at: position + 1)
-                }
+        if position == 0 {
+            text = ""
+        }
+        if position < lastBotResponse.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.035) {
+                text.append(lastBotResponse[position])
+                typeWriter(at: position + 1)
             }
         }
+    }
     
     func submit(){
         messages.append(Message(botR: false, t: textFieldValue))
