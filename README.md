@@ -11,7 +11,7 @@ The assistant is currently able to understand:
 
 ### Screenshots of the app
 
-
-![Uploading 2.png…]()
-![Uploading 1.png…]()
-![3](https://github.com/g-celentano/GameWizard/assets/111139129/5015224c-37da-4519-b58e-ff8cfaccd396)
+<img src="https://github.com/g-celentano/GameWizard/assets/111139129/a6e0fe78-58fc-428b-83ad-8250fdb221ea" width="30%" height="30%"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/g-celentano/GameWizard/assets/111139129/dd220ca6-5635-4d36-b33a-abb733b75c95" width="30%" height="30%">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/g-celentano/GameWizard/assets/111139129/5015224c-37da-4519-b58e-ff8cfaccd396" width="30%" height="30%">
