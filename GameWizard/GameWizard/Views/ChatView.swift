@@ -23,6 +23,9 @@ struct ChatView: View {
     @State var firstChat: Bool = true
     @FocusState var textFieldFocus : Field?
     @State var openMenu = false
+    @State var suggestionHeight = global_height * 0.07
+    @State var requestTitleWidth = global_width
+    @State var requestTitleOpacity = 1.0
     
     @AppStorage("bg") var bg_color_storage : String = "BgColor"
     @State var bgValue = "BgColor"
@@ -118,16 +121,28 @@ struct ChatView: View {
                                     
                                 }
                                 .onChange(of: messages.count) { _ in
-                                    withAnimation(.linear){
-                                        let last = messages.last
-                                        reader.scrollTo(last!.id, anchor: .top)
-                                        }
+                                    let last = messages.last
+                                    reader.scrollTo(last!.id, anchor: .bottom)
+                                    
                                 }
                                 .onChange(of: text) { _ in
-                                    withAnimation(.linear){
-                                        let last = messages.last
-                                        reader.scrollTo(last!.id, anchor: .top)
+                                    
+                                    let last = messages.last
+                                    withAnimation {
+                                        reader.scrollTo(last!.id, anchor: .bottom)
+                                    }
+                                    
+                                    
+                                    if !messages.contains(where: { m in m.getText() == NSLocalizedString("suggestSuggestions", comment: "")}) {
+                                        if text == lastBotResponse && messages.filter({ m in !m.isBotResponse() }).count == 3 {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                                                    lastBotResponse = NSLocalizedString("suggestSuggestions", comment: "")
+                                                    typeWriter()
+                                                    messages.append(Message(botR: true, t: lastBotResponse))
+                                            }
                                         }
+                                    }
+                                    
                                 }
                             }
                         }
@@ -136,12 +151,6 @@ struct ChatView: View {
                         
         
                     VStack{
-                        if openMenu {
-                            RequestsSuggestions(textfield: $textFieldValue, openMenu: $openMenu)
-                            Spacer()
-                            Divider()
-                                .frame(width: global_width * 0.8)
-                        }
                         HStack{
                             TextField("", text: $textFieldValue)
                                 .senderLayout(textFieldValue, placeholder: NSLocalizedString("Type here...", comment: ""))
@@ -167,25 +176,59 @@ struct ChatView: View {
                                     .frame(width: global_width*0.12, height: global_width*0.1)
                                 }
                             } else {
-                                AnimatedMenuIcon(openMenu: $openMenu)
-                                    .onTapGesture{
-                                        withAnimation{
-                                            openMenu.toggle()
-                                        }
-                                    }
+                                AnimatedMenuIcon(openMenu: $openMenu, delay: 0.3)
                                     .disabled(messages.last != nil ? !(messages.last!.getText() == text) : false)
                             }
                         }
-                        .padding(.bottom, openMenu ? global_height * 0.005 : 0.0)
+                        //.padding(.bottom, openMenu ? global_height * 0.005 : 0.0)
+                        .padding(.horizontal)
+                        .background(.white, in: MessageBoxV2BG())
+                        .clipped()
+                        .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5.5))
+                        
+                        if openMenu {
+                            Spacer()
+                                HStack{
+                                    Text("Request Samples")
+                                        .frame(width: requestTitleWidth, height:global_height
+                                               * 0.07)
+                                        .font(Font.custom("RetroGaming", size:  global_width*0.05 ))
+                                        .foregroundColor(.white)
+                                        .opacity(requestTitleOpacity)
+                                    
+                                    RequestsSuggestions(textfield: $textFieldValue, openMenu: $openMenu)
+                                }
+                                .onAppear{
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                                        withAnimation(.linear(duration: 0.1)){
+                                            requestTitleOpacity = 0.0
+                                        }
+                                        withAnimation{
+                                            requestTitleWidth = 0.0
+                                        }
+                                    }
+                                }
+                                
+                        
+                        }
                         
                     }
-                    .frame(maxWidth: global_width, maxHeight: openMenu ? global_height * 0.28 : global_height * 0.07, alignment: .center)
-                    .padding(.horizontal)
-                    .background(.white, in: MessageBoxV2BG())
-                    .clipped()
-                    .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5.5))
+                    .frame(maxWidth: global_width, maxHeight: suggestionHeight, alignment: .center)
                     .background(.clear)
                     .padding(.bottom)
+                    .onChange(of: openMenu) { _ in
+                        if openMenu {
+                            withAnimation(.linear(duration: 0.3)){
+                                suggestionHeight = global_height * 0.14
+                            }
+                        } else {
+                            requestTitleWidth = global_width
+                            requestTitleOpacity = 1.0
+                            withAnimation(.linear(duration: 0.3)){
+                                suggestionHeight = global_height * 0.07
+                            }
+                        }
+                    }
                     
                 }
                 .onTapGesture(perform: {
@@ -231,6 +274,8 @@ struct ChatView: View {
             lastBotResponse = botResponse.message
             typeWriter()
             messages.append(Message(botR: true, t: lastBotResponse, games: botResponse.response_games))
+           
+
             
             
             /*if message != "Forza Napoli" {

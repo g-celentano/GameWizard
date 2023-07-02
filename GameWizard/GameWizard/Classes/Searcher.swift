@@ -15,7 +15,7 @@ func searchKeyword(keywords: [String], games: [Game], alreadySuggested: FetchedR
     var index = 0
     var keyIndex = 0
     let todayDate = Date()
-    let todayTimeStamp = Int(todayDate.timeIntervalSince1970)
+    
     
     
         for game in games {
@@ -58,7 +58,7 @@ func searchKeywords(keywords: [String], games: [Game], alreadySuggested: Fetched
     var founds : [String?] = []
     var maxTries = 0
     let todayDate = Date()
-    let todayTimeStamp = Int(todayDate.timeIntervalSince1970)
+    
     
     while founds.count < 4 && maxTries < 4 {
         for game in games {

@@ -19,26 +19,23 @@ struct RequestsSuggestions: View {
     @Binding var openMenu : Bool
     
     var body: some View {
-        VStack{
-            Text("Request Suggestions")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(Font.custom("RetroGaming", size: global_width*0.042))
-            ScrollView{
-                ForEach(samples, id: \.self){ sample in
-                    Text("✰ \"\(sample)\"")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(Font.custom("RetroGaming", size: global_width*0.035))
-                        .onTapGesture{
-                            textfield = sample.replacingOccurrences(of: "(keyword)", with: "")
-                            withAnimation{
-                                openMenu = false
+            ScrollView(.horizontal){
+                HStack{
+                    ForEach(samples, id: \.self){ sample in
+                        Text("\"\(sample)\"")
+                            .messageLayout()
+                            .padding(.vertical, global_height * 0.001)
+                            .font(Font.custom("RetroGaming", size: global_width*0.035))
+                            .onTapGesture{
+                                textfield = sample.replacingOccurrences(of: "(keyword)", with: "")
+                                withAnimation{
+                                    openMenu = false
+                                }
                             }
-                        }
+                    }
                 }
             }
-        }
-        .padding()
-        .foregroundColor(.black)
+        
     }
 }
 

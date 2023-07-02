@@ -25,6 +25,7 @@
 "Secret" = "Oh, it seems you have used the secret spell...\n Remember, if you want to break it, you just have to tap on me (the donkey, if you didn't got that...)";
 "SecretAlready" = "You have already used that spell, you can't throw it again and again... e jamme ja\nTap on me if you want to break it...";
 "mainChat_intro" = "Welcome back, human! It's always great to see you again. Get ready for some meowgic!";
+"suggestSuggestions" = "Purrfect timing! If you're feeling tired or paw-stively annoyed with typing out each request, let me show you a whisker-worthy trick. Try paw-ressing the button on the right side of the input you're using for some paw-some suggestions to make compiling a breeze! :)";
 "Game Name" = "Nome del Gioco";
 "Suggestions" = "Suggerimenti";
 "Add" = "Aggiungi";

@@ -106,11 +106,17 @@ struct OnboardingView: View {
                         
                         
                     }
-                    .onChange(of: messages.count) { newValue in
-                        withAnimation{
-                            reader.scrollTo(messages.last!.id, anchor: .bottom)
-                        }
-                            
+                    .onChange(of: messages.count) { _ in
+                        withAnimation(.linear(duration: 0.0005)){
+                            let last = messages.last
+                            reader.scrollTo(last!.id, anchor: .top)
+                            }
+                    }
+                    .onChange(of: text) { _ in
+                        withAnimation(.linear(duration: 0.0005)){
+                            let last = messages.last
+                            reader.scrollTo(last!.id, anchor: .top)
+                            }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding(.top)
@@ -148,14 +154,12 @@ struct OnboardingView: View {
                     
                     
                 }
-                .frame(maxWidth: allowInput ?  global_width : 0.0, maxHeight: global_height * 0.08, alignment: .center)
+                .frame(maxWidth: allowInput ?  global_width : 0.0, maxHeight: global_height * 0.07, alignment: .center)
                 .padding(.horizontal)
-                .background(.white)
+                .background(.white, in: MessageBoxV2BG())
                 .clipped()
-                .overlay(MessageBox().stroke(Color(uiColor: .systemGray6), lineWidth: 8))
-                .clipShape(MessageBox())
+                .overlay(MessageBoxV2Border().stroke(Color(uiColor: .systemGray6), lineWidth: 5.5))
                 .background(Color("BgColor"))
-                .padding(.vertical)
                 .opacity(inputHeightBool ? 1.0 : 0.0)
                 .onTapGesture {
                     if textFieldValue == "start" {

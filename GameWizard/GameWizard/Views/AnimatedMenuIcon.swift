@@ -10,6 +10,8 @@ import SwiftUI
 struct AnimatedMenuIcon: View {
     
     @Binding var openMenu : Bool
+    @State var delay : Double
+    
     @State var xOffset: Double = global_width * 0.025
     @State var closeHeight: Double = 0.0
     
@@ -46,26 +48,35 @@ struct AnimatedMenuIcon: View {
                 
         }
         .frame(width: global_width*0.12, height: global_width*0.1)
+        .onTapGesture{
+            withAnimation{
+                openMenu.toggle()
+            }
+        }
         .onChange(of: openMenu) { _ in
             if openMenu {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                    withAnimation(.linear(duration:0.15)){
-                        xOffset = 0.0
-                    }
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay ){
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                        withAnimation(.linear(duration:0.1)){
-                            closeHeight = global_width * 0.07
+                        withAnimation(.linear(duration:0.15)){
+                            xOffset = 0.0
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                            withAnimation(.linear(duration:0.05)){
+                                closeHeight = global_width * 0.07
+                            }
                         }
                     }
                 }
             } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                    withAnimation(.linear(duration:0.15)){
-                       xOffset = global_width * 0.025
-                    }
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay ){
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                        withAnimation(.linear(duration:0.1)){
-                            closeHeight = 0.0
+                        withAnimation(.linear(duration:0.15)){
+                           xOffset = global_width * 0.025
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                            withAnimation(.linear(duration:0.05)){
+                                closeHeight = 0.0
+                            }
                         }
                     }
                 }
@@ -76,6 +87,6 @@ struct AnimatedMenuIcon: View {
 
 struct AnimatedMenuIcon_Previews: PreviewProvider {
     static var previews: some View {
-        AnimatedMenuIcon(openMenu: .constant(false))
+        AnimatedMenuIcon(openMenu: .constant(false), delay: 0.0)
     }
 }
